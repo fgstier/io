@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" href="data:,">
+    <title>ARKUSNAT Sektor-Glossar</title>
+
+<style>
+        /* CSS direkt hier, damit der Button sicher erscheint */
+        body {
+            font-family: "Book Antiqua", serif;
+            background: #fff; color: #000;
+            line-height: 1.6; font-size: 20px;
+            padding: 20px; margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        .entry {
+            display: block;
+            min-height: 300px; /* Platzhalter für Stabilität */
+            margin-bottom: 50px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+            scroll-margin-top: 80px; /* iPhone-Anker-Stopp */
+        }
+        .id { color: #888; font-size: 0.8em; font-family: monospace; }
+        .term { font-weight: bold; font-style: italic; font-size: 1.2em; display: block; }
+        
+        /* Der schwebende Button */
+        #btn-reset {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            z-index: 9999;
+            padding: 15px 20px;
+            background: #ff4444; color: #fff;
+            border: none; border-radius: 50px;
+            font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        #reset-overlay {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(255,255,255,0.95);
+            z-index: 10000; text-align: center; padding-top: 20%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/matrix-logic.js" defer></script>
+	
+</head>
+
+<body>
+    <div id="reset-overlay">
+        <h2>SYSTEM BEREIT</h2>
+        <p>Bitte scannen Sie den nächsten Sektor.</p>
+        <button onclick="document.getElementById('reset-overlay').style.display='none'">X</button>
+    </div>
+
+
+    <h1>Edition ARKUSNAT: Glossar</h1>
+    <p>Konstruktion: F.G. Stier</p>
+
+
+
+    <div id="L0" class="entry">
+        <span class="id">#L0</span>
+        <span class="term">Initialisierung der Wahrnehmung</span>
+        <p>
+            Willkommen im interaktiven Ur-Depot!
+            Du hältst kein gewöhnliches Buch in den Händen, sondern ein Artefakt der Realität [cite: 2026-01-06].
+            Jede Seite kann Frequenzen enthalten, die für das bloße Auge unsichtbar sind.
+            <br>
+
+        <p><strong>1. Die Suche (Scan-Modus):</strong>
+        <p>
+            Um die verborgenen Protokolle und YouTube-Shorts zu aktivieren, richte die Kamera deines Endgeräts auf die
+            markierten Bildbereiche
+            oder die QR-Integrierungen. Das System wird dich automatisch zu den entsprechenden Sektoren (#L0 bis #Lxx)
+            leiten.
+            <br>
+
+        <p><strong>2. Der schwebende Scanner (Floating Action Button):</strong>
+        <p>
+            In der unteren Ecke deines Displays findest du den internen Scanner.
+            <br>
+
+
+        <p><strong>WICHTIG:</strong>
+        <p>
+            Nutze diesen Button immer dann, wenn die Standard-Kamera-App an ihre Grenzen stößt.
+            Das interne Script ist auf die spezifische Kontrast-Verschleierung dieses Buches optimiert.
+            <br>
+
+        <p><strong>3. Die „Leeren Seiten“ & Kodierungen:</strong>
+        <p>
+            Im Verlauf deiner Untersuchung wirst du auf scheinbar leere Seiten oder s/w-Strukturmuster stoßen. Dies ist
+            kein Druckfehler,
+            sondern eine „gleichgerichtete Leere“.
+            <br>
+
+        <p><strong>4. Der Text im Text:</strong>
+        <p>
+            Manchmal findest du inmitten der Einträge kryptische Anweisungen oder versteckte Codes.
+            Diese sind als „Text im Text“ oder „Text im Bild" konzipiert und können nur durch die Aktivierung des
+            Scanners entschlüsselt werden.
+            <br>
+            Aktiviere den internen Scanner.
+            Halte das Gerät ruhig über die Textur.
+            Das Script wird das Rauschen dekonstruieren und den verborgenen Code (Stegano) extrahieren.
+
+        </p>
+    </div>
+
+
+
+
+    <div id="L1" class="entry">
+        <span class="id">#L1</span>
+        <span class="term">Incomprehensibilitatem</span>
+        <p>
+            das Unbegreifbare der Unverständlichkeit:
+            In der Informationstheorie beschreibt dies den Zustand maximaler Entropie, in dem ein Signal nicht mehr vom
+            Rauschen unterschieden werden kann.
+            Wissenschaftlich verweist es auf die Grenzen der Erkenntnistheorie, an denen die menschliche Logik aufgrund
+            der Komplexität subatomarer oder kosmologischer Prozesse kollabiert.
+        </p>
+    </div>
+    <div id="L2" class="entry">
+        <span class="id">#L2</span>
+        <span class="term">Motus animi</span>
+        <p>
+            eine breitseitige Streuung des Geistes:
+            Neurobiologisch lässt sich dies als "diffuse Aufmerksamkeit" oder "Global Workspace Theory" interpretieren,
+            bei der Informationen über weite Areale des Kortex verteilt verarbeitet werden. Es ist der Gegenentwurf zum
+            fokussierten Tunnelblick und ermöglicht die parallele Mustererkennung in komplexen Systemen.
+        </p>
+    </div>
+    <div id="L3" class="entry">
+        <span class="id">#L3</span>
+        <span class="term">transuersa obiceretur hosti</span>
+        <p>
+            eine Bewegung erzeugt ein neues Ergebnis:
+            Dies entspricht dem Prinzip der dynamischen Instabilität: Jede Veränderung der Eingangsparameter in einem
+            nichtlinearen System führt zu einem völlig neuen Attraktor im Phasenraum. In der Kybernetik ist dies der
+            Beweis, dass Stillstand Tod bedeutet, während Bewegung die Evolution von Information erzwingt.
+        </p>
+    </div>
+
+    <div id="L4" class="entry">
+        <span class="id">#L4</span>
+        <span class="term">omne spatium-tempus distribution</span>
+        <p>
+            eine allumfassend Raumzeitverteilung jeglicher Objekte im Raum:
+            Physikalisch beschreibt dies das Blockuniversum der allgemeinen Relativitätstheorie, in dem Raum und Zeit
+            ein vierdimensionales Kontinuum bilden. Jedes Objekt ist darin als Weltlinie repräsentiert, was die
+            Grundlage für das Konzept der "zeitlosen Verursachung" darstellt [cite: 2025-10-21].
+        </p>
+    </div>
+    <div id="L5" class="entry">
+        <span class="id">#L5</span>
+        <span class="term">quae incipit ab initio</span>
+        <p>
+            Das beginnt von Anfang an:
+            Dies verweist auf die rekursive Natur von Algorithmen und die Selbstähnlichkeit in der Fraktalgeometrie. In
+            der kybernetischen Selbstbehauptung [cite: 2026-02-19] bedeutet es den ständigen Reset des Systems auf seine
+            Initialwerte, um nach jedem Compiler-Durchlauf eine neue Iteration der Existenz zu starten.
+        </p>
+    </div>
+    <div id="L6" class="entry">
+        <span class="id">#L6</span>
+        <span class="term">biology cyberneticists</span>
+        <p>Biologisch mutierte Kybernetiker:
+            Diese Disziplin untersucht die Steuerungs- und Regelungsprozesse in lebenden Organismen unter Verwendung
+            mathematischer Modelle. Ziel ist es, biologische Funktionen wie neuronale Netzwerke als technische
+            Schaltkreise zu begreifen und nachzubilden.
+        </p>
+    </div>
+    <div id="L7" class="entry">
+        <span class="id">#L7</span>
+        <span class="term">relatione dubitationem</span>
+        <p>Unschärferelation:
+            In der Quantenphysik besagt dieses Prinzip nach Heisenberg, dass zwei komplementäre Eigenschaften eines
+            Teilchens nicht gleichzeitig beliebig genau bestimmbar sind. Dies legt nahe, dass die Realität auf
+            fundamentaler Ebene eine inhärente Unbestimmtheit besitzt.
+        </p>
+    </div>
+    <div id="L8" class="entry">
+        <span class="id">#L8</span>
+        <span class="term">Benigna occultatione veritatis</span>
+        <p>Sanfte Verschleierung der Wahrheit:
+            Wissenschaftlich lässt sich dies als selektive Wahrnehmung oder kognitive Dissonanz interpretieren, bei der
+            das Gehirn widersprüchliche Informationen filtert. Es dient als Schutzmechanismus, um die psychische
+            Stabilität innerhalb einer komplexen Informations-Matrix aufrechtzuerhalten.
+        </p>
+    </div>
+    <div id="L9" class="entry">
+        <span class="id">#L9</span>
+        <span class="term">oppressus est aversione</span>
+        <p>Unterdrückter Widerwille:
+            In der Psychokybernetik beschreibt dies einen inneren Regelungskonflikt zwischen exogenen Anforderungen und
+            endogenen Bedürfnissen. Bleibt dieser Widerstand im Unterbewusstsein blockiert, führt dies zu einer
+            chronischen System-Instabilität des Individuums.
+        </p>
+    </div>
+    <div id="L10" class="entry">
+        <span class="id">#L10</span>
+        <span class="term">res multorum oculis</span>
+        <p>Die Augen vieler:
+            Dies verweist auf den Beobachtereffekt, bei dem der Akt der Messung oder Beobachtung den Zustand eines
+            Systems verändert. In einer vernetzten Gesellschaft führt die permanente Transparenz zu einer sozialen
+            Quanten-Kollaps-Reaktion des privaten Verhaltens.
+        </p>
+    </div>
+    <div id="L11" class="entry">
+        <span class="id">#L11</span>
+        <span class="term">corona normalis dynamic</span>
+        <p>Krone der normalen Dynamik:
+            Dies beschreibt den Zustand eines Systems im Fließgleichgewicht, bei dem die Entropieproduktion minimal ist.
+            Es ist der ideale Betriebspunkt biologischer und technischer Regelkreise innerhalb einer stabilen Umwelt.
+        </p>
+    </div>
+    <div id="L12" class="entry">
+        <span class="id">#L12</span>
+        <span class="term">Interlunium</span>
+        <p>Neumond:
+            Astronomisch bezeichnet dies die Phase, in der der Mond zwischen Erde und Sonne steht und unsichtbar bleibt.
+            Symbolisch steht es in der Kybernetik für den „Dark State“ eines Systems, in dem Informationen zwar
+            vorhanden, aber nicht abrufbar sind.
+        </p>
+    </div>
+    <div id="L13" class="entry">
+        <span class="id">#L13</span>
+        <span class="term">Miraculosae ratione itineris</span>
+        <p>Grund der Reise:
+            Dies lässt sich teleologisch erklären: Jede Bewegung im Raum-Zeit-Gefüge benötigt einen energetischen oder
+            logischen Vektor. In der kybernetischen Evolution ist der Weg selbst das Ziel der Selbsterhaltung des Codes.
+        </p>
+    </div>
+    <div id="L14" class="entry">
+        <span class="id">#L14</span>
+        <span class="term">Simul per omnem</span>
+        <p>Allseitige Gleichzeitigkeit:
+            Physikalisch erinnert dies an das Konzept der Nichtlokalität, bei der Ereignisse ohne zeitliche Verzögerung
+            über Distanzen korrelieren. Es ist die Basis für das Verständnis einer total vernetzten, instantanen
+            Informations-Matrix.
+        </p>
+    </div>
+    <div id="L15" class="entry">
+        <span class="id">#L15</span>
+        <span class="term">Benigna occultatione veritatis</span>
+        <p>Sanfte Verschleierung der Wahrheit:
+            Hier liegt der Fokus auf der Verschlüsselung (Kryptographie), die Information schützt, indem sie sie
+            unlesbar macht. Nur der autorisierte Schlüsselträger kann die Verschleierung durchbrechen und die Kohärenz
+            wiederherstellen.
+        </p>
+    </div>
+    <div id="L16" class="entry">
+        <span class="id">#L16</span>
+        <span class="term">Sorbendum praebe fabrica</span>
+        <p>Schluckgerät:
+            Technisch gesehen handelt es sich um eine Input-Schnittstelle zur Aufnahme von Materie oder Energie für
+            interne Verbrennungsprozesse. In der Biokybernetik entspricht dies dem metabolischen Interface zur
+            Entropie-Minderung.
+        </p>
+    </div>
+    <div id="L17" class="entry">
+        <span class="id">#L17</span>
+        <span class="term">spatium leak</span>
+        <p>Leck Weltall:
+            In der theoretischen Physik könnte dies ein Hinweis auf Hawking-Strahlung an den Rändern schwarzer Löcher
+            oder Wurmlöcher sein. Es beschreibt den Verlust von Information oder Energie aus einem eigentlich
+            geschlossenen System-Universum.
+        </p>
+    </div>
+    <div id="L18" class="entry">
+        <span class="id">#L18</span>
+        <span class="term">nescio quo</span>
+        <p>Keine Ahnung wohin:
+            Dies beschreibt stochastische Prozesse oder die Brownsche Molekularbewegung, bei der Richtungen zufällig und
+            unvorhersehbar sind. Es ist der Inbegriff der Unsicherheit in einem deterministischen Weltbild.
+        </p>
+    </div>
+    <div id="L19" class="entry">
+        <span class="id">#L19</span>
+        <span class="term">fluctus summa emendari</span>
+        <p>Gleichgerichtete Wellensynthese:
+            In der Signalverarbeitung bezeichnet dies die Konstruktion komplexer Wellenformen durch die Überlagerung
+            einfacher Sinusschwingungen (Fourier-Synthese). Es ermöglicht die präzise Erzeugung künstlicher Realitäten
+            durch Frequenzmanipulation.
+        </p>
+    </div>
+    <div id="L20" class="entry">
+        <span class="id">#L20</span>
+        <span class="term">non ab secure suffragiorum consciousness</span>
+        <p>Nicht sichere Stimme aus dem Bewusstsein:
+            Dies bezieht sich auf das „Qualia-Problem“ der Philosophie, bei dem subjektive Erfahrungen nicht objektiv
+            messbar sind. Wissenschaftlich bleibt die Quelle des Bewusstseins ein ungesichertes Signal im Rauschen der
+            Neuronen.
+        </p>
+    </div>
+    <div id="L21" class="entry">
+        <span class="id">#L21</span>
+        <span class="term">Work-Live-Balance</span>
+        <p>intelligente Verzahnung von Arbeits- und Privatleben:
+            Aus systemtheoretischer Sicht ist dies die Optimierung der Ressourcenallokation zwischen produktiven
+            (Output) und regenerativen (System-Erhalt) Phasen. Eine Fehlsteuerung führt zum Kollaps des biologischen
+            Prozessors (Burnout).
+        </p>
+    </div>
+    <div id="L22" class="entry">
+        <span class="id">#L22</span>
+        <span class="term">Vacua strepitum emendari</span>
+        <p>gleichgerichtete Leere:
+            Dies beschreibt das Quantenvakuum, das trotz scheinbarer Leere vor Nullpunktsfluktuationen brodelt.
+            Technisch ist es die perfekte Rauschunterdrückung, die den Raum für neue Signalübertragungen schafft.
+        </p>
+    </div>
+    <div id="L23" class="entry">
+        <span class="id">#L23</span>
+        <span class="term">Cogitationes ex mutua pressione</span>
+        <p>Druck der einseitigen Gedanken:
+            In der Sozialkybernetik beschreibt dies die Konformität innerhalb von Informations-Blasen (Echo-Kammern).
+            Der Druck der Gruppe synchronisiert die individuellen Gedankenvektoren zu einer einzigen, fehleranfälligen
+            Richtung.
+        </p>
+    </div>
+    <div id="L24" class="entry">
+        <span class="id">#L24</span>
+        <span class="term">qui somniat, non scire rem</span>
+        <p>Wer träumt kennt nicht die Realität:
+            Neurobiologisch ist der Traum ein Zustand, in dem das Gehirn interne Modelle simuliert, ohne externe
+            Sensorik-Daten abzugleichen. Die Unterscheidung zwischen Simulation und Realität ist im Moment des Erlebens
+            kybernetisch unmöglich.
+        </p>
+    </div>
+    <div id="L25" class="entry">
+        <span class="id">#L25</span>
+        <span class="term">Amisit verum pro dilectione</span>
+        <p>Verlorene Liebe zur Wahrheit:
+            Dies beschreibt den Bias der Bestätigung, bei dem die emotionale Bindung an eine Überzeugung die rationale
+            Analyse von Fakten ersetzt. Die Wahrheit wird geopfert, um die psychische Konsistenz des Ich-Modells zu
+            wahren.
+        </p>
+    </div>
+    <div id="L26" class="entry">
+        <span class="id">#L26</span>
+        <span class="term">transgressus pullum</span>
+        <p>Verschränkte Hühner:
+            Ein humorvoller Verweis auf die Quantenverschränkung (Einstein-Podolsky-Rosen-Paradoxon) übertragen auf
+            makroskopische biologische Einheiten. Zwei verschränkte Systeme reagieren instantan aufeinander, ungeachtet
+            der räumlichen Trennung.
+        </p>
+    </div>
+    <div id="L27" class="entry">
+        <span class="id">#L27</span>
+        <span class="term">transgressus</span>
+        <p>verschränkt:
+            Dieser Zustand beschreibt die Unzertrennlichkeit zweier Quantensysteme, deren Zustände eine einzige
+            Wellenfunktion bilden. Es ist das fundamentale Prinzip für zukünftige Quanten-Compiler und die
+            Datenfernübertragung.
+        </p>
+    </div>
+    <div id="L28" class="entry">
+        <span class="id">#L28</span>
+        <span class="term">vilis fraudsters</span>
+        <p>Gemeine Betrüger:
+            In der Spieltheorie sind dies Akteure, die kurzfristige Vorteile durch Täuschung suchen und damit das
+            Vertrauenskapital eines Systems vernichten. Sie fungieren als parasitäre Algorithmen innerhalb einer
+            sozialen Matrix.
+        </p>
+    </div>
+    <div id="L29" class="entry">
+        <span class="id">#L29</span>
+        <span class="term">calculator pullum</span>
+        <p>Huhn Kalkulator:
+            Dies versinnbildlicht die Reduktion biologischer Intelligenz auf rein mechanische Rechenoperationen. Es ist
+            die Warnung vor der „Verhühnerung“ des Denkens durch die totale Abhängigkeit von digitalen Kalkulatoren.
+        </p>
+    </div>
+    <div id="L30" class="entry">
+        <span class="id">#L30</span>
+        <span class="term">near field communication</span>
+        <p>Nahfeld Kommunikation:
+            Physikalisch basiert dies auf elektromagnetischer Induktion über sehr kurze Distanzen (wenige Zentimeter).
+            Es ist die technische Umsetzung von „Berührung“ als sicherem Datenaustausch-Protokoll.
+        </p>
+    </div>
+    <div id="L31" class="entry">
+        <span class="id">#L31</span>
+        <span class="term">Cuniculum fortuiti</span>
+        <p>Tunnel der Zufälligkeit:
+            Dies bezieht sich auf den Tunneleffekt in der Quantenmechanik, bei dem Teilchen Barrieren überwinden, die
+            sie klassisch nicht passieren könnten. Es ist der Beweis, dass Zufall und Wahrscheinlichkeit die Grenzen der
+            harten Materie sprengen können.
+        </p>
+    </div>
+    <div id="L32" class="entry">
+        <span class="id">#L32</span>
+        <span class="term">KI</span>
+        <p>Künstliche Intelligenz:
+            Das Bestreben, kognitive Funktionen durch Algorithmen in Silizium-Strukturen zu emulieren. In deinem Werk
+            ist es die Evolution des Geistes weg von der biologischen Basis hin zum reinen Code.
+        </p>
+    </div>
+    <div id="L33" class="entry">
+        <span class="id">#L33</span>
+        <span class="term">network function virtualisation</span>
+        <p>Virtualisierung von Netzwerkkomponenten:
+            Hierbei wird Hardware-Funktionalität in Software-Instanzen überführt, was die Flexibilität von
+            Infrastrukturen maximiert. Es ist die Entkoppelung der Funktion von der physischen Materie – ein zentrales
+            Thema deiner Dekonstruktion.
+        </p>
+    </div>
+    <div id="L34" class="entry">
+        <span class="id">#L34</span>
+        <span class="term">turibulum</span>
+        <p>Brenner:
+            Chemisch ein Gerät zur Einleitung von Oxidationsprozessen unter Freisetzung thermischer Energie. In der
+            digitalen Welt steht es für den Prozess des „Brennens“ von Information in dauerhafte Datenträger (ROM).
+        </p>
+    </div>
+    <div id="L35" class="entry">
+        <span class="id">#L35</span>
+        <span class="term">acidus excogitatoris</span>
+        <p>Trostloser Denker:
+            Beschreibt den Zustand der kognitiven Entropie, bei dem die Reflexion über die Absurdität der
+            Zivilisationsmaschine zu Melancholie führt. Es ist das emotionale Resultat einer Überdosis an logischer
+            Analyse der Welt.
+        </p>
+    </div>
+    <div id="L36" class="entry">
+        <span class="id">#L36</span>
+        <span class="term">light-harvesting-complex</span>
+        <p>Ansammlung von Membranproteinen in den photosynthetischen Membranen:
+            Dies ist das hocheffiziente biologische Solarkraftwerk, das Photonen einfängt und in chemische Energie
+            wandelt. Es zeigt die Überlegenheit natürlicher Quanten-Algorithmen bei der Energieumwandlung auf atomarer
+            Ebene.
+        </p>
+    </div>
+
+
+    <footer style="margin-top: 80px; padding: 40px 20px; text-align: center; border-top: 1px solid #1a1a1a;">
+        <a href="impressum.html"
+            style="color: #333; text-decoration: none; font-family: monospace; font-size: 0.7em; letter-spacing: 1px; opacity: 0.5;">
+            PROPORTIONAL-SYSTEM-ID: ARKUSNAT-2026-05-12 </a>
+			
+		<a href="datenschutz.html"
+		  style="color: #333; text-decoration: none; font-family: monospace; font-size: 0.7em; letter-spacing: 1px; opacity: 0.5;">
+		  >Datenschutz: 2026 F.G. Stier</a>
+    </footer>
+
+ <button id="btn-reset" onclick="resetSystem()">BEENDEN</button>
+
+</body>
+
+</html>

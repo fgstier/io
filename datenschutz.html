@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sektor-Datenrecht | ARKUSNAT</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #a0a0a0;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.5;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border-left: 2px solid #333;
+            padding-left: 20px;
+        }
+        h1 {
+            color: #d1d1d1;
+            font-size: 1.2em;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+        h2 {
+            color: #f0f0f0;
+            font-size: 1.0em;
+            margin-top: 25px;
+            font-style: italic;
+        }
+        .highlight { color: #f0f0f0; }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #ff0000;
+            text-decoration: none;
+            border: 1px solid #ff0000;
+            padding: 5px 10px;
+        }
+        .back-link:hover { background: #ff0000; color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sektor-Datenrecht / Datenschutz</h1>
+        
+        <p>Verantwortlich für die Daten-Konstruktion: <span class="highlight">F.G. Stier</span></p>
+
+        <h2>1. Daten-Erfassung im Ur-Depot</h2>
+        <p>Diese Web-Applikation wird lokal auf einem ESP32-Mikrocontroller bereitgestellt. Es findet keine serverseitige Speicherung von personenbezogenen Daten statt. Die Synchronisations-Exekutive arbeitet rein clientseitig.</p>
+
+        <h2>2. Sensor-Zugriff (AR-Scanner)</h2>
+        <p>Für die Analyse der Sektor-Codes fordert das System Zugriff auf die Kamera Ihres Endgeräts. Die Bildfrequenzen werden lokal im RAM verarbeitet und zu keinem Zeitpunkt an externe Sektoren übertragen.</p>
+
+        <h2>3. Externe Frequenzen & CDN</h2>
+        <p>Zur Aufrechterhaltung der Funktionalität werden externe Ressourcen geladen:</p>
+        <p>
+            <span class="highlight">ZXing Library:</span> Geladen via unpkg.com zur Dekodierung der Data-Matrix-Muster.<br>
+            <span class="highlight">YouTube:</span> Bei Aktivierung von Video-Vektoren werden Daten an Google (YouTube) übertragen.
+        </p>
+
+        <h2>4. Ihre Rechte</h2>
+        <p>Sie haben das Recht auf Auskunft und Löschung. Da dieses System jedoch als geschlossene Konstruktion fungiert und keine Daten speichert, entfällt eine Protokollierung personenbezogener Merkmale.</p>
+
+        <p><em>"Dieses Video dient als philosophische Analyse und literarische Dekonstruktion der Begriffe 'Nichts', 'Existenz' und 'Code'."</em></p>
+
+        <a href="/" class="back-link"><< ZURÜCK ZUM SYSTEM</a>
+    </div>
+</body>
+</html>
