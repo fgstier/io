@@ -58,3 +58,17 @@ function activateSektor(elementId, coordString) {
         }
     }
 }
+
+// Synchronisations-Exekutive [cite: 2026-03-28]
+    window.onload = function() {
+        if (window.location.hash) {
+            var hash = window.location.hash;
+            var element = document.querySelector(hash);
+            if (element) {
+                // Ein kleiner Delay von 10ms zwingt GitHub zur Kooperation
+                setTimeout(function() {
+                    element.scrollIntoView();
+                }, 10);
+            }
+        }
+    };
