@@ -9,11 +9,13 @@ window.addEventListener('load', () => {
     const fullHash = window.location.hash;
     if (!fullHash) return;
 
+    // Splitten in Anker (#L111) und Parameter (?p=1...)
     const parts = fullHash.split('?');
     const targetAnchor = parts[0]; 
     const paramString = parts[1];
 
     if (paramString) {
+        // --- LOGIK FÜR VIDEO-SEKTOREN ---
         const urlParams = new URLSearchParams(paramString);
         const coordsData = urlParams.get('coords');
 
@@ -21,17 +23,24 @@ window.addEventListener('load', () => {
             const idPart = coordsData.split('|')[0].split(':')[0];
             const coordValues = coordsData.split('|')[0].split(':')[1];
             
-            // 1. Sektor aktivieren (Raum aufspannen & Video laden)
             activateSektor("L" + idPart, coordValues);
             
-            // 2. Verzögerter Sprung, damit die Seite "Zeit hat zu wachsen"
             setTimeout(() => {
                 const targetEl = document.querySelector(targetAnchor);
-                if (targetEl) {
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 500); // 500ms ist der Sicherheits-Puffer
+                if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500); 
         }
+    } else {
+        // --- LOGIK FÜR REINE TEXT-SEKTOREN (z.B. #L111) ---
+        setTimeout(() => {
+            const targetEl = document.querySelector(targetAnchor);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Optional: Kurzes Flashen für die Kohärenz-Kuratoren [cite: 2026-03-28]
+                targetEl.style.backgroundColor = "rgba(0, 243, 255, 0.1)";
+                setTimeout(() => { targetEl.style.backgroundColor = "transparent"; }, 1000);
+            }
+        }, 100); // 100ms reicht für Text-Sektoren auf GitHub aus
     }
 });
 
