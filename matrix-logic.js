@@ -1,7 +1,24 @@
 function resetSystem() {
-    document.querySelectorAll('iframe').forEach(f => f.src = "");
-    document.getElementById('reset-overlay').style.display = 'block';
+    console.log("Reset-Vektor initialisiert...");
+    
+    // 1. Alle Videos stoppen (Synchronisations-Exekutive [cite: 2026-03-28])
+    document.querySelectorAll('iframe').forEach(f => {
+        f.src = "";
+    });
+
+    // 2. Das Overlay sicher adressieren
+    const overlay = document.getElementById('reset-overlay');
+    if (overlay) {
+        overlay.style.display = 'block';
+    } else {
+        console.error("Fehler: reset-overlay im Ur-Depot nicht gefunden!");
+    }
+
+    // 3. URL säubern (Anker entfernen)
     history.pushState("", document.title, window.location.pathname);
+    
+    // 4. Sanfter Scroll nach oben
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 
