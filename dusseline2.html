@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Loop: Bug: Dusseline // Interface_v3</title>
+    <title>Loop: Bug: Dusseline // Interface_v5</title>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <style>
         * {
@@ -22,7 +22,7 @@
             font-family: 'Courier New', Courier, Consolas, monospace;
         }
 
-        /* Start-Bildschirm zur Freischaltung der Audio-Kontexte */
+        /* Sicherheits-Schranke für Audio-Freigabe */
         #start-overlay {
             position: absolute;
             top: 0;
@@ -69,7 +69,7 @@
             z-index: 1;
         }
 
-        /* Optimierter YouTube Container (Zentriert, skaliert, kontrolliert) */
+        /* YouTube Container (Zentriert und Klickbar) */
         #youtube-overlay-container {
             position: absolute;
             top: 0;
@@ -78,24 +78,25 @@
             height: 100%;
             z-index: 3;
             display: none;
-            background: rgba(0, 0, 0, 0.8); /* Durchscheinend für AR-Effekt */
+            background: rgba(0, 0, 0, 0.85); 
             justify-content: center;
             align-items: center;
             padding: 10px;
+            cursor: pointer;
         }
 
         .video-wrapper {
             position: relative;
             width: 100%;
-            max-width: 560px; /* Begrenzt die maximale Breite auf dem Desktop/Tablet */
-            aspect-ratio: 16 / 9; /* Erzwingt das korrekte Videoformat */
-            box-border: 1px solid #fff;
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+            border: 1px solid #fff;
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            pointer-events: none;
         }
 
-        /* Spezial-Klasse für hochkantige Shorts */
         .video-wrapper.is-short {
-            max-width: 340px;
+            max-width: 320px;
             aspect-ratio: 9 / 16;
         }
 
@@ -124,7 +125,7 @@
         /* Das HUD-Interface */
         .hud-box {
             border: 1px solid #fff;
-            background: rgba(0, 0, 0, 0.85); 
+            background: rgba(0, 0, 0, 0.9); 
             color: #fff;
             padding: 18px;
             max-width: 90%;
@@ -167,6 +168,31 @@
             display: block;
         }
 
+        /* NEU: Schwebender, interaktiver Audio-Stopp-Button unten rechts */
+        #audio-stop-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            z-index: 6; /* Über allen Overlays platziert */
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 12px 18px;
+            font-family: inherit;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: none; /* Standardmäßig unsichtbar */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        #audio-stop-btn:active {
+            background: #fff;
+            color: #000;
+        }
+
         #status-bar {
             position: absolute;
             top: 15px;
@@ -199,12 +225,14 @@
     </div>
 
     <div id="status-bar">
-        <span class="blink">●</span> SCANNER_MODE: ACTIVE // AUDIO_OK
+        <span class="blink">●</span> SCANNER_MODE: ACTIVE // FLOATING_AUDIO_CTRL
     </div>
 
     <video id="video" autoplay playsinline muted></video>
 
-    <div id="youtube-overlay-container">
+    <button id="audio-stop-btn" onclick="manualAudioStop()">⏹ AUDIO MUTE</button>
+
+    <div id="youtube-overlay-container" onclick="openExternalYouTube()">
         <div id="video-wrapper" class="video-wrapper">
             <iframe id="youtube-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
@@ -235,13 +263,14 @@
         const hudBody = document.getElementById('hud-body');
         const hudFooter = document.getElementById('hud-footer');
         const startOverlay = document.getElementById('start-overlay');
+        const audioStopBtn = document.getElementById('audio-stop-btn');
 
         let worker = null;
         let isProcessing = false;
         let clearOverlayTimeout = null;
         let currentAudio = null; 
+        let activeYouTubeId = ""; 
 
-        // Die Datenbank mit Typ-Unterscheidung für das Video-Format
         const database = {
             "zivilisations-maschine": {
                 title: "⚠️ CRITICAL_FAILURE",
@@ -268,30 +297,25 @@
                 text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
                 index: "SYS_REF_005 // SYNTAX_LVL"
             },
-            // YouTube-Short-Eintrag (Hochkant)
             "core-detection_run_32": {
                 title: "🎬 YT_STREAM_LAUNCH",
-                text: "Verbinde mit externem Video-Server...",
+                text: "Tippe auf den Bildschirm,\num das Short direkt zu öffnen.",
                 index: "EXE_V_32 // YOUTUBE",
                 youtubeId: "Sz4zR94KDkk", 
-                videoType: "short" // Weist das Skript an, das Hochformat zu wählen 
+                videoType: "short" 
             },
-            // Lokaler Audio-Trigger
             "core-sound_run_24": {
                 title: "🎵 AUDIO_STREAM_LAUNCH",
-                text: "Initialisiere akustisches Signalfeld...",
+                text: "Akustisches Signalfeld aktiv.\nNutze den Button unten rechts zum Beenden.",
                 index: "EXE_A_24 // ASSETS",
                 audio: "assets/sound1.mp3" 
             }
         };
 
-        // Wird durch den Klick auf den Start-Button ausgeführt
         function initializeEngine() {
             startOverlay.style.display = "none";
-            // Audio-Kontext freischalten durch Dummy-Wiedergabe
             const contextAudio = new Audio();
             contextAudio.play().catch(() => {});
-            
             startCamera();
             initOCR();
         }
@@ -360,8 +384,10 @@
                         hud.classList.remove('active');
                         ytContainer.style.display = "none";
                         ytPlayer.src = ""; 
+                        activeYouTubeId = "";
+                        // HINWEIS: Audio läuft jetzt einfach im Hintergrund ungestört weiter!
                         clearOverlayTimeout = null;
-                    }, 5000); // 5 Sekunden Haltezeit
+                    }, 5000); 
                 } else if (found && clearOverlayTimeout) {
                     clearTimeout(clearOverlayTimeout);
                     clearOverlayTimeout = null;
@@ -380,31 +406,55 @@
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
-            // Audio-Wiedergabe (lokal) - läuft jetzt fehlerfrei durch die Schranke
+            // Audio-Start und Button-Einblendung
             if (entry.audio) {
                 if (!currentAudio || currentAudio.src.indexOf(entry.audio) === -1) {
                     if (currentAudio) currentAudio.pause();
                     currentAudio = new Audio(entry.audio);
                     currentAudio.volume = 0.9;
-                    currentAudio.play().catch(e => console.log("Audio blockiert:", e));
+                    
+                    // Zeigt den Schwebebutton an, wenn Ton erfolgreich startet
+                    currentAudio.play()
+                        .then(() => { audioStopBtn.style.display = "block"; })
+                        .catch(e => console.log("Audio blockiert:", e));
+                    
+                    // Blendet den Button automatisch aus, wenn das Lied regulär zu Ende ist
+                    currentAudio.onended = function() {
+                        audioStopBtn.style.display = "none";
+                    };
                 }
             }
 
-            // YouTube-Wiedergabe (extern über skaliertes iframe)
             if (entry.youtubeId) {
-                // Format-Prüfung: Short oder Standard
+                activeYouTubeId = entry.youtubeId;
                 if (entry.videoType === "short") {
                     ytWrapper.classList.add('is-short');
                 } else {
                     ytWrapper.classList.remove('is-short');
                 }
 
-                const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0`;
+                const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
-                    ytContainer.style.display = "flex"; // Nutzt Flexbox zur perfekten Zentrierung
+                    ytContainer.style.display = "flex"; 
                 }
             }
+        }
+
+        function openExternalYouTube() {
+            if (activeYouTubeId) {
+                const url = `https://www.youtube.com/shorts/${activeYouTubeId}`;
+                window.open(url, '_blank');
+            }
+        }
+
+        // NEU: Logik für den schwebenden Interrupt-Button
+        function manualAudioStop() {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0; // Setzt die Spur an den Anfang zurück
+            }
+            audioStopBtn.style.display = "none"; // Versteckt den Button wieder
         }
     </script>
 </body>
