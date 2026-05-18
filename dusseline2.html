@@ -25,12 +25,18 @@
 </head>
 <body>
 
+    <div id="start-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:100; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-align:center; padding:20px;">
+        <h2 style="margin-bottom:20px; letter-spacing:2px;">HYBRID_AUDIO // INITIATION</h2>
+        <p style="font-size:12px; max-width:300px; line-height:1.6; color:#aaa; margin-bottom:30px;">Klicken Sie auf den Bildschirm, um die Kamera-Sensoren und das Frequenz-Audio-Modul zu initialisieren.</p>
+        <button id="start-btn" style="background:transparent; border:1px solid #fff; color:#fff; padding:12px 30px; font-family:monospace; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">System Starten</button>
+    </div>
+
     <div id="status-bar">
         <span class="blink">●</span> MATRIX_DECODER: HYBRID_AUDIO // ON
     </div>
 
     <video id="video" autoplay playsinline muted></video>
-    <audio id="audio-player" preload="auto"></audio>
+    <audio id="audio-player" preload="auto" crossorigin="anonymous"></audio>
 
     <div id="overlay-container">
         <div id="hud" class="hud-box">
@@ -45,20 +51,19 @@
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
         const audioPlayer = document.getElementById('audio-player');
+        const startOverlay = document.getElementById('start-overlay');
+        const startBtn = document.getElementById('start-btn');
         
         let ocrWorker = null;
         let isScannerReady = false;
-
-        // Präzise Konfiguration des Code-Readers
-        const hints = new Map();
-        const formats = [ZXing.BarcodeFormat.DATA_MATRIX];
-        hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
-        hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
-
-        const codeReader = new ZXing.BrowserMultiFormatReader(hints);
-        
         let isProcessing = false;
         let clearTextTimeout = null;
+
+        // Code-Reader Konfiguration
+        const hints = new Map();
+        hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
+        hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+        const codeReader = new ZXing.BrowserMultiFormatReader(hints);
 
         const textDatabase = {
             "zivilisations-maschine": { title: "⚠️ CRITICAL_FAILURE", text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität an den Code abgetreten." },
@@ -70,62 +75,72 @@
             "sound_loop_02": { type: "audio", src: "https://fgstier.github.io/io/assets/sound2.mp3" }
         };
 
+        // Event Listener für den echten Systemstart per Klick
+        startBtn.addEventListener('click', async () => {
+            startOverlay.style.display = 'none'; // Overlay ausblenden
+            
+            // 1. Audio-Schnittstelle explizit im Klick-Event freischalten
+            audioPlayer.play().then(() => {
+                audioPlayer.pause();
+                console.log("Audio-Kontext erfolgreich entsperrt.");
+            }).catch(e => console.log("Audio-Vorbereitung läuft..."));
+
+            // 2. Kamera und Scanner starten
+            await startCamera();
+            await initScanner();
+        });
+
         async function startCamera() {
-            const constraints = {
-                video: {
-                    facingMode: { exact: "environment" },
-                    width: { ideal: 1920 },
-                    height: { ideal: 1080 }
-                },
-                audio: false
-            };
+            // Stufenweise Constraints für maximale Kompatibilität
+            const profileHigh = { video: { facingMode: { exact: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false };
+            const profileStandard = { video: { facingMode: "environment" }, audio: false };
+            const profileFallback = { video: true, audio: false };
 
             try {
-                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                // Versuch 1: Rückkamera in Full-HD
+                const stream = await navigator.mediaDevices.getUserMedia(profileHigh);
                 video.srcObject = stream;
             } catch (err) {
-                try { 
-                    const fallback = await navigator.mediaDevices.getUserMedia({ video: true, audio: false }); 
-                    video.srcObject = fallback; 
-                } catch (e) { 
-                    alert("Kamera-Fehler: Zugriff blockiert oder keine Kamera vorhanden."); 
+                console.warn("Full-HD oder Umgebungskamera verweigert, versuche Standard-Rückkamera...");
+                try {
+                    // Versuch 2: Standard-Rückkamera ohne feste Auflösungsvorgabe
+                    const stream = await navigator.mediaDevices.getUserMedia(profileStandard);
+                    video.srcObject = stream;
+                } catch (e) {
+                    try {
+                        // Versuch 3: Universeller Fallback (jede verfügbare Kamera, z.B. Frontkamera am PC)
+                        const stream = await navigator.mediaDevices.getUserMedia(profileFallback);
+                        video.srcObject = stream;
+                    } catch (finalErr) {
+                        alert("Kamera-Fehler: Zugriff im Browser blockiert. Bitte prüfen Sie, ob die Seite über HTTPS geladen wurde und die Kameraberechtigung erteilt ist.");
+                    }
                 }
             }
         }
 
         async function initScanner() {
             try {
-                // Korrekte Tesseract v5 Initialisierung des Workers
                 ocrWorker = await Tesseract.createWorker('deu');
-                
                 isScannerReady = true;
-                console.log("Scanner-Schnittstellen bereit.");
                 
-                // Startet die rekursive Analyseschnittstelle, sobald das Video läuft
                 video.addEventListener('play', () => {
                     setTimeout(processFrameLoop, 500);
                 });
             } catch (err) {
-                console.error("Fehler bei der Scanner-Initialisierung:", err);
+                console.error("Fehler bei OCR-Initialisierung:", err);
             }
         }
 
-        // Rekursive Loop-Funktion statt starrem Intervall
         async function processFrameLoop() {
             if (video.paused || video.ended) return;
-            
             if (!isProcessing && isScannerReady && video.videoWidth > 0) {
                 await processFrame();
             }
-            
-            // Wartet nach der Verarbeitung 400ms, bevor der nächste Frame geholt wird
-            // Das schont den Smartphone-Akku und stabilisiert die Framerate
             setTimeout(processFrameLoop, 400);
         }
 
         async function processFrame() {
             isProcessing = true;
-
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth; 
             canvas.height = video.videoHeight;
@@ -133,13 +148,11 @@
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
             try {
-                // 1. SCHRITT: Data-Matrix auslesen (Priorisiert)
+                // 1. SCHRITT: Data-Matrix
                 try {
                     const codeResult = await codeReader.decodeFromCanvas(canvas);
                     const codeContent = codeResult.getText().trim(); 
                     const lowerContent = codeContent.toLowerCase();
-
-                    console.log("Erkannter Code-Inhalt:", codeContent);
 
                     if (lowerContent.includes('http://') || lowerContent.includes('https://')) {
                         const urlStartIndex = lowerContent.indexOf('http');
@@ -151,13 +164,10 @@
                         playInternalAudio(codeDatabase[lowerContent].src);
                         return; 
                     }
-                } catch (e) { 
-                    /* Kein Matrix-Code im aktuellen Frame gefunden - fahre fort mit OCR */ 
-                }
+                } catch (e) { /* Kein Code */ }
 
-                // 2. SCHRITT: OCR-Texterkennung
+                // 2. SCHRITT: OCR
                 try {
-                    // Performance-Optimierung: Wir übergeben Tesseract das Full-HD Canvas.
                     const { data: { text } } = await ocrWorker.recognize(canvas);
                     const normalizedText = text.toLowerCase().trim();
                     let textFound = false;
@@ -173,24 +183,12 @@
                     if (!textFound && !hud.classList.contains('active')) {
                         resetTextWithDelay();
                     }
-                } catch (ocrError) { 
-                    console.error("OCR Fehler im Frame:", ocrError); 
-                }
+                } catch (ocrError) { /* OCR Fehler */ }
 
-            } catch (globalError) {
-                console.error("Verarbeitungsfehler:", globalError);
             } finally {
                 isProcessing = false;
             }
         }
-
-        // Freischaltung der Audio-Schnittstelle durch Erst-Interaktion
-        window.addEventListener('click', () => {
-            audioPlayer.play().then(() => {
-                audioPlayer.pause(); 
-                console.log("Audio-Schnittstelle aktiv.");
-            }).catch(e => console.log("Audio-Freischaltung ausstehend..."));
-        }, { once: true });
 
         function showText(title, text) {
             if (clearTextTimeout) clearTimeout(clearTextTimeout);
@@ -198,9 +196,7 @@
             hudBody.innerHTML = text.replace(/\n/g, '<br>');
             hud.classList.add('active');
             
-            clearTextTimeout = setTimeout(() => { 
-                hud.classList.remove('active'); 
-            }, 6000);
+            clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 6000);
         }
 
         function playInternalAudio(src) {
@@ -212,8 +208,8 @@
                         showText("🔊 AUDIO_STREAM", "Frequenz-Signal wird wiedergegeben...");
                     })
                     .catch(e => {
-                        console.log("Audio blockiert:", e);
-                        showText("⚠️ AUDIO_BLOCKED", "Klicken Sie auf den Bildschirm, um Ton zu erlauben.");
+                        console.error("Audio-Wiedergabefehler:", e);
+                        showText("⚠️ AUDIO_ERROR", "Wiedergabe vom Browser blockiert.");
                     });
             }
         }
@@ -223,11 +219,6 @@
                 clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 3000);
             }
         }
-
-        window.addEventListener('load', () => { 
-            startCamera(); 
-            initScanner(); 
-        });
     </script>
 </body>
 </html>
