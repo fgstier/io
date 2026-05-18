@@ -4,115 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Loop: Bug: Dusseline // Scanner-Interface</title>
+    <title>Loop: Bug: Dusseline // Scanner-Interface & Diagnose</title>
     
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body,
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Live-Kamera-Stream füllt den ganzen Bildschirm */
-        #video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        /* Transparentes AR-Overlay für die Text-Einblendungen */
-        #overlay-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Das HUD-Interface (Heads-Up-Display) */
-        .hud-box {
-            border: 1px solid #fff;
-            background: rgba(0, 0, 0, 0.75);
-            color: #fff;
-            padding: 15px;
-            max-width: 90%;
-            width: 400px;
-            text-transform: uppercase;
-            font-size: 13px;
-            line-height: 1.5;
-            letter-spacing: 1px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .hud-box.active {
-            opacity: 1;
-        }
-
-        .hud-header {
-            border-bottom: 1px dashed #fff;
-            padding-bottom: 5px;
-            margin-bottom: 8px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Status-Indikator oben links */
-        #status-bar {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 3;
-            color: #fff;
-            font-size: 11px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-        }
-
-        .blink {
-            animation: blinker 1.5s linear infinite;
-        }
-
-        @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
+        #video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        #overlay-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        
+        .hud-box { border: 1px solid #fff; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px; max-width: 90%; width: 420px; text-transform: uppercase; font-size: 12px; line-height: 1.5; letter-spacing: 1px; opacity: 1; transition: opacity 0.3s ease-in-out; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        .hud-header { border-bottom: 1px dashed #fff; padding-bottom: 5px; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between; }
+        
+        #status-bar { position: absolute; top: 15px; left: 15px; z-index: 3; color: #fff; font-size: 11px; background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border: 1px solid rgba(255, 255, 255, 0.3); text-transform: uppercase; }
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+        
+        .diag-text { color: #00ff00; font-size: 10px; margin-top: 5px; font-family: monospace; }
+        .err-text { color: #ff3333; }
     </style>
 </head>
 
 <body>
 
     <div id="status-bar">
-        <span class="blink">●</span> SCANNER_MODE: ACTIVE // CORRUPTED_MATRIX
+        <span class="blink">●</span> DIAGNOSE_MODE // ON
     </div>
 
     <video id="video" autoplay playsinline muted></video>
@@ -120,127 +40,147 @@
     <div id="overlay-container">
         <div id="hud" class="hud-box">
             <div class="hud-header">
-                <span id="hud-title">Target Found</span>
-                <span>SYS_REC_06</span>
+                <span id="hud-title">SYSTEM INIZIALISIERUNG</span>
+                <span>DIAG_v2.6</span>
             </div>
             <div id="hud-body">
-                Analyse läuft...
+                Kamera-Sensoren werden gestartet...
+            </div>
+            <div id="hud-diagnostics" class="diag-text">
+                Warte auf Video-Frame...
             </div>
         </div>
     </div>
 
-    <script>
+<script>
         const video = document.getElementById('video');
         const hud = document.getElementById('hud');
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
+        const hudDiag = document.getElementById('hud-diagnostics');
 
         let ocrWorker = null;
         let codeReader = null;
         let isProcessing = false;
+        let isScannerReady = false;
         let clearOverlayTimeout = null;
 
-        // Definition der Zielworte für OCR
         const database = {
-            "zivilisations-maschine": {
-                title: "⚠️ CRITICAL_FAILURE",
-                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten."
-            },
-            "aberglaube": {
-                title: "[!] SYSTEM-DIAGNOSE",
-                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING."
-            },
-            "zensuren": {
-                title: "🚫 FILTER_BLOCKED",
-                text: "[Inhalt nach Novia-Dekret der Elb-Stille zensiert]\nFrequenz-Abweichung isoliert."
-            },
-            "idioten": {
-                title: "> SCAN: DEFAULT_MODE",
-                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt."
-            },
-            "dusseline": {
-                title: "🤖 MATRIX_ERROR",
-                text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM ENDLOSEN FAKE."
-            }
+            "zivilisations-maschine": { title: "⚠️ CRITICAL_FAILURE", text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten." },
+            "aberglaube": { title: "[!] SYSTEM-DIAGNOSE", text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht." },
+            "zensuren": { title: "🚫 FILTER_BLOCKED", text: "[Inhalt nach Novia-Dekret zensiert]" },
+            "idioten": { title: "> SCAN: DEFAULT_MODE", text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'." },
+            "dusseline": { title: "🤖 MATRIX_ERROR", text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM FAKE." }
         };
 
-        // 1. Kamera-Stream initialisieren
         async function startCamera() {
+            // Wir fordern eine robuste Auflösung an, fokussieren aber auf Kompatibilität
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { exact: "environment" } },
+                    video: { facingMode: { exact: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
                     audio: false
                 });
                 video.srcObject = stream;
+                updateDiag("Kamera initialisiert (720p optimiert).");
             } catch (err) {
                 try {
                     const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
                     video.srcObject = fallbackStream;
+                    updateDiag("Kamera: Standard-Fallback aktiv.");
                 } catch (fallbackErr) {
-                    alert("Kamera-Zugriff verweigert oder nicht verfügbar.");
+                    updateDiag("Kamera-Zugriff blockiert!", true);
                 }
             }
         }
 
-        // 2. Engines im Hintergrund vorbereiten
         async function initScanner() {
-            // ZXing Data-Matrix-Reader konfigurieren
-            const hints = new Map();
-            hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
-            hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
-            codeReader = new ZXing.BrowserMultiFormatReader(hints);
+            updateDiag("Lade Analyse-Engines...");
+            try {
+                // ZXing Konfiguration
+                const hints = new Map();
+                hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
+                hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+                codeReader = new ZXing.BrowserMultiFormatReader(hints);
 
-            // Tesseract OCR konfigurieren
-            ocrWorker = await Tesseract.createWorker('deu');
-            
-            // Schleife starten
-            video.addEventListener('play', () => {
-                setInterval(captureAndScan, 1000);
-            });
+                // Tesseract v5 Konfiguration
+                ocrWorker = await Tesseract.createWorker('deu');
+                
+                isScannerReady = true;
+                updateDiag("System bereit. Fokussiere Code...");
+
+                // Rekursiven Loop starten, sobald das Video echt Signale liefert
+                video.addEventListener('play', () => {
+                    setTimeout(scanLoop, 500);
+                });
+            } catch (e) {
+                updateDiag("Init-Fehler: " + e.message, true);
+            }
         }
 
-        // 3. Frame abgreifen und hybrid analysieren
-        async function captureAndScan() {
-            if (isProcessing || !ocrWorker || !codeReader) return;
-            isProcessing = true;
+        // Kontrollierter, rekursiver Loop statt blindem Intervall
+        async function scanLoop() {
+            if (video.paused || video.ended) return;
 
+            if (!isProcessing && isScannerReady && video.videoWidth > 0) {
+                await captureAndScan();
+            }
+
+            // Wartet exakt 400 Millisekunden NACHDEM der letzte Frame fertig berechnet wurde
+            setTimeout(scanLoop, 400);
+        }
+
+        async function captureAndScan() {
+            isProcessing = true;
+            updateDiag("Isoliere Matrix-Ebene...");
+
+            // Erzeuge ein optimiertes Analyse-Canvas (Skalierung für CPU-Entlastung)
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
+            
+            // Frame zeichnen
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // BILD-OPTIMIERUNG (Erhöht die Erkennungsrate von Data-Matrix im Web-Canvas drastisch):
+            // Wir nutzen CSS-Filter direkt auf dem Canvas-Kontext, um Kontrast zu maximieren
+            ctx.filter = 'contrast(1.8) grayscale(1)';
+            ctx.drawImage(canvas, 0, 0); 
 
             let matrixFound = false;
 
             try {
-                // SCHRITT A: Data-Matrix-Analyse (Vorrangig)
+                // ZWEIG 1: Data-Matrix (Höchste Priorität)
                 try {
                     const codeResult = await codeReader.decodeFromCanvas(canvas);
                     const content = codeResult.getText().trim();
-                    console.log("Data-Matrix erkannt:", content);
+                    
+                    console.log("💥 DATA-MATRIX ERKANNT:", content);
+                    updateDiag("Code isoliert: Leite weiter...");
 
-                    // Prüfen, ob der Inhalt eine URL enthält (z.B. youtube.com oder https://...)
                     if (content.toLowerCase().includes('http://') || content.toLowerCase().includes('https://')) {
                         matrixFound = true;
-                        
-                        // Extrahiert die saubere URL, falls Text davor steht
                         const urlStartIndex = content.toLowerCase().indexOf('http');
                         const targetUrl = content.substring(urlStartIndex);
                         
-                        showOverlay("🔗 REDIRECT", "Verbindung zu externem Speicherpunkt wird aufgebaut...");
+                        showOverlay("🔗 REDIRECT", "Synchronisation mit Ziel-Plattform läuft...\n" + targetUrl);
                         
-                        // Sofortige Weiterleitung zum externen Link (z.B. YouTube-Video)
-                        window.location.href = targetUrl;
-                        return; // Beendet das Skript, da die Seite gewechselt wird
+                        setTimeout(() => {
+                            window.location.href = targetUrl;
+                        }, 800);
+                        return; 
                     }
                 } catch (matrixError) {
-                    // Kein Data-Matrix-Code im aktuellen Frame gefunden, fahre fort mit OCR
+                    // Kein Code im Frame gefunden, wechsle zu Status-Anzeige
+                    updateDiag("Data-Matrix: Suche Signatur...");
                 }
 
-                // SCHRITT B: OCR-Texterkennung (Nur wenn keine Matrix-Weiterleitung aktiv ist)
+                // ZWEIG 2: OCR-Texterkennung (Nur wenn keine Matrix anschlägt und CPU frei ist)
                 if (!matrixFound) {
                     const { data: { text } } = await ocrWorker.recognize(canvas);
-                    const normalizedText = text.toLowerCase();
+                    const normalizedText = text.toLowerCase().trim();
+                    
+                    console.log("OCR-Frequenzstrom:", normalizedText ? normalizedText : "[Rauschen/Kein Text]");
 
                     let found = false;
                     for (const key in database) {
@@ -251,10 +191,10 @@
                         }
                     }
 
-                    // Wenn nichts gefunden wurde, das Overlay nach 3 Sekunden ausblenden
                     if (!found && !clearOverlayTimeout) {
                         clearOverlayTimeout = setTimeout(() => {
-                            hud.classList.remove('active');
+                            hudTitle.innerText = "MATRIX_SEARCH";
+                            hudBody.innerText = "Bewege Code oder Trigger-Text in den Fokus.";
                             clearOverlayTimeout = null;
                         }, 3000);
                     } else if (found && clearOverlayTimeout) {
@@ -264,25 +204,28 @@
                 }
 
             } catch (error) {
-                console.error("Fehler bei der Frame-Analyse:", error);
+                console.error("Schleifenfehler:", error);
             } finally {
+                // Gibt den Scanner garantiert erst hier für den nächsten Frame frei
                 isProcessing = false;
             }
         }
 
-        // 4. Das Overlay auf dem Display anzeigen
         function showOverlay(title, text) {
             hudTitle.innerText = title;
             hudBody.innerHTML = text.replace(/\n/g, '<br>');
-            hud.classList.add('active');
         }
 
-        // Startvorgang
+        function updateDiag(msg, isError = false) {
+            hudDiag.innerHTML = isError ? `<span class="err-text">⚠️ ${msg}</span>` : `> ${msg}`;
+        }
+
         window.addEventListener('load', () => {
             startCamera();
             initScanner();
         });
     </script>
+
 </body>
 
 </html>
