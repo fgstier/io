@@ -1,47 +1,131 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Loop: Bug: Dusseline // Audio- & Code-Scanner</title>
+    <title>Loop: Bug: Dusseline // Scanner-Interface</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
+    
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
-        
-        #video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
-        
-        #overlay-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
-        
-        .hud-box { border: 1px solid #fff; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px; max-width: 90%; width: 400px; text-transform: uppercase; font-size: 13px; line-height: 1.5; letter-spacing: 1px; opacity: 0; transition: opacity 0.3s ease-in-out; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .hud-box.active { opacity: 1; }
-        .hud-header { border-bottom: 1px dashed #fff; padding-bottom: 5px; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between; }
-        
-        #status-bar { position: absolute; top: 15px; left: 15px; z-index: 3; color: #fff; font-size: 11px; background: rgba(0,0,0,0.5); padding: 5px 10px; border: 1px solid rgba(255,255,255,0.3); text-transform: uppercase; }
-        .blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Live-Kamera-Stream füllt den ganzen Bildschirm */
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Transparentes AR-Overlay für die Text-Einblendungen */
+        #overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Das HUD-Interface (Heads-Up-Display) */
+        .hud-box {
+            border: 1px solid #fff;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 15px;
+            max-width: 90%;
+            width: 400px;
+            text-transform: uppercase;
+            font-size: 13px;
+            line-height: 1.5;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .hud-box.active {
+            opacity: 1;
+        }
+
+        .hud-header {
+            border-bottom: 1px dashed #fff;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Status-Indikator oben links */
+        #status-bar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 3;
+            color: #fff;
+            font-size: 11px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <div id="start-overlay" style="position: absolute; top:0; left:0; width:100%; height:100%; background:#000; z-index:100; display:flex; flex-direction:column; justify-content:center; align-items:center; color:#fff; text-align:center; padding:20px;">
-        <h2 style="margin-bottom:20px; letter-spacing:2px;">HYBRID_AUDIO // INITIATION</h2>
-        <p style="font-size:12px; max-width:300px; line-height:1.6; color:#aaa; margin-bottom:30px;">Klicken Sie auf den Bildschirm, um die Kamera-Sensoren und das Frequenz-Audio-Modul zu initialisieren.</p>
-        <button id="start-btn" style="background:transparent; border:1px solid #fff; color:#fff; padding:12px 30px; font-family:monospace; cursor:pointer; text-transform:uppercase; letter-spacing:1px;">System Starten</button>
-    </div>
-
     <div id="status-bar">
-        <span class="blink">●</span> MATRIX_DECODER: HYBRID_AUDIO // ON
+        <span class="blink">●</span> SCANNER_MODE: ACTIVE // CORRUPTED_MATRIX
     </div>
 
     <video id="video" autoplay playsinline muted></video>
-    <audio id="audio-player" preload="auto" crossorigin="anonymous"></audio>
 
     <div id="overlay-container">
         <div id="hud" class="hud-box">
-            <div class="hud-header"><span id="hud-title">Target</span><span>SYS_REC_06</span></div>
-            <div id="hud-body">Suche...</div>
+            <div class="hud-header">
+                <span id="hud-title">Target Found</span>
+                <span>SYS_REC_06</span>
+            </div>
+            <div id="hud-body">
+                Analyse läuft...
+            </div>
         </div>
     </div>
 
@@ -50,175 +134,155 @@
         const hud = document.getElementById('hud');
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
-        const audioPlayer = document.getElementById('audio-player');
-        const startOverlay = document.getElementById('start-overlay');
-        const startBtn = document.getElementById('start-btn');
-        
+
         let ocrWorker = null;
-        let isScannerReady = false;
+        let codeReader = null;
         let isProcessing = false;
-        let clearTextTimeout = null;
+        let clearOverlayTimeout = null;
 
-        // Code-Reader Konfiguration
-        const hints = new Map();
-        hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
-        hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
-        const codeReader = new ZXing.BrowserMultiFormatReader(hints);
-
-        const textDatabase = {
-            "zivilisations-maschine": { title: "⚠️ CRITICAL_FAILURE", text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität an den Code abgetreten." },
-            "dusseline": { title: "🤖 MATRIX_ERROR", text: "Entität ist reines Wort.\nGEFANGEN IM ENDLOSEN FAKE." }
+        // Definition der Zielworte für OCR
+        const database = {
+            "zivilisations-maschine": {
+                title: "⚠️ CRITICAL_FAILURE",
+                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten."
+            },
+            "aberglaube": {
+                title: "[!] SYSTEM-DIAGNOSE",
+                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING."
+            },
+            "zensuren": {
+                title: "🚫 FILTER_BLOCKED",
+                text: "[Inhalt nach Novia-Dekret der Elb-Stille zensiert]\nFrequenz-Abweichung isoliert."
+            },
+            "idioten": {
+                title: "> SCAN: DEFAULT_MODE",
+                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt."
+            },
+            "dusseline": {
+                title: "🤖 MATRIX_ERROR",
+                text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM ENDLOSEN FAKE."
+            }
         };
 
-        const codeDatabase = {
-            "sound_loop_01": { type: "audio", src: "https://fgstier.github.io/io/assets/sound1.mp3" },
-            "sound_loop_02": { type: "audio", src: "https://fgstier.github.io/io/assets/sound2.mp3" }
-        };
-
-        // Event Listener für den echten Systemstart per Klick
-        startBtn.addEventListener('click', async () => {
-            startOverlay.style.display = 'none'; // Overlay ausblenden
-            
-            // 1. Audio-Schnittstelle explizit im Klick-Event freischalten
-            audioPlayer.play().then(() => {
-                audioPlayer.pause();
-                console.log("Audio-Kontext erfolgreich entsperrt.");
-            }).catch(e => console.log("Audio-Vorbereitung läuft..."));
-
-            // 2. Kamera und Scanner starten
-            await startCamera();
-            await initScanner();
-        });
-
+        // 1. Kamera-Stream initialisieren
         async function startCamera() {
-            // Stufenweise Constraints für maximale Kompatibilität
-            const profileHigh = { video: { facingMode: { exact: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false };
-            const profileStandard = { video: { facingMode: "environment" }, audio: false };
-            const profileFallback = { video: true, audio: false };
-
             try {
-                // Versuch 1: Rückkamera in Full-HD
-                const stream = await navigator.mediaDevices.getUserMedia(profileHigh);
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: { exact: "environment" } },
+                    audio: false
+                });
                 video.srcObject = stream;
             } catch (err) {
-                console.warn("Full-HD oder Umgebungskamera verweigert, versuche Standard-Rückkamera...");
                 try {
-                    // Versuch 2: Standard-Rückkamera ohne feste Auflösungsvorgabe
-                    const stream = await navigator.mediaDevices.getUserMedia(profileStandard);
-                    video.srcObject = stream;
-                } catch (e) {
-                    try {
-                        // Versuch 3: Universeller Fallback (jede verfügbare Kamera, z.B. Frontkamera am PC)
-                        const stream = await navigator.mediaDevices.getUserMedia(profileFallback);
-                        video.srcObject = stream;
-                    } catch (finalErr) {
-                        alert("Kamera-Fehler: Zugriff im Browser blockiert. Bitte prüfen Sie, ob die Seite über HTTPS geladen wurde und die Kameraberechtigung erteilt ist.");
-                    }
+                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                    video.srcObject = fallbackStream;
+                } catch (fallbackErr) {
+                    alert("Kamera-Zugriff verweigert oder nicht verfügbar.");
                 }
             }
         }
 
+        // 2. Engines im Hintergrund vorbereiten
         async function initScanner() {
-            try {
-                ocrWorker = await Tesseract.createWorker('deu');
-                isScannerReady = true;
-                
-                video.addEventListener('play', () => {
-                    setTimeout(processFrameLoop, 500);
-                });
-            } catch (err) {
-                console.error("Fehler bei OCR-Initialisierung:", err);
-            }
+            // ZXing Data-Matrix-Reader konfigurieren
+            const hints = new Map();
+            hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
+            hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+            codeReader = new ZXing.BrowserMultiFormatReader(hints);
+
+            // Tesseract OCR konfigurieren
+            ocrWorker = await Tesseract.createWorker('deu');
+            
+            // Schleife starten
+            video.addEventListener('play', () => {
+                setInterval(captureAndScan, 1000);
+            });
         }
 
-        async function processFrameLoop() {
-            if (video.paused || video.ended) return;
-            if (!isProcessing && isScannerReady && video.videoWidth > 0) {
-                await processFrame();
-            }
-            setTimeout(processFrameLoop, 400);
-        }
-
-        async function processFrame() {
+        // 3. Frame abgreifen und hybrid analysieren
+        async function captureAndScan() {
+            if (isProcessing || !ocrWorker || !codeReader) return;
             isProcessing = true;
+
             const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth; 
+            canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+            let matrixFound = false;
+
             try {
-                // 1. SCHRITT: Data-Matrix
+                // SCHRITT A: Data-Matrix-Analyse (Vorrangig)
                 try {
                     const codeResult = await codeReader.decodeFromCanvas(canvas);
-                    const codeContent = codeResult.getText().trim(); 
-                    const lowerContent = codeContent.toLowerCase();
+                    const content = codeResult.getText().trim();
+                    console.log("Data-Matrix erkannt:", content);
 
-                    if (lowerContent.includes('http://') || lowerContent.includes('https://')) {
-                        const urlStartIndex = lowerContent.indexOf('http');
-                        window.location.href = codeContent.substring(urlStartIndex); 
-                        return; 
+                    // Prüfen, ob der Inhalt eine URL enthält (z.B. youtube.com oder https://...)
+                    if (content.toLowerCase().includes('http://') || content.toLowerCase().includes('https://')) {
+                        matrixFound = true;
+                        
+                        // Extrahiert die saubere URL, falls Text davor steht
+                        const urlStartIndex = content.toLowerCase().indexOf('http');
+                        const targetUrl = content.substring(urlStartIndex);
+                        
+                        showOverlay("🔗 REDIRECT", "Verbindung zu externem Speicherpunkt wird aufgebaut...");
+                        
+                        // Sofortige Weiterleitung zum externen Link (z.B. YouTube-Video)
+                        window.location.href = targetUrl;
+                        return; // Beendet das Skript, da die Seite gewechselt wird
                     }
+                } catch (matrixError) {
+                    // Kein Data-Matrix-Code im aktuellen Frame gefunden, fahre fort mit OCR
+                }
 
-                    if (codeDatabase[lowerContent] && codeDatabase[lowerContent].type === "audio") {
-                        playInternalAudio(codeDatabase[lowerContent].src);
-                        return; 
-                    }
-                } catch (e) { /* Kein Code */ }
-
-                // 2. SCHRITT: OCR
-                try {
+                // SCHRITT B: OCR-Texterkennung (Nur wenn keine Matrix-Weiterleitung aktiv ist)
+                if (!matrixFound) {
                     const { data: { text } } = await ocrWorker.recognize(canvas);
-                    const normalizedText = text.toLowerCase().trim();
-                    let textFound = false;
+                    const normalizedText = text.toLowerCase();
 
-                    for (const key in textDatabase) {
+                    let found = false;
+                    for (const key in database) {
                         if (normalizedText.includes(key)) {
-                            showText(textDatabase[key].title, textDatabase[key].text);
-                            textFound = true;
+                            showOverlay(database[key].title, database[key].text);
+                            found = true;
                             break;
                         }
                     }
 
-                    if (!textFound && !hud.classList.contains('active')) {
-                        resetTextWithDelay();
+                    // Wenn nichts gefunden wurde, das Overlay nach 3 Sekunden ausblenden
+                    if (!found && !clearOverlayTimeout) {
+                        clearOverlayTimeout = setTimeout(() => {
+                            hud.classList.remove('active');
+                            clearOverlayTimeout = null;
+                        }, 3000);
+                    } else if (found && clearOverlayTimeout) {
+                        clearTimeout(clearOverlayTimeout);
+                        clearOverlayTimeout = null;
                     }
-                } catch (ocrError) { /* OCR Fehler */ }
+                }
 
+            } catch (error) {
+                console.error("Fehler bei der Frame-Analyse:", error);
             } finally {
                 isProcessing = false;
             }
         }
 
-        function showText(title, text) {
-            if (clearTextTimeout) clearTimeout(clearTextTimeout);
+        // 4. Das Overlay auf dem Display anzeigen
+        function showOverlay(title, text) {
             hudTitle.innerText = title;
             hudBody.innerHTML = text.replace(/\n/g, '<br>');
             hud.classList.add('active');
-            
-            clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 6000);
         }
 
-        function playInternalAudio(src) {
-            if (audioPlayer.src !== src) {
-                audioPlayer.src = src;
-                audioPlayer.load();
-                audioPlayer.play()
-                    .then(() => {
-                        showText("🔊 AUDIO_STREAM", "Frequenz-Signal wird wiedergegeben...");
-                    })
-                    .catch(e => {
-                        console.error("Audio-Wiedergabefehler:", e);
-                        showText("⚠️ AUDIO_ERROR", "Wiedergabe vom Browser blockiert.");
-                    });
-            }
-        }
-
-        function resetTextWithDelay() {
-            if (!clearTextTimeout && hud.classList.contains('active')) {
-                clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 3000);
-            }
-        }
+        // Startvorgang
+        window.addEventListener('load', () => {
+            startCamera();
+            initScanner();
+        });
     </script>
 </body>
+
 </html>
