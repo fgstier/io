@@ -54,7 +54,15 @@
         const audioPlayer = document.getElementById('audio-player');
         
         let ocrWorker = null;
-        const codeReader = new ZXing.BrowserMultiFormatReader();
+
+// Neue, hochpräzise Konfiguration des Code-Readers
+const hints = new Map();
+const formats = [ZXing.BarcodeFormat.DATA_MATRIX]; // Nur auf Data-Matrix fokussieren spart Rechenzeit
+hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, formats);
+hints.set(ZXing.DecodeHintType.TRY_HARDER, true); // Aktiviert die Tiefenanalyse für perfekte Geometrien
+
+const codeReader = new ZXing.BrowserMultiFormatReader(hints);
+        
         let isProcessing = false;
         let clearTextTimeout = null;
 
@@ -71,13 +79,29 @@
         };
 
         async function startCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } }, audio: false });
-                video.srcObject = stream;
-            } catch (err) {
-                try { const fallback = await navigator.mediaDevices.getUserMedia({ video: true, audio: false }); video.srcObject = fallback; } catch (e) { alert("Kamera-Fehler"); }
-            }
+    const constraints = {
+        video: {
+            facingMode: { exact: "environment" },
+            // Erreicht maximale Pixeldichte auf dem Sensor für kleine Codes
+            width: { ideal: 1920 },
+            height: { ideal: 1080 }
+        },
+        audio: false
+    };
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+    } catch (err) {
+        try { 
+            // Fallback für PC/Test-Systeme
+            const fallback = await navigator.mediaDevices.getUserMedia({ video: true, audio: false }); 
+            video.srcObject = fallback; 
+        } catch (e) { 
+            alert("Kamera-Fehler: Auflösung oder Zugriff blockiert."); 
         }
+    }
+}
 
         async function initScanner() {
             ocrWorker = await Tesseract.createWorker('deu');
