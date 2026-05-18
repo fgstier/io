@@ -251,7 +251,7 @@
     </div>
 
     <script>
-       const video = document.getElementById('video');
+        const video = document.getElementById('video');
         const ytContainer = document.getElementById('youtube-overlay-container');
         const ytWrapper = document.getElementById('video-wrapper');
         const ytPlayer = document.getElementById('youtube-player');
@@ -283,7 +283,7 @@
 
             // Lädt die externe JSON-Datenbank asynchron aus dem Unterordner "assets"
             try {
-                const response = await fetch('assets/database.json'); // Pfad hier angepasst
+                const response = await fetch('assets/database.json'); 
                 if (!response.ok) throw new Error('Netzwerk-Antwort war nicht OK');
                 database = await response.json();
                 console.log("Kybernetische Datenbank erfolgreich aus /assets/ synchronisiert.");
@@ -336,7 +336,7 @@
             setTimeout(scanLoop, 1000);
         }
 
-async function captureAndScan() {
+        async function captureAndScan() {
             isProcessing = true;
 
             const canvas = document.createElement('canvas');
@@ -358,7 +358,7 @@ async function captureAndScan() {
                     }
                 }
 
-                // Geändert: Der Timer schließt das Fenster NUR, wenn kein Video läuft!
+                // Der Timer schließt das Fenster NUR, wenn kein Video läuft!
                 if (!found && !clearOverlayTimeout && !videoPlaying) {
                     clearOverlayTimeout = setTimeout(() => {
                         hud.classList.remove('active');
@@ -410,7 +410,7 @@ async function captureAndScan() {
                     ytWrapper.classList.remove('is-short');
                 }
 
-                // controls=1 erlaubt Ihnen das normale Pausieren/Bedienen im Video!
+                // controls=1 erlaubt das normale Pausieren/Bedienen im Video!
                 const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
@@ -423,7 +423,7 @@ async function captureAndScan() {
             }
         }
 
-        // Steuerung für den manuellen Abbruch (Button-Klick)
+        // Steuerung für den manuellen Abbruch (Hier wurden die Korrekturen eingetragen)
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
@@ -431,27 +431,30 @@ async function captureAndScan() {
                 currentAudio.currentTime = 0;
             }
             
-            // Falls ein Video läuft, setzen wir es hier hart zurück
+            // Falls ein Video läuft, setzen wir es hier vollständig zurück
             if (videoPlaying) {
                 ytContainer.style.display = "none";
                 ytPlayer.src = "";
                 videoPlaying = false;
             }
 
+            // HIER KORRIGIERT: Blendet das HUD-Textfeld sofort aus und löscht offene Lade-Timer
+            hud.classList.remove('active');
+            if (clearOverlayTimeout) {
+                clearTimeout(clearOverlayTimeout);
+                clearOverlayTimeout = null;
+            }
+
             audioStopBtn.style.display = "none";
             audioStopBtn.innerText = "⏹ AUDIO MUTE"; // Reset des Button-Textes
             audioPlaying = false;
-            hud.classList.remove('active');
         }
-    
     </script>
 
-<div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 5; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
-    <a href="impressum.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">IMPRESSUM</a> | 
-    <a href="datenschutz.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">DATENSCHUTZ</a>
-</div>
+    <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 5; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
+        <a href="impressum.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">IMPRESSUM</a> | 
+        <a href="datenschutz.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">DATENSCHUTZ</a>
+    </div>
 
-    
 </body>
-
 </html>
