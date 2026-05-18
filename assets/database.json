@@ -26,10 +26,10 @@
   },
   "core-detection_run_64": {
    "title": "🎬 Video_LAUNCH",
-   "text": "Starte die visuelle Dekonstruktion im Querformat...",
+   "text": "Starte die visuelle Dekonstruktion im Querformat",
    "index": "EXE_V_99 // YOUTUBE",
-   "youtubeId": "Ihre_normale_Video_ID", // Die ID aus dem normalen YouTube-Link
-   "videoType": "normal" // Dadurch wird das Fenster breit ($16:9$)
+   "youtubeId": "iuo3P4qx9mU",
+   "videoType": "normal"
             },
   "core-detection_run_32": {
     "title": "🎬 YT_STREAM_LAUNCH",
