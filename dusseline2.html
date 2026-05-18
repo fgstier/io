@@ -84,54 +84,71 @@
             video.addEventListener('play', () => { setInterval(processFrame, 1000); });
         }
 
-        async function processFrame() {
-            if (isProcessing) return;
-            isProcessing = true;
+        // Aktualisierte und fehlerbereinigte Funktion für das Skript:
 
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+async function processFrame() {
+    if (isProcessing) return;
+    isProcessing = true;
 
-            // 1. SCHRITT: Data-Matrix / QR-Code auslesen
-            try {
-                const codeResult = await codeReader.decodeFromCanvas(canvas);
-                const codeContent = codeResult.getText().trim();
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-                // FALL A: Es ist ein YouTube-Link oder eine externe URL im Code hinterlegt
-                if (codeContent.startsWith('http://') || codeContent.startsWith('https://')) {
-                    window.location.href = codeContent; // Direkt zum YouTube-Video springen
-                    return;
-                }
+    // 1. SCHRITT: Data-Matrix auslesen + aggressive Textbereinigung
+    try {
+        const codeResult = await codeReader.decodeFromCanvas(canvas);
+        // .trim() entfernt unsichtbare Leerzeichen und Zeilenumbrüche aus dem Matrix-Code
+        const codeContent = codeResult.getText().trim(); 
+        const lowerContent = codeContent.toLowerCase();
 
-                // FALL B: Es ist ein Schlüsselwort für eine interne MP3-Datei
-                const lowerContent = codeContent.toLowerCase();
-                if (codeDatabase[lowerContent] && codeDatabase[lowerContent].type === "audio") {
-                    playInternalAudio(codeDatabase[lowerContent].src);
-                    isProcessing = false;
-                    return; 
-                }
-            } catch (e) { /* Kein Code im Frame */ }
+        console.log("Erkannter Code-Inhalt:", codeContent); // Zum Testen in der Browser-Konsole
 
-            // 2. SCHRITT: OCR-Texterkennung
-            try {
-                const { data: { text } } = await ocrWorker.recognize(canvas);
-                const normalizedText = text.toLowerCase();
-                let textFound = false;
-
-                for (const key in textDatabase) {
-                    if (normalizedText.includes(key)) {
-                        showText(textDatabase[key].title, textDatabase[key].text);
-                        textFound = true;
-                        break;
-                    }
-                }
-
-                if (!textFound) resetTextWithDelay();
-            } catch (ocrError) { console.error(ocrError); }
-
-            isProcessing = false;
+        // FEHLERBEHEBUNG URL: Prüft flexibler, ob eine URL im Code steckt
+        if (lowerContent.includes('http://') || lowerContent.includes('https://')) {
+            // Extrahiert die saubere URL aus dem Code
+            const urlStartIndex = lowerContent.indexOf('http');
+            const cleanUrl = codeContent.substring(urlStartIndex);
+            window.location.href = cleanUrl; 
+            return;
         }
+
+        // FALL B: Interne MP3-Datei abspielen
+        if (codeDatabase[lowerContent] && codeDatabase[lowerContent].type === "audio") {
+            playInternalAudio(codeDatabase[lowerContent].src);
+            isProcessing = false;
+            return; 
+        }
+    } catch (e) { /* Kein Code im aktuellen Frame gefunden */ }
+
+    // 2. SCHRITT: OCR-Texterkennung
+    try {
+        const { data: { text } } = await ocrWorker.recognize(canvas);
+        const normalizedText = text.toLowerCase().trim();
+        let textFound = false;
+
+        for (const key in textDatabase) {
+            if (normalizedText.includes(key)) {
+                showText(textDatabase[key].title, textDatabase[key].text);
+                textFound = true;
+                break;
+            }
+        }
+
+        if (!textFound) resetTextWithDelay();
+    } catch (ocrError) { console.error(ocrError); }
+
+    isProcessing = false;
+}
+
+// FEHLERBEHEBUNG AUTOPLAY: 
+// Schaltet das Audio-Element frei, sobald der Nutzer den Bildschirm berührt
+window.addEventListener('click', () => {
+    audioPlayer.play().then(() => {
+        audioPlayer.pause(); // Kurz anspielen und stoppen, damit der Browser es für später erlaubt
+        console.log("Audio-Schnittstelle durch Benutzerinteraktion freigeschaltet.");
+    }).catch(e => console.log("Freischaltung läuft..."));
+}, { once: true }); // Wird nur ein einziges Mal ausgeführt
 
         function showText(title, text) {
             if (clearTextTimeout) clearTimeout(clearTextTimeout);
