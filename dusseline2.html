@@ -19,7 +19,6 @@
             height: 100%;
             overflow: hidden;
             background-color: #000;
-            /* Ein sauberer Monospace-Stapel für Terminal-Ästhetik */
             font-family: 'Courier New', Courier, Consolas, monospace;
         }
 
@@ -34,6 +33,24 @@
             z-index: 1;
         }
 
+        /* YouTube Container (vollflächig über der Kamera) */
+        #youtube-overlay-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            display: none;
+            background: #000;
+        }
+
+        #youtube-player {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* Transparentes AR-Overlay für die Text-Einblendungen */
         #overlay-container {
             position: absolute;
@@ -41,7 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
+            z-index: 4; /* Über dem Video-Overlay, damit das HUD lesbar bleibt */
             pointer-events: none;
             display: flex;
             flex-direction: column;
@@ -53,7 +70,7 @@
         /* Das HUD-Interface */
         .hud-box {
             border: 1px solid #fff;
-            background: rgba(0, 0, 0, 0.85); /* Etwas dunkler für besseren Kontrast zur Realität */
+            background: rgba(0, 0, 0, 0.85); 
             color: #fff;
             padding: 18px;
             max-width: 90%;
@@ -69,7 +86,6 @@
             opacity: 1;
         }
 
-        /* Der Primär-Identifikator (Größer, Fett, Abgegrenzt) */
         .hud-header {
             border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
             padding-bottom: 6px;
@@ -81,14 +97,12 @@
             text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
         }
 
-        /* Der Datenstrom (Präzise, gut lesbar, klar strukturiert) */
         #hud-body {
             font-size: 12px;
             line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Fußnummer / Index-Zeile am unteren Rand der Box */
         .hud-footer {
             margin-top: 12px;
             padding-top: 4px;
@@ -99,12 +113,11 @@
             display: block;
         }
 
-        /* Status-Indikator oben links */
         #status-bar {
             position: absolute;
             top: 15px;
             left: 15px;
-            z-index: 3;
+            z-index: 5;
             color: #fff;
             font-size: 11px;
             background: rgba(0, 0, 0, 0.7);
@@ -118,9 +131,7 @@
         }
 
         @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -128,10 +139,14 @@
 <body>
 
     <div id="status-bar">
-        <span class="blink">●</span> SCANNER_MODE: ACTIVE // OCR_ONLY
+        <span class="blink">●</span> SCANNER_MODE: ACTIVE // YT_STREAM_ON
     </div>
 
     <video id="video" autoplay playsinline muted></video>
+
+    <div id="youtube-overlay-container">
+        <iframe id="youtube-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
 
     <div id="overlay-container">
         <div id="hud" class="hud-box">
@@ -150,6 +165,8 @@
 
     <script>
         const video = document.getElementById('video');
+        const ytContainer = document.getElementById('youtube-overlay-container');
+        const ytPlayer = document.getElementById('youtube-player');
         const hud = document.getElementById('hud');
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
@@ -158,17 +175,18 @@
         let worker = null;
         let isProcessing = false;
         let clearOverlayTimeout = null;
+        let currentAudio = null; 
 
-        // Erweiterte Datenbank mit spezifischen Fußnummern (Index)
+        // Die Datenbank mit integrierten YouTube-Embed-IDs
         const database = {
             "zivilisations-maschine": {
                 title: "⚠️ CRITICAL_FAILURE",
-                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten.",
+                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten.",
                 index: "SYS_REF_001 // LOC_DRESDEN"
             },
             "aberglaube": {
                 title: "[!] SYSTEM-DIAGNOSE",
-                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING.",
+                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.",
                 index: "SYS_REF_002 // CORE_LOGIC"
             },
             "zensuren": {
@@ -178,27 +196,36 @@
             },
             "idioten": {
                 title: "> SCAN: DEFAULT_MODE",
-                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt.",
+                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.",
                 index: "SYS_REF_004 // ASSET_ERR"
             },
             "dusseline": {
                 title: "🤖 MATRIX_ERROR",
                 text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
                 index: "SYS_REF_005 // SYNTAX_LVL"
+            },
+            // YouTube-Video-Trigger: Verwendet die Video-ID am Ende der URL
+            // Parameter &autoplay=1 startet das Video sofort im iframe
+            "[core-detection_run_32]": {
+                title: "🎬 YT_STREAM_LAUNCH",
+                text: "Verbinde mit externem Video-Server...",
+                index: "EXE_V_32 // YOUTUBE", 
+                youtubeId: "JDB7QalzHfg" // Setzen Sie hier Ihre YouTube-Video-ID ein
+            },
+            // Lokaler Audio-Trigger
+            "[core-sound_run_24]": {
+                title: "🎵 AUDIO_STREAM_LAUNCH",
+                text: "Initialisiere akustisches Signalfeld...",
+                index: "EXE_A_24 // ASSETS",
+                audio: "assets/sound_24.mp3" 
             }
         };
 
-        // 1. Kamera-Stream mit hoher HD-Auflösung anfordern
         async function startCamera() {
             const constraints = {
-                video: { 
-                    facingMode: "environment",
-                    width: { ideal: 1280 },
-                    height: { ideal: 720 }
-                },
+                video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
                 audio: false
             };
-
             try {
                 const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 video.srcObject = stream;
@@ -207,12 +234,11 @@
                     const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
                     video.srcObject = fallbackStream;
                 } catch (fallbackErr) {
-                    alert("Kamera-Zugriff verweigert oder nicht verfügbar.");
+                    alert("Kamera-Zugriff nicht verfügbar.");
                 }
             }
         }
 
-        // 2. OCR Engine im Hintergrund vorbereiten
         async function initOCR() {
             try {
                 worker = await Tesseract.createWorker('deu');
@@ -224,18 +250,14 @@
             }
         }
 
-        // 3. Der kontrollierte Takt-Loop
         async function scanLoop() {
             if (video.paused || video.ended) return;
-
             if (!isProcessing && worker && video.videoWidth > 0) {
                 await captureAndScan();
             }
-
             setTimeout(scanLoop, 1000);
         }
 
-        // 4. Frame abgreifen und nach Zielwörtern analysieren
         async function captureAndScan() {
             isProcessing = true;
 
@@ -252,7 +274,7 @@
                 let found = false;
                 for (const key in database) {
                     if (normalizedText.includes(key)) {
-                        showOverlay(database[key].title, database[key].text, database[key].index);
+                        executeTrigger(database[key]);
                         found = true;
                         break;
                     }
@@ -261,8 +283,11 @@
                 if (!found && !clearOverlayTimeout) {
                     clearOverlayTimeout = setTimeout(() => {
                         hud.classList.remove('active');
+                        // YouTube-Player stoppen und ausblenden bei Fokusverlust
+                        ytContainer.style.display = "none";
+                        ytPlayer.src = ""; 
                         clearOverlayTimeout = null;
-                    }, 3000);
+                    }, 4000); 
                 } else if (found && clearOverlayTimeout) {
                     clearTimeout(clearOverlayTimeout);
                     clearOverlayTimeout = null;
@@ -275,12 +300,30 @@
             }
         }
 
-        // 5. Das Overlay inklusive Fußnummer auf dem Display anzeigen
-        function showOverlay(title, text, index) {
-            hudTitle.innerText = title;
-            hudBody.innerHTML = text.replace(/\n/g, '<br>');
-            hudFooter.innerText = index; // Setzt den spezifischen Index
+        function executeTrigger(entry) {
+            hudTitle.innerText = entry.title;
+            hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
+            hudFooter.innerText = entry.index;
             hud.classList.add('active');
+
+            // Audio-Wiedergabe (lokal)
+            if (entry.audio) {
+                if (!currentAudio || currentAudio.src.indexOf(entry.audio) === -1) {
+                    if (currentAudio) currentAudio.pause();
+                    currentAudio = new Audio(entry.audio);
+                    currentAudio.volume = 0.8;
+                    currentAudio.play().catch(e => console.log("Audio blockiert:", e));
+                }
+            }
+
+            // YouTube-Wiedergabe (extern über iframe)
+            if (entry.youtubeId) {
+                const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1`;
+                if (ytPlayer.src !== targetUrl) {
+                    ytPlayer.src = targetUrl;
+                    ytContainer.style.display = "block";
+                }
+            }
         }
 
         window.addEventListener('load', () => {
