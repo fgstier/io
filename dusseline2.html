@@ -353,17 +353,22 @@
                     }
                 }
 
-                // Schließt das HUD nach 5 Sekunden, wenn kein Video/Audio blockiert
-                if (!found && !clearOverlayTimeout && !videoPlaying && !audioPlaying) {
-                    clearOverlayTimeout = setTimeout(() => {
-                        hud.classList.remove('active');
-                        ytContainer.style.display = "none";
-                        ytPlayer.src = ""; 
+               // OPTIMIERT: Der Timer schließt das Fenster jetzt nach exakt 3 Sekunden (3000ms)
+                if (!found && !videoPlaying && !audioPlaying) {
+                    if (!clearOverlayTimeout) {
+                        clearOverlayTimeout = setTimeout(() => {
+                            hud.classList.remove('active');
+                            ytContainer.style.display = "none";
+                            ytPlayer.src = ""; 
+                            clearOverlayTimeout = null;
+                        }, 3000); // Auf 3 Sekunden verkürzt für maximale Dynamik
+                    }
+                } else if (found) {
+                    // Falls der Text wiedergefunden wird, löschen wir den Timer sofort
+                    if (clearOverlayTimeout) {
+                        clearTimeout(clearOverlayTimeout);
                         clearOverlayTimeout = null;
-                    }, 5000); 
-                } else if (found && clearOverlayTimeout) {
-                    clearTimeout(clearOverlayTimeout);
-                    clearOverlayTimeout = null;
+                    }
                 }
 
             } catch (ocrError) {
