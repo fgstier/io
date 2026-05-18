@@ -1,246 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Loop: Bug: Dusseline // Scanner-Interface & Diagnose</title>
-    
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
-    
+    <title>Loop: Bug: Dusseline // Native Scanner-Interface</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
         #video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
-        
         #overlay-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
-        
-        .hud-box { border: 1px solid #fff; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px; max-width: 90%; width: 420px; text-transform: uppercase; font-size: 12px; line-height: 1.5; letter-spacing: 1px; opacity: 1; transition: opacity 0.3s ease-in-out; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        .hud-box { border: 1px solid #fff; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px; max-width: 90%; width: 420px; text-transform: uppercase; font-size: 12px; line-height: 1.5; letter-spacing: 1px; }
         .hud-header { border-bottom: 1px dashed #fff; padding-bottom: 5px; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between; }
-        
         #status-bar { position: absolute; top: 15px; left: 15px; z-index: 3; color: #fff; font-size: 11px; background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border: 1px solid rgba(255, 255, 255, 0.3); text-transform: uppercase; }
-        .blink { animation: blinker 1.5s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
-        
-        .diag-text { color: #00ff00; font-size: 10px; margin-top: 5px; font-family: monospace; }
-        .err-text { color: #ff3333; }
+        .diag-text { color: #00ff00; font-size: 10px; margin-top: 5px; }
     </style>
 </head>
-
 <body>
 
-    <div id="status-bar">
-        <span class="blink">●</span> DIAGNOSE_MODE // ON
-    </div>
-
+    <div id="status-bar">● HARDWARE_MODE // ACTIVE</div>
     <video id="video" autoplay playsinline muted></video>
 
     <div id="overlay-container">
-        <div id="hud" class="hud-box">
+        <div class="hud-box">
             <div class="hud-header">
-                <span id="hud-title">SYSTEM INIZIALISIERUNG</span>
-                <span>DIAG_v2.6</span>
+                <span>SYSTEM STATUS</span>
+                <span>NATIVE_v3.0</span>
             </div>
-            <div id="hud-body">
-                Kamera-Sensoren werden gestartet...
-            </div>
-            <div id="hud-diagnostics" class="diag-text">
-                Warte auf Video-Frame...
-            </div>
+            <div id="hud-body">Fokussiere Data-Matrix-Code...</div>
+            <div id="hud-diagnostics" class="diag-text">Initialisiere Kamera...</div>
         </div>
     </div>
 
-<script>
+    <script>
         const video = document.getElementById('video');
-        const hud = document.getElementById('hud');
-        const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
         const hudDiag = document.getElementById('hud-diagnostics');
+        let barcodeDetector;
 
-        let ocrWorker = null;
-        let codeReader = null;
-        let isProcessing = false;
-        let isScannerReady = false;
-        let clearOverlayTimeout = null;
+        async function startSystem() {
+            // Prüfen, ob das Betriebssystem des Handys Data Matrix nativ unterstützt
+            if ('BarcodeDetector' in window) {
+                const formats = await BarcodeDetector.getSupportedFormats();
+                if (formats.includes('data_matrix')) {
+                    barcodeDetector = new BarcodeDetector({ formats: ['data_matrix'] });
+                    hudDiag.innerText = "> Native Hardware-Engine aktiv.";
+                }
+            }
 
-        const database = {
-            "zivilisations-maschine": { title: "⚠️ CRITICAL_FAILURE", text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten." },
-            "aberglaube": { title: "[!] SYSTEM-DIAGNOSE", text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht." },
-            "zensuren": { title: "🚫 FILTER_BLOCKED", text: "[Inhalt nach Novia-Dekret zensiert]" },
-            "idioten": { title: "> SCAN: DEFAULT_MODE", text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'." },
-            "dusseline": { title: "🤖 MATRIX_ERROR", text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM FAKE." }
-        };
+            if (!barcodeDetector) {
+                hudDiag.innerText = "> Fehler: Native API nicht unterstützt. Fallback erforderlich.";
+                return;
+            }
 
-        async function startCamera() {
-            // OPTIMIERUNG: Wir fordern ein gestochen scharfes Full-HD-Signal an
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { 
-                        facingMode: "environment", 
-                        width: { ideal: 1920 }, 
-                        height: { ideal: 1080 } 
-                    },
+                    video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
                     audio: false
                 });
                 video.srcObject = stream;
-                updateDiag("Kamera initialisiert (Full-HD Matrix-Modus).");
-            } catch (err) {
-                try {
-                    // Erster Fallback: 720p falls Full-HD hardwareseitig blockiert ist
-                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ 
-                        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } }, 
-                        audio: false 
-                    });
-                    video.srcObject = fallbackStream;
-                    updateDiag("Kamera: 720p Fallback aktiv.");
-                } catch (fallbackErr) {
-                    try {
-                        const genericStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-                        video.srcObject = genericStream;
-                        updateDiag("Kamera: Standard-Fallback aktiv.");
-                    } catch (finalErr) {
-                        updateDiag("Kamera-Zugriff blockiert!", true);
-                    }
-                }
-            }
-        }
-
-        async function initScanner() {
-            updateDiag("Lade Analyse-Engines...");
-            try {
-                // ZXing OPTIMIERUNG: Explizite Formatsuche und rücksichtsloser Deep-Scan (TRY_HARDER)
-                const hints = new Map();
-                hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
-                hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
-                
-                codeReader = new ZXing.BrowserMultiFormatReader(hints);
-
-                // Tesseract v5 Konfiguration
-                ocrWorker = await Tesseract.createWorker('deu');
-                
-                isScannerReady = true;
-                updateDiag("System bereit. Fokussiere Code...");
-
-                // Rekursiven Loop starten, sobald das Video echt Signale liefert
                 video.addEventListener('play', () => {
-                    setTimeout(scanLoop, 500);
+                    setInterval(nativeScan, 200); // Schneller, nativer Hardware-Scan alle 200ms
                 });
-            } catch (e) {
-                updateDiag("Init-Fehler: " + e.message, true);
+            } catch (err) {
+                hudDiag.innerText = "> Kamera-Fehler: " + err.message;
             }
         }
 
-        // Kontrollierter, rekursiver Loop statt blindem Intervall
-        async function scanLoop() {
+        async function nativeScan() {
             if (video.paused || video.ended) return;
 
-            if (!isProcessing && isScannerReady && video.videoWidth > 0) {
-                await captureAndScan();
-            }
-
-            // Wartet exakt 400 Millisekunden NACHDEM der letzte Frame fertig berechnet wurde
-            setTimeout(scanLoop, 400);
-        }
-
-        async function captureAndScan() {
-            isProcessing = true;
-            updateDiag("Isoliere Matrix-Ebene...");
-
-            // Erzeuge ein hochauflösendes Analyse-Canvas basierend auf der echten Videogröße
-            const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            
-            // Frame zeichnen
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // BILD-OPTIMIERUNG (Erhöht die Erkennungsrate von Data-Matrix im Web-Canvas drastisch):
-            // Wir nutzen CSS-Filter direkt auf dem Canvas-Kontext, um Kontrast zu maximieren
-            ctx.filter = 'contrast(1.8) grayscale(1)';
-            ctx.drawImage(canvas, 0, 0); 
-
-            let matrixFound = false;
-
             try {
-                // ZWEIG 1: Data-Matrix (Höchste Priorität)
-                try {
-                    const codeResult = await codeReader.decodeFromCanvas(canvas);
-                    const content = codeResult.getText().trim();
-                    
-                    console.log("💥 DATA-MATRIX ERKANNT:", content);
-                    updateDiag("Code isoliert: Leite weiter...");
-
-                    if (content.toLowerCase().includes('http://') || content.toLowerCase().includes('https://')) {
-                        matrixFound = true;
-                        const urlStartIndex = content.toLowerCase().indexOf('http');
-                        const targetUrl = content.substring(urlStartIndex);
-                        
-                        showOverlay("🔗 REDIRECT", "Synchronisation mit Ziel-Plattform läuft...\n" + targetUrl);
-                        
-                        setTimeout(() => {
-                            window.location.href = targetUrl;
-                        }, 800);
-                        return; 
+                // Das Betriebssystem scannt den Video-Frame direkt im Grafikspeicher
+                const barcodes = await barcodeDetector.detect(video);
+                if (barcodes.length > 0) {
+                    const content = barcodes[0].rawValue.trim();
+                    if (content.toLowerCase().startsWith('http')) {
+                        hudBody.innerText = "Code erkannt! Weiterleitung...";
+                        window.location.href = content;
                     }
-                } catch (matrixError) {
-                    // Kein Code im Frame gefunden, wechsle zu Status-Anzeige
-                    updateDiag("Data-Matrix: Suche Signatur...");
+                } else {
+                    hudDiag.innerText = "> Suche aktive Signatur...";
                 }
-
-                // ZWEIG 2: OCR-Texterkennung (Nur wenn keine Matrix anschlägt und CPU frei ist)
-                if (!matrixFound) {
-                    const { data: { text } } = await ocrWorker.recognize(canvas);
-                    const normalizedText = text.toLowerCase().trim();
-                    
-                    console.log("OCR-Frequenzstrom:", normalizedText ? normalizedText : "[Rauschen/Kein Text]");
-
-                    let found = false;
-                    for (const key in database) {
-                        if (normalizedText.includes(key)) {
-                            showOverlay(database[key].title, database[key].text);
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (!found && !clearOverlayTimeout) {
-                        clearOverlayTimeout = setTimeout(() => {
-                            hudTitle.innerText = "MATRIX_SEARCH";
-                            hudBody.innerText = "Bewege Code oder Trigger-Text in den Fokus.";
-                            clearOverlayTimeout = null;
-                        }, 3000);
-                    } else if (found && clearOverlayTimeout) {
-                        clearTimeout(clearOverlayTimeout);
-                        clearOverlayTimeout = null;
-                    }
-                }
-
-            } catch (error) {
-                console.error("Schleifenfehler:", error);
-            } finally {
-                // Gibt den Scanner garantiert erst hier für den nächsten Frame frei
-                isProcessing = false;
+            } catch (e) {
+                console.error("Hardware-Scan-Fehler:", e);
             }
         }
 
-        function showOverlay(title, text) {
-            hudTitle.innerText = title;
-            hudBody.innerHTML = text.replace(/\n/g, '<br>');
-        }
-
-        function updateDiag(msg, isError = false) {
-            hudDiag.innerHTML = isError ? `<span class="err-text">⚠️ ${msg}</span>` : `> ${msg}`;
-        }
-
-        window.addEventListener('load', () => {
-            startCamera();
-            initScanner();
-        });
+        window.addEventListener('load', startSystem);
     </script>
-
 </body>
-
 </html>
