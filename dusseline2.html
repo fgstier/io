@@ -1,132 +1,48 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Loop: Bug: Dusseline // Scanner-Interface</title>
-    <!-- Tesseract.js für Echtzeit-Texterkennung direkt im Browser -->
+    <title>Loop: Bug: Dusseline // Audio- & Code-Scanner</title>
+    <!-- Tesseract.js für Texterkennung (OCR) -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <!-- ZXing für Data-Matrix- und QR-Code Erkennung -->
+    <script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.19.1/umd/index.min.js"></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body,
-        html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        /* Live-Kamera-Stream füllt den ganzen Bildschirm */
-        #video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        /* Transparentes AR-Overlay für die Text-Einblendungen */
-        #overlay-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none;
-            /* Klicks gehen durch auf das Video */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Das HUD-Interface (Heads-Up-Display) */
-        .hud-box {
-            border: 1px solid #fff;
-            background: rgba(0, 0, 0, 0.75);
-            color: #fff;
-            padding: 15px;
-            max-width: 90%;
-            width: 400px;
-            text-transform: uppercase;
-            font-size: 13px;
-            line-height: 1.5;
-            letter-spacing: 1px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .hud-box.active {
-            opacity: 1;
-        }
-
-        .hud-header {
-            border-bottom: 1px dashed #fff;
-            padding-bottom: 5px;
-            margin-bottom: 8px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* Status-Indikator oben links */
-        #status-bar {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 3;
-            color: #fff;
-            font-size: 11px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 5px 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-        }
-
-        .blink {
-            animation: blinker 1.5s linear infinite;
-        }
-
-        @keyframes blinker {
-            50% {
-                opacity: 0;
-            }
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #000; font-family: 'Courier New', Courier, monospace; }
+        
+        #video { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
+        
+        #overlay-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; }
+        
+        /* Das HUD-Interface für Text */
+        .hud-box { border: 1px solid #fff; background: rgba(0, 0, 0, 0.85); color: #fff; padding: 15px; max-width: 90%; width: 400px; text-transform: uppercase; font-size: 13px; line-height: 1.5; letter-spacing: 1px; opacity: 0; transition: opacity 0.3s ease-in-out; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        .hud-box.active { opacity: 1; }
+        .hud-header { border-bottom: 1px dashed #fff; padding-bottom: 5px; margin-bottom: 8px; font-weight: bold; display: flex; justify-content: space-between; }
+        
+        #status-bar { position: absolute; top: 15px; left: 15px; z-index: 3; color: #fff; font-size: 11px; background: rgba(0,0,0,0.5); padding: 5px 10px; border: 1px solid rgba(255,255,255,0.3); text-transform: uppercase; }
+        .blink { animation: blinker 1.5s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
     </style>
 </head>
-
 <body>
 
     <div id="status-bar">
-        <span class="blink">●</span> SCANNER_MODE: ACTIVE // CORRUPTED_MATRIX
+        <span class="blink">●</span> MATRIX_DECODER: HYBRID_AUDIO // ON
     </div>
 
-    <!-- Die physische Kamera -->
+    <!-- Live-Kamera-Stream -->
     <video id="video" autoplay playsinline muted></video>
 
-    <!-- Das dynamische Text-Overlay -->
+    <!-- Unsichtbares Audio-Element für MP3-Dateien vom Webserver -->
+    <audio id="audio-player" preload="auto"></audio>
+
+    <!-- Transparentes AR-Overlay für Text-HUD -->
     <div id="overlay-container">
         <div id="hud" class="hud-box">
-            <div class="hud-header">
-                <span id="hud-title">Target Found</span>
-                <span>SYS_REC_06</span>
-            </div>
-            <div id="hud-body">
-                Analyse läuft...
-            </div>
+            <div class="hud-header"><span id="hud-title">Target</span><span>SYS_REC_06</span></div>
+            <div id="hud-body">Suche...</div>
         </div>
     </div>
 
@@ -135,122 +51,113 @@
         const hud = document.getElementById('hud');
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
-
-        let worker = null;
+        const audioPlayer = document.getElementById('audio-player'); // Das neue Audio-Tag steuerbar machen
+        
+        let ocrWorker = null;
+        const codeReader = new ZXing.BrowserMultiFormatReader();
         let isProcessing = false;
-        let clearOverlayTimeout = null;
+        let clearTextTimeout = null;
 
-        // Definition der Zielworte und ihrer kybernetischen Overlays
-        const database = {
-            "zivilisations-maschine": {
-                title: "⚠️ CRITICAL_FAILURE",
-                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten."
-            },
-            "aberglaube": {
-                title: "[!] SYSTEM-DIAGNOSE",
-                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING."
-            },
-            "zensuren": {
-                title: "🚫 FILTER_BLOCKED",
-                text: "[Inhalt nach Novia-Dekret der Elb-Stille zensiert]\nFrequenz-Abweichung isoliert."
-            },
-            "idioten": {
-                title: "> SCAN: DEFAULT_MODE",
-                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt."
-            },
-            "dusseline": {
-                title: "🤖 MATRIX_ERROR",
-                text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM ENDLOSEN FAKE."
-            }
+        // Datenbank für Text-Trigger (OCR)
+        const textDatabase = {
+            "zivilisations-maschine": { title: "⚠️ CRITICAL_FAILURE", text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität an den Code abgetreten." },
+            "dusseline": { title: "🤖 MATRIX_ERROR", text: "Entität ist reines Wort.\nGEFANGEN IM ENDLOSEN FAKE." }
         };
 
-        // 1. Kamera-Stream initialisieren (Rückkamera anfordern)
+        // Datenbank für Data-Matrix-Inhalte
+        const codeDatabase = {
+            "sound_loop_01": { type: "audio", src: "https://fgstier.github.io/io/assets/sound1.mp3" },
+            "sound_loop_02": { type: "audio", src: "https://fgstier.github.io/io/assets/sound2.mp3" }
+        };
+
         async function startCamera() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { exact: "environment" } },
-                    audio: false
-                });
+                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } }, audio: false });
                 video.srcObject = stream;
             } catch (err) {
-                // Fallback, falls "exact environment" auf Desktop/manchen Geräten fehlschlägt
-                try {
-                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-                    video.srcObject = fallbackStream;
-                } catch (fallbackErr) {
-                    alert("Kamera-Zugriff verweigert oder nicht verfügbar.");
-                }
+                try { const fallback = await navigator.mediaDevices.getUserMedia({ video: true, audio: false }); video.srcObject = fallback; } catch (e) { alert("Kamera-Fehler"); }
             }
         }
 
-        // 2. OCR Engine im Hintergrund vorbereiten
-        async function initOCR() {
-            worker = await Tesseract.createWorker('deu'); // Deutsche Spracherkennung
-            // Kamera-Verarbeitung starten, sobald das Video läuft
-            video.addEventListener('play', () => {
-                setInterval(captureAndScan, 1000); // Scannt jede Sekunde ein Frame
-            });
+        async function initScanner() {
+            ocrWorker = await Tesseract.createWorker('deu');
+            video.addEventListener('play', () => { setInterval(processFrame, 1000); });
         }
 
-        // 3. Frame abgreifen und nach Zielwörtern analysieren
-        async function captureAndScan() {
-            if (isProcessing || !worker) return;
+        async function processFrame() {
+            if (isProcessing) return;
             isProcessing = true;
 
-            // Unsichtbares Canvas erstellen, um aktuellen Frame zu kopieren
             const canvas = document.createElement('canvas');
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            canvas.width = video.videoWidth; canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+            // 1. SCHRITT: Data-Matrix / QR-Code auslesen
             try {
-                // OCR auf dem Frame ausführen
-                const { data: { text } } = await worker.recognize(canvas);
-                const normalizedText = text.toLowerCase();
+                const codeResult = await codeReader.decodeFromCanvas(canvas);
+                const codeContent = codeResult.getText().trim();
 
-                // Text auf Übereinstimmung mit der Datenbank prüfen
-                let found = false;
-                for (const key in database) {
+                // FALL A: Es ist ein YouTube-Link oder eine externe URL im Code hinterlegt
+                if (codeContent.startsWith('http://') || codeContent.startsWith('https://')) {
+                    window.location.href = codeContent; // Direkt zum YouTube-Video springen
+                    return;
+                }
+
+                // FALL B: Es ist ein Schlüsselwort für eine interne MP3-Datei
+                const lowerContent = codeContent.toLowerCase();
+                if (codeDatabase[lowerContent] && codeDatabase[lowerContent].type === "audio") {
+                    playInternalAudio(codeDatabase[lowerContent].src);
+                    isProcessing = false;
+                    return; 
+                }
+            } catch (e) { /* Kein Code im Frame */ }
+
+            // 2. SCHRITT: OCR-Texterkennung
+            try {
+                const { data: { text } } = await ocrWorker.recognize(canvas);
+                const normalizedText = text.toLowerCase();
+                let textFound = false;
+
+                for (const key in textDatabase) {
                     if (normalizedText.includes(key)) {
-                        showOverlay(database[key].title, database[key].text);
-                        found = true;
+                        showText(textDatabase[key].title, textDatabase[key].text);
+                        textFound = true;
                         break;
                     }
                 }
 
-                // Wenn nichts gefunden wurde, das Overlay nach 3 Sekunden ausblenden
-                if (!found && !clearOverlayTimeout) {
-                    clearOverlayTimeout = setTimeout(() => {
-                        hud.classList.remove('active');
-                        clearOverlayTimeout = null;
-                    }, 3000);
-                } else if (found && clearOverlayTimeout) {
-                    // Falls wieder etwas gefunden wurde, automatischen Reset stoppen
-                    clearTimeout(clearOverlayTimeout);
-                    clearOverlayTimeout = null;
-                }
-
-            } catch (ocrError) {
-                console.error("OCR Fehler:", ocrError);
-            }
+                if (!textFound) resetTextWithDelay();
+            } catch (ocrError) { console.error(ocrError); }
 
             isProcessing = false;
         }
 
-        // 4. Das Overlay auf dem Display anzeigen
-        function showOverlay(title, text) {
+        function showText(title, text) {
+            if (clearTextTimeout) clearTimeout(clearTextTimeout);
             hudTitle.innerText = title;
             hudBody.innerHTML = text.replace(/\n/g, '<br>');
             hud.classList.add('active');
+            clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 4000);
         }
 
-        // Startvorgang
-        window.addEventListener('load', () => {
-            startCamera();
-            initOCR();
-        });
+        function playInternalAudio(src) {
+            // Verhindert das Neustarten, wenn dieselbe Datei bereits läuft
+            if (audioPlayer.src !== src) {
+                audioPlayer.src = src;
+                audioPlayer.load();
+                audioPlayer.play().catch(e => console.log("Audio-Autoplay blockiert. Interaktion erforderlich."));
+                showText("🔊 AUDIO_STREAM", "Frequenz-Signal wird wiedergegeben...");
+            }
+        }
+
+        function resetTextWithDelay() {
+            if (!clearTextTimeout) {
+                clearTextTimeout = setTimeout(() => { hud.classList.remove('active'); }, 3000);
+            }
+        }
+
+        window.addEventListener('load', () => { startCamera(); initScanner(); });
     </script>
 </body>
-
 </html>
