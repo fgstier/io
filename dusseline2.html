@@ -74,21 +74,35 @@
         };
 
         async function startCamera() {
-            // Wir fordern eine robuste Auflösung an, fokussieren aber auf Kompatibilität
+            // OPTIMIERUNG: Wir fordern ein gestochen scharfes Full-HD-Signal an
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { facingMode: { exact: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
+                    video: { 
+                        facingMode: "environment", 
+                        width: { ideal: 1920 }, 
+                        height: { ideal: 1080 } 
+                    },
                     audio: false
                 });
                 video.srcObject = stream;
-                updateDiag("Kamera initialisiert (720p optimiert).");
+                updateDiag("Kamera initialisiert (Full-HD Matrix-Modus).");
             } catch (err) {
                 try {
-                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                    // Erster Fallback: 720p falls Full-HD hardwareseitig blockiert ist
+                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ 
+                        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } }, 
+                        audio: false 
+                    });
                     video.srcObject = fallbackStream;
-                    updateDiag("Kamera: Standard-Fallback aktiv.");
+                    updateDiag("Kamera: 720p Fallback aktiv.");
                 } catch (fallbackErr) {
-                    updateDiag("Kamera-Zugriff blockiert!", true);
+                    try {
+                        const genericStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+                        video.srcObject = genericStream;
+                        updateDiag("Kamera: Standard-Fallback aktiv.");
+                    } catch (finalErr) {
+                        updateDiag("Kamera-Zugriff blockiert!", true);
+                    }
                 }
             }
         }
@@ -96,10 +110,11 @@
         async function initScanner() {
             updateDiag("Lade Analyse-Engines...");
             try {
-                // ZXing Konfiguration
+                // ZXing OPTIMIERUNG: Explizite Formatsuche und rücksichtsloser Deep-Scan (TRY_HARDER)
                 const hints = new Map();
                 hints.set(ZXing.DecodeHintType.POSSIBLE_FORMATS, [ZXing.BarcodeFormat.DATA_MATRIX]);
                 hints.set(ZXing.DecodeHintType.TRY_HARDER, true);
+                
                 codeReader = new ZXing.BrowserMultiFormatReader(hints);
 
                 // Tesseract v5 Konfiguration
@@ -133,7 +148,7 @@
             isProcessing = true;
             updateDiag("Isoliere Matrix-Ebene...");
 
-            // Erzeuge ein optimiertes Analyse-Canvas (Skalierung für CPU-Entlastung)
+            // Erzeuge ein hochauflösendes Analyse-Canvas basierend auf der echten Videogröße
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
