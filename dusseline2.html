@@ -267,7 +267,10 @@
         let clearOverlayTimeout = null;
         let currentAudio = null; 
         let audioPlaying = false; // Mechanische Verriegelung für die Musikfrequenz
+        let videoPlaying = false; // NEU: Verriegelung für den Video-Modus
 
+
+        
         const database = {
             "zivilisations-maschine": {
                 title: "⚠️ CRITICAL_FAILURE",
@@ -354,7 +357,7 @@
             setTimeout(scanLoop, 1000);
         }
 
-        async function captureAndScan() {
+async function captureAndScan() {
             isProcessing = true;
 
             const canvas = document.createElement('canvas');
@@ -376,11 +379,12 @@
                     }
                 }
 
-                if (!found && !clearOverlayTimeout) {
+                // Geändert: Der Timer schließt das Fenster NUR, wenn kein Video läuft!
+                if (!found && !clearOverlayTimeout && !videoPlaying) {
                     clearOverlayTimeout = setTimeout(() => {
                         hud.classList.remove('active');
                         ytContainer.style.display = "none";
-                        ytPlayer.src = ""; // Stoppt das Video sofort intern nach 5 Sek.
+                        ytPlayer.src = ""; 
                         clearOverlayTimeout = null;
                     }, 5000); 
                 } else if (found && clearOverlayTimeout) {
@@ -394,29 +398,22 @@
                 isProcessing = false;
             }
         }
-
-        function executeTrigger(entry) {
+        
+function executeTrigger(entry) {
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
-            // Stabilisierter Audio-Start über Verriegelung
+            // Audio-Schiene
             if (entry.audio && !audioPlaying) {
-                audioPlaying = true; // Verriegelt den Kanal
+                audioPlaying = true;
                 if (currentAudio) currentAudio.pause();
-                
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
-                
                 currentAudio.play()
-                    .then(() => { 
-                        audioStopBtn.style.display = "block"; // Button einblenden
-                    })
-                    .catch(e => {
-                        console.log("Audio blockiert:", e);
-                        audioPlaying = false;
-                    });
+                    .then(() => { audioStopBtn.style.display = "block"; })
+                    .catch(e => { console.log(e); audioPlaying = false; });
                 
                 currentAudio.onended = function() {
                     audioStopBtn.style.display = "none";
@@ -424,31 +421,49 @@
                 };
             }
 
-            // In-App YouTube Wiedergabe ohne Verlassen der Seite
-            if (entry.youtubeId) {
+            // YouTube-Schiene (Optimierte Aktivierung)
+            if (entry.youtubeId && !videoPlaying) {
+                videoPlaying = true; // Blockiert den automatischen 5-Sekunden-Timer
+                
                 if (entry.videoType === "short") {
                     ytWrapper.classList.add('is-short');
                 } else {
                     ytWrapper.classList.remove('is-short');
                 }
 
-                // mute=0 sorgt dafür, dass das eingebettete Short auch Ton hat!
+                // controls=1 erlaubt Ihnen das normale Pausieren/Bedienen im Video!
                 const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
                     ytContainer.style.display = "flex"; 
+                    
+                    // Wir zweckentfremden den Schwebebutton auch für das Video
+                    audioStopBtn.innerText = "❌ VIDEO BEENDEN";
+                    audioStopBtn.style.display = "block";
                 }
             }
         }
 
-        // Manuelles Beenden über den schwebenden Button
+        
+       // Steuerung für den manuellen Abbruch (Button-Klick)
         function manualAudioStop() {
+            // Falls Musik läuft
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
             }
+            
+            // Falls ein Video läuft, setzen wir es hier hart zurück
+            if (videoPlaying) {
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+            }
+
             audioStopBtn.style.display = "none";
-            audioPlaying = false; // Gibt den Kanal wieder frei
+            audioStopBtn.innerText = "⏹ AUDIO MUTE"; // Reset des Button-Textes
+            audioPlaying = false;
+            hud.classList.remove('active');
         }
     </script>
 </body>
