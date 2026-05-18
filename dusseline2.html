@@ -19,7 +19,8 @@
             height: 100%;
             overflow: hidden;
             background-color: #000;
-            font-family: 'Courier New', Courier, monospace;
+            /* Ein sauberer Monospace-Stapel für Terminal-Ästhetik */
+            font-family: 'Courier New', Courier, Consolas, monospace;
         }
 
         /* Live-Kamera-Stream füllt den ganzen Bildschirm */
@@ -42,7 +43,6 @@
             height: 100%;
             z-index: 2;
             pointer-events: none;
-            /* Klicks gehen durch auf das Video */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -50,34 +50,53 @@
             padding: 20px;
         }
 
-        /* Das HUD-Interface (Heads-Up-Display) */
+        /* Das HUD-Interface */
         .hud-box {
             border: 1px solid #fff;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.85); /* Etwas dunkler für besseren Kontrast zur Realität */
             color: #fff;
-            padding: 15px;
+            padding: 18px;
             max-width: 90%;
-            width: 400px;
+            width: 420px;
             text-transform: uppercase;
-            font-size: 13px;
-            line-height: 1.5;
             letter-spacing: 1px;
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
         }
 
         .hud-box.active {
             opacity: 1;
         }
 
+        /* Der Primär-Identifikator (Größer, Fett, Abgegrenzt) */
         .hud-header {
-            border-bottom: 1px dashed #fff;
-            padding-bottom: 5px;
-            margin-bottom: 8px;
-            font-weight: bold;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 15px; 
             display: flex;
             justify-content: space-between;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Der Datenstrom (Präzise, gut lesbar, klar strukturiert) */
+        #hud-body {
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Fußnummer / Index-Zeile am unteren Rand der Box */
+        .hud-footer {
+            margin-top: 12px;
+            padding-top: 4px;
+            border-top: 1px dotted rgba(255, 255, 255, 0.2);
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+            display: block;
         }
 
         /* Status-Indikator oben links */
@@ -88,7 +107,7 @@
             z-index: 3;
             color: #fff;
             font-size: 11px;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.7);
             padding: 5px 10px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             text-transform: uppercase;
@@ -123,6 +142,9 @@
             <div id="hud-body">
                 Analyse läuft...
             </div>
+            <div id="hud-footer" class="hud-footer">
+                INDEX // PENDING
+            </div>
         </div>
     </div>
 
@@ -131,32 +153,38 @@
         const hud = document.getElementById('hud');
         const hudTitle = document.getElementById('hud-title');
         const hudBody = document.getElementById('hud-body');
+        const hudFooter = document.getElementById('hud-footer');
 
         let worker = null;
         let isProcessing = false;
         let clearOverlayTimeout = null;
 
-        // Definition der Zielworte und ihrer kybernetischen Overlays
+        // Erweiterte Datenbank mit spezifischen Fußnummern (Index)
         const database = {
             "zivilisations-maschine": {
                 title: "⚠️ CRITICAL_FAILURE",
-                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten."
+                text: "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität erfolgreich an den Code abgetreten.",
+                index: "SYS_REF_001 // LOC_DRESDEN"
             },
             "aberglaube": {
                 title: "[!] SYSTEM-DIAGNOSE",
-                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING."
+                text: "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.\nCausality_Execution: PENDING.",
+                index: "SYS_REF_002 // CORE_LOGIC"
             },
             "zensuren": {
                 title: "🚫 FILTER_BLOCKED",
-                text: "[Inhalt nach Novia-Dekret zensiert]\nFrequenz-Abweichung isoliert."
+                text: "[Inhalt nach Novia-Dekret zensiert]\nFrequenz-Abweichung isoliert.",
+                index: "SYS_REF_003 // NOVIA_LAW"
             },
             "idioten": {
                 title: "> SCAN: DEFAULT_MODE",
-                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt."
+                text: "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.\nDisplay-Diktat vollständig ausgeführt.",
+                index: "SYS_REF_004 // ASSET_ERR"
             },
             "dusseline": {
                 title: "🤖 MATRIX_ERROR",
-                text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IM ENDLOSEN FAKE."
+                text: "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
+                index: "SYS_REF_005 // SYNTAX_LVL"
             }
         };
 
@@ -176,7 +204,6 @@
                 video.srcObject = stream;
             } catch (err) {
                 try {
-                    // Fallback ohne erzwungene Rückkamera
                     const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
                     video.srcObject = fallbackStream;
                 } catch (fallbackErr) {
@@ -188,9 +215,7 @@
         // 2. OCR Engine im Hintergrund vorbereiten
         async function initOCR() {
             try {
-                worker = await Tesseract.createWorker('deu'); // Deutsche Spracherkennung
-                
-                // Schleife sicher starten, sobald das Video echte Frames liefert
+                worker = await Tesseract.createWorker('deu');
                 video.addEventListener('play', () => {
                     setTimeout(scanLoop, 1000);
                 });
@@ -203,12 +228,10 @@
         async function scanLoop() {
             if (video.paused || video.ended) return;
 
-            // Nur scannen, wenn die Engine frei ist und das Video Bilddaten hat
             if (!isProcessing && worker && video.videoWidth > 0) {
                 await captureAndScan();
             }
 
-            // Garantiert exakt 1000ms Pause NACH Abschluss des letzten Rechenprozesses
             setTimeout(scanLoop, 1000);
         }
 
@@ -229,7 +252,7 @@
                 let found = false;
                 for (const key in database) {
                     if (normalizedText.includes(key)) {
-                        showOverlay(database[key].title, database[key].text);
+                        showOverlay(database[key].title, database[key].text, database[key].index);
                         found = true;
                         break;
                     }
@@ -248,18 +271,18 @@
             } catch (ocrError) {
                 console.error("OCR Fehler:", ocrError);
             } finally {
-                isProcessing = false; // Gibt den Pfad für den nächsten Frame frei
+                isProcessing = false;
             }
         }
 
-        // 5. Das Overlay auf dem Display anzeigen
-        function showOverlay(title, text) {
+        // 5. Das Overlay inklusive Fußnummer auf dem Display anzeigen
+        function showOverlay(title, text, index) {
             hudTitle.innerText = title;
             hudBody.innerHTML = text.replace(/\n/g, '<br>');
+            hudFooter.innerText = index; // Setzt den spezifischen Index
             hud.classList.add('active');
         }
 
-        // Startvorgang
         window.addEventListener('load', () => {
             startCamera();
             initOCR();
