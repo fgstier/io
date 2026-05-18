@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Loop: Bug: Dusseline // Interface_v6</title>
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<style>
+    <style>
         * {
             box-sizing: border-box;
             margin: 0;
@@ -69,14 +69,14 @@
             z-index: 1;
         }
 
-        /* KORREKTUR 1: YouTube Container auf z-index: 5 angehoben (über das HUD) */
+        /* YouTube Container (Über das HUD gelegt für freie Bedienung) */
         #youtube-overlay-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 5; /* Liegt jetzt über ALLEM */
+            z-index: 5; 
             display: none;
             background: rgba(0, 0, 0, 0.85); 
             justify-content: center;
@@ -104,7 +104,7 @@
             border: none;
         }
 
-        /* KORREKTUR 2: HUD-Container bleibt auf z-index: 4, bleibt aber voll durchlässig */
+        /* Transparentes AR-Overlay für die Text-Einblendungen */
         #overlay-container {
             position: absolute;
             top: 0;
@@ -112,7 +112,7 @@
             width: 100%;
             height: 100%;
             z-index: 4; 
-            pointer-events: none; /* Klicks fallen durch die Matrix durch */
+            pointer-events: none; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -166,12 +166,12 @@
             display: block;
         }
 
-        /* KORREKTUR 3: Stopp-Button auf z-index: 6 (damit er ÜBER dem YouTube-Fenster liegt) */
+        /* FIX: Absolut höchste Ebene, damit er immer sichtbar und anklickbar ist */
         #audio-stop-btn {
             position: absolute;
             bottom: 25px;
             right: 25px;
-            z-index: 6; /* Höchste Ebene für permanente Klickbarkeit */
+            z-index: 99; /* Maximaler Schutz gegen Überlagerung */
             background: rgba(0, 0, 0, 0.9);
             color: #fff;
             border: 1px solid #fff;
@@ -182,7 +182,7 @@
             letter-spacing: 1px;
             cursor: pointer;
             display: none; 
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
         }
 
         #audio-stop-btn:active {
@@ -194,7 +194,7 @@
             position: absolute;
             top: 15px;
             left: 15px;
-            z-index: 2; /* Unter dem HUD und Video-Player */
+            z-index: 6; /* Über das HUD gehoben */
             color: #fff;
             font-size: 11px;
             background: rgba(0, 0, 0, 0.7);
@@ -269,19 +269,14 @@
         let audioPlaying = false; 
         let videoPlaying = false; 
 
-        // Die Datenbank ist jetzt dynamisch und wird vom Server geladen
         let database = {};
-        
 
-        // Wird beim Drücken des Start-Buttons ausgeführt
         async function initializeEngine() {
             startOverlay.style.display = "none";
             
-            // Initialisiert ein leeres Audio-Objekt zur Freigabe
             const contextAudio = new Audio();
             contextAudio.play().catch(() => {});
 
-            // Lädt die externe JSON-Datenbank asynchron aus dem Unterordner "assets"
             try {
                 const response = await fetch('assets/database.json'); 
                 if (!response.ok) throw new Error('Netzwerk-Antwort war nicht OK');
@@ -358,8 +353,8 @@
                     }
                 }
 
-                // Der Timer schließt das Fenster NUR, wenn kein Video läuft!
-                if (!found && !clearOverlayTimeout && !videoPlaying) {
+                // Schließt das HUD nach 5 Sekunden, wenn kein Video/Audio blockiert
+                if (!found && !clearOverlayTimeout && !videoPlaying && !audioPlaying) {
                     clearOverlayTimeout = setTimeout(() => {
                         hud.classList.remove('active');
                         ytContainer.style.display = "none";
@@ -384,25 +379,37 @@
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
-            // Audio-Schiene
+            // FIX: Audio-Aktivierung robuster gestaltet
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
-                if (currentAudio) currentAudio.pause();
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
+                
                 currentAudio.play()
-                    .then(() => { audioStopBtn.style.display = "block"; })
-                    .catch(e => { console.log(e); audioPlaying = false; });
+                    .then(() => { 
+                        audioStopBtn.innerText = "⏹ AUDIO MUTE";
+                        audioStopBtn.style.display = "block"; 
+                    })
+                    .catch(e => { 
+                        console.error("Audio Playback-Fehler:", e); 
+                        audioPlaying = false; 
+                    });
                 
                 currentAudio.onended = function() {
                     audioStopBtn.style.display = "none";
                     audioPlaying = false;
+                    hud.classList.remove('active');
                 };
             }
 
-            // YouTube-Schiene (Optimierte Aktivierung)
+            // YouTube-Schiene
             if (entry.youtubeId && !videoPlaying) {
-                videoPlaying = true; // Blockiert den automatischen 5-Sekunden-Timer
+                videoPlaying = true; 
                 
                 if (entry.videoType === "short") {
                     ytWrapper.classList.add('is-short');
@@ -410,20 +417,17 @@
                     ytWrapper.classList.remove('is-short');
                 }
 
-                // controls=1 erlaubt das normale Pausieren/Bedienen im Video!
                 const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
                     ytContainer.style.display = "flex"; 
                     
-                    // Wir zweckentfremden den Schwebebutton auch für das Video
                     audioStopBtn.innerText = "❌ VIDEO BEENDEN";
                     audioStopBtn.style.display = "block";
                 }
             }
         }
 
-        // Steuerung für den manuellen Abbruch (Hier wurden die Korrekturen eingetragen)
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
@@ -431,14 +435,14 @@
                 currentAudio.currentTime = 0;
             }
             
-            // Falls ein Video läuft, setzen wir es hier vollständig zurück
+            // Falls ein Video läuft
             if (videoPlaying) {
                 ytContainer.style.display = "none";
                 ytPlayer.src = "";
                 videoPlaying = false;
             }
 
-            // HIER KORRIGIERT: Blendet das HUD-Textfeld sofort aus und löscht offene Lade-Timer
+            // Schließt das HUD-Textfeld sofort
             hud.classList.remove('active');
             if (clearOverlayTimeout) {
                 clearTimeout(clearOverlayTimeout);
@@ -446,12 +450,12 @@
             }
 
             audioStopBtn.style.display = "none";
-            audioStopBtn.innerText = "⏹ AUDIO MUTE"; // Reset des Button-Textes
+            audioStopBtn.innerText = "⏹ AUDIO MUTE"; 
             audioPlaying = false;
         }
     </script>
 
-    <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 5; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
+    <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 6; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
         <a href="impressum.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">IMPRESSUM</a> | 
         <a href="datenschutz.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">DATENSCHUTZ</a>
     </div>
