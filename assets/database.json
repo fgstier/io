@@ -1,0 +1,40 @@
+{
+  "zivilisations-maschine": {
+    "title": "⚠️ CRITICAL_FAILURE",
+    "text": "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten.",
+    "index": "SYS_REF_001 // LOC_DRESDEN"
+  },
+  "aberglaube": {
+    "title": "[!] SYSTEM-DIAGNOSE",
+    "text": "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.",
+    "index": "SYS_REF_002 // CORE_LOGIC"
+  },
+  "zensuren": {
+    "title": "🚫 FILTER_BLOCKED",
+    "text": "[Inhalt nach Novia-Dekret zensiert]\nFrequenz-Abweichung isoliert.",
+    "index": "SYS_REF_003 // NOVIA_LAW"
+  },
+  "idioten": {
+    "title": "> SCAN: DEFAULT_MODE",
+    "text": "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.",
+    "index": "SYS_REF_004 // ASSET_ERR"
+  },
+  "dusseline": {
+    "title": "🤖 MATRIX_ERROR",
+    "text": "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
+    "index": "SYS_REF_005 // SYNTAX_LVL"
+  },
+  "core-detection_run_32": {
+    "title": "🎬 YT_STREAM_LAUNCH",
+    "text": "Short-Vorschau wird geladen.\nIntegrierte In-App-Wiedergabe active.",
+    "index": "EXE_V_32 // YOUTUBE",
+    "youtubeId": "Sz4zR94KDkk", 
+    "videoType": "short" 
+  },
+  "core-sound_run_24": {
+    "title": "🎵 AUDIO_STREAM_LAUNCH",
+    "text": "Akustisches Signalfeld dauerhaft aktiv.\nNutze den Mute-Button zum Beenden.",
+    "index": "EXE_A_24 // ASSETS",
+    "audio": "assets/sound1.mp3" 
+  }
+}
