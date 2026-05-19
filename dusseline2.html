@@ -388,56 +388,30 @@
         } 
 
 function executeTrigger(entry) {
-            // 1. HUD-Metadaten wie gewohnt speisen
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
             // ==========================================
-            // WEG A: REINER TEXTMARKER-SPRUNG
+            // EINFACHER JUMP-VEKTOR (Als neues Tab öffnen)
             // ==========================================
             if (entry.jumpUrl) {
-                // Eventuell laufende Medien der Hauptseite im Hintergrund kappen
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-                ytContainer.style.display = "none";
-                ytPlayer.src = ""; // Stoppt das YouTube-Video sofort
-                videoPlaying = false;
-                audioPlaying = false;
-
-                const targetWindow = (window.top !== window.self) ? window.top : window;
-                
-                // Sofortiger System-Wechsel zur Textmarker-Seite. 
-                // Der Button bleibt bis zum Laden der neuen Seite sichtbar, friert aber nicht ein.
-                targetWindow.location.href = entry.jumpUrl;
-                return; // Beendet den Vektor sauber
+                // Öffnet das Textmarker-Ziel sauber in einem externen neuen Tab
+                window.open(entry.jumpUrl, '_blank');
+                return; // Funktion sofort beenden, Scan läuft im Hintergrund weiter!
             }
 
-            // ==========================================
-            // WEG B: AUDIO-SEKTOR
-            // ==========================================
+            // Falls ein normales Audio-Wort kommt
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-                
+                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
-                
-                currentAudio.play()
-                    .then(() => { 
-                        audioStopBtn.innerText = "⏹ AUDIO MUTE";
-                        audioStopBtn.style.display = "block"; 
-                    })
-                    .catch(e => { 
-                        console.error("Audio Playback-Fehler:", e); 
-                        audioPlaying = false; 
-                    });
+                currentAudio.play().then(() => { 
+                    audioStopBtn.innerText = "⏹ AUDIO MUTE";
+                    audioStopBtn.style.display = "block"; 
+                }).catch(e => { audioPlaying = false; });
                 
                 currentAudio.onended = function() {
                     audioStopBtn.style.display = "none";
@@ -446,23 +420,16 @@ function executeTrigger(entry) {
                 };
             }
 
-            // ==========================================
-            // WEG C: YOUTUBE-VIDEO-SEKTOR
-            // ==========================================
+            // Falls ein normales Video-Wort kommt
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
-                
-                if (entry.videoType === "short") {
-                    ytWrapper.classList.add('is-short');
-                } else {
-                    ytWrapper.classList.remove('is-short');
-                }
+                if (entry.videoType === "short") { ytWrapper.classList.add('is-short'); } 
+                else { ytWrapper.classList.remove('is-short'); }
 
                 const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
                     ytContainer.style.display = "flex"; 
-                    
                     audioStopBtn.innerText = "❌ VIDEO BEENDEN";
                     audioStopBtn.style.display = "block";
                 }
