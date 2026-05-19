@@ -28,13 +28,13 @@
     "title": "⚠️ ENTROPIE_WARNUNG",
     "text": "Signalverlust droht. Lade Protokoll #L1...",
     "index": "SYS_REF_1 // ENTROPY",
-    "jumpUrl": "Dusseline2_jump.html#L1"
+    "jumpUrl": "dusseline2_jump.html#L1"
   },
   "aufmerksamkeit": {
     "title": "🧠 NEURO_VREQUENCY",
     "text": "Mustererkennung aktiv. Lade Protokoll #L2...",
     "index": "SYS_REF_2 // CORTEX",
-    "jumpUrl": "Dusseline2_jump.html#L2"
+    "jumpUrl": "dusseline2_jump.html#L2"
   },
   "core-detection_run_64": {
    "title": "🎬 Video_LAUNCH",
