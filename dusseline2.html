@@ -388,30 +388,47 @@
         } 
 
 function executeTrigger(entry) {
+            // 1. HUD-Texte stabil befüllen und anzeigen
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
             // ==========================================
-            // EINFACHER JUMP-VEKTOR (Als neues Tab öffnen)
+            // FIX: EXTERNER SPRUNG (Öffnet neues Tab)
             // ==========================================
             if (entry.jumpUrl) {
-                // Öffnet das Textmarker-Ziel sauber in einem externen neuen Tab
+                // Stoppt eventuell laufende Medien im HUD
+                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+                audioPlaying = false;
+
+                // Öffnet das Ziel unblockiert in einem neuen Tab
                 window.open(entry.jumpUrl, '_blank');
-                return; // Funktion sofort beenden, Scan läuft im Hintergrund weiter!
+                
+                // WICHTIG: Kein abruptes "return", das die Schleife zerstört,
+                // sondern wir beenden nur diese Funktion sauber!
+                return; 
             }
 
-            // Falls ein normales Audio-Wort kommt
+            // ==========================================
+            // AUDIO-SEKTOR (Standard-Betrieb)
+            // ==========================================
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
                 if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
-                currentAudio.play().then(() => { 
-                    audioStopBtn.innerText = "⏹ AUDIO MUTE";
-                    audioStopBtn.style.display = "block"; 
-                }).catch(e => { audioPlaying = false; });
+                
+                currentAudio.play()
+                    .then(() => { 
+                        audioStopBtn.innerText = "⏹ AUDIO MUTE";
+                        audioStopBtn.style.display = "block"; 
+                    })
+                    .catch(e => { console.error("Audio-Fehler:", e); audioPlaying = false; });
                 
                 currentAudio.onended = function() {
                     audioStopBtn.style.display = "none";
@@ -420,9 +437,12 @@ function executeTrigger(entry) {
                 };
             }
 
-            // Falls ein normales Video-Wort kommt
+            // ==========================================
+            // YOUTUBE-VIDEO-SEKTOR (Standard-Betrieb)
+            // ==========================================
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
+                
                 if (entry.videoType === "short") { ytWrapper.classList.add('is-short'); } 
                 else { ytWrapper.classList.remove('is-short'); }
 
@@ -430,12 +450,12 @@ function executeTrigger(entry) {
                 if (ytPlayer.src !== targetUrl) {
                     ytPlayer.src = targetUrl;
                     ytContainer.style.display = "flex"; 
+                    
                     audioStopBtn.innerText = "❌ VIDEO BEENDEN";
                     audioStopBtn.style.display = "block";
                 }
             }
-        }
-        function manualAudioStop() {
+        }        function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
                 currentAudio.pause();
