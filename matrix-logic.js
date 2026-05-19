@@ -54,7 +54,9 @@ window.addEventListener('load', () => {
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 // Optional: Kurzes Flashen für die Kohärenz-Kuratoren [cite: 2026-03-28]
-                targetEl.style.backgroundColor = "rgba(0, 243, 255, 0.1)";
+                //targetEl.style.backgroundColor = "rgba(0, 243, 255, 0.1)";
+                // Änderung in matrix-logic.js für das rote Neon-Design:
+                targetEl.style.backgroundColor = "rgba(255, 17, 17, 0.2)";
                 setTimeout(() => { targetEl.style.backgroundColor = "transparent"; }, 1000);
             }
         }, 100); // 100ms reicht für Text-Sektoren auf GitHub aus
