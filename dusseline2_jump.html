@@ -105,5 +105,26 @@
 
     <button id="btn-reset" onclick="resetSystem(); setTimeout(() => { window.close(); }, 300);">ZURÜCK</button>
 
+    <script>
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#L')) {
+                // Den Kohärenz-Kuratoren 350ms zusätzliche Zeit geben, 
+                // bis das DOM auf GitHub vollständig gerendert ist
+                setTimeout(() => {
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Optional: Visuelles Feedback für den Sektor-Sprung
+                        target.style.backgroundColor = "rgba(0, 243, 255, 0.08)";
+                        setTimeout(() => { target.style.backgroundColor = "transparent"; }, 1200);
+                    }
+                }, 350);
+            }
+        });
+    </script>
+</body>
+</html>
 </body>
 </html>
