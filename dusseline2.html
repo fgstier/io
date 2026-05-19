@@ -374,7 +374,7 @@ function showText(title, text, footerText, titleColor) {
                     if (normalizedText.includes(key))
                     {
                         executeTrigger(database[key]);
-                        showText(textDatabase[key].title, textDatabase[key].text, textDatabase[key].footer, textDatabase[key].color);
+                        showText(textDatabase[key].title, textDatabase[key].text, textDatabase[key].index, textDatabase[key].color);
                         found = true;
                         break;
                     }
