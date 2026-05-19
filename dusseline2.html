@@ -332,28 +332,6 @@
             }
             setTimeout(scanLoop, 1000);
         }
-function showText(title, text, footerText, titleColor) {
-    if (clearTextTimeout) clearTimeout(clearTextTimeout);
-    
-    hudTitle.innerText = title;
-    hudBody.innerHTML = text.replace(/\n/g, '<br>');
-    hudFooter.innerText = footerText || "INDEX // PENDING";
-    
-    // DYNAMISCHE FARBWAHL FÜR DEN TITEL:
-    if (titleColor === "red") {
-        hudTitle.style.color = "#ff1111"; // Knalliges Alarm-Rot
-        hudTitle.style.textShadow = "0 0 10px #ff0000"; // Optionaler Neon-Glüheffekt
-    } else {
-        hudTitle.style.color = "#ffffff"; // Standard-Weiß
-        hudTitle.style.textShadow = "none";
-    }
-    
-    hud.classList.add('active');
-    
-    clearTextTimeout = setTimeout(() => { 
-        hud.classList.remove('active'); 
-    }, 6000);
-}
         
         async function captureAndScan() {
             isProcessing = true;
@@ -374,7 +352,6 @@ function showText(title, text, footerText, titleColor) {
                     if (normalizedText.includes(key))
                     {
                         executeTrigger(database[key]);
-                        showText(textDatabase[key].title, textDatabase[key].text, textDatabase[key].index, textDatabase[key].color);
                         found = true;
                         break;
                     }
