@@ -123,6 +123,25 @@
                 }, 350);
             }
         });
+
+        window.addEventListener('load', () => {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#L')) {
+                // Den Kohärenz-Kuratoren 300ms zusätzliche Render-Zeit gewähren
+                setTimeout(() => {
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        // Sanft an den Ziel-Sektor heranziehen
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        
+                        // Sektor kurz optisch hervorheben (Flash-Effekt)
+                        target.style.backgroundColor = "rgba(0, 243, 255, 0.08)";
+                        setTimeout(() => { target.style.backgroundColor = "transparent"; }, 1200);
+                    }
+                }, 300);
+            }
+        });
+        
     </script>
 </body>
 </html>
