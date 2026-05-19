@@ -2,8 +2,7 @@
   "zivilisations-maschine": {
     "title": "⚠️ CRITICAL_FAILURE",
     "text": "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten.",
-    "index": "SYS_REF_001 // LOC_DRESDEN",
-    "color": "red" 
+    "index": "SYS_REF_001 // LOC_DRESDEN"
   },
   "aberglaube": {
     "title": "[!] SYSTEM-DIAGNOSE",
@@ -13,8 +12,7 @@
   "zensuren": {
     "title": "🚫 FILTER_BLOCKED",
     "text": "[Inhalt nach Novia-Dekret zensiert]\nFrequenz-Abweichung isoliert.",
-    "index": "SYS_REF_003 // NOVIA_LAW",
-    "color": "red" 
+    "index": "SYS_REF_003 // NOVIA_LAW"
   },
   "idioten": {
     "title": "> SCAN: DEFAULT_MODE",
@@ -24,8 +22,7 @@
   "dusseline": {
     "title": "🤖 MATRIX_ERROR",
     "text": "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
-    "index": "SYS_REF_005 // SYNTAX_LVL",
-    "color": "red" 
+    "index": "SYS_REF_005 // SYNTAX_LVL"
   },
   "core-detection_run_64": {
    "title": "🎬 Video_LAUNCH",
