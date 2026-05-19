@@ -272,28 +272,7 @@
         let database = {};
 
 
-        function showText(title, text, footerText, titleColor) {
-    if (clearTextTimeout) clearTimeout(clearTextTimeout);
-    
-    hudTitle.innerText = title;
-    hudBody.innerHTML = text.replace(/\n/g, '<br>');
-    hudFooter.innerText = footerText || "INDEX // PENDING";
-    
-    // DYNAMISCHE FARBWAHL FÜR DEN TITEL:
-    if (titleColor === "red") {
-        hudTitle.style.color = "#ff1111"; // Knalliges Alarm-Rot
-        hudTitle.style.textShadow = "0 0 10px #ff0000"; // Optionaler Neon-Glüheffekt
-    } else {
-        hudTitle.style.color = "#ffffff"; // Standard-Weiß
-        hudTitle.style.textShadow = "none";
-    }
-    
-    hud.classList.add('active');
-    
-    clearTextTimeout = setTimeout(() => { 
-        hud.classList.remove('active'); 
-    }, 6000);
-}
+       
         async function initializeEngine() {
             startOverlay.style.display = "none";
             
@@ -482,6 +461,30 @@
             audioStopBtn.innerText = "⏹ AUDIO MUTE"; 
             audioPlaying = false;
         }
+
+ function showText(title, text, footerText, titleColor) {
+    if (clearTextTimeout) clearTimeout(clearTextTimeout);
+    
+    hudTitle.innerText = title;
+    hudBody.innerHTML = text.replace(/\n/g, '<br>');
+    hudFooter.innerText = footerText || "INDEX // PENDING";
+    
+    // DYNAMISCHE FARBWAHL FÜR DEN TITEL:
+    if (titleColor === "red") {
+        hudTitle.style.color = "#ff1111"; // Knalliges Alarm-Rot
+        hudTitle.style.textShadow = "0 0 10px #ff0000"; // Optionaler Neon-Glüheffekt
+    } else {
+        hudTitle.style.color = "#ffffff"; // Standard-Weiß
+        hudTitle.style.textShadow = "none";
+    }
+    
+    hud.classList.add('active');
+    
+    clearTextTimeout = setTimeout(() => { 
+        hud.classList.remove('active'); 
+    }, 6000);
+}
+        
     </script>
 
     <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 6; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
