@@ -11,7 +11,7 @@
     <script src="matrix-logic.js" defer></script>
 
     <style>
-        /* Spezifische Design-Anpassung für die reine Text-Oberfläche */
+        /* Cyberpunk-Matrix-Branding passend zur Ausrichtung */
         body {
             font-family: "Courier New", Courier, Consolas, monospace;
             background: #000; 
@@ -34,14 +34,16 @@
             margin-bottom: 30px;
         }
 
-        /* Die von Ihnen definierten Sprungmarken-Container (.entry) */
+        /* Präzise Sektor-Einträge */
         .entry {
             display: block;
             min-height: 200px;
             margin-bottom: 40px;
-            border-top: 1px solid #ff1111; /* Cyberpunk-Rot statt Schwarz */
+            border-top: 1px solid #ff1111;
             padding-top: 20px;
-            scroll-margin-top: 100px; /* Präziser iPhone-Anker-Stopp laut style.css */
+            /* WICHTIG: Das fängt den Sprung am iPhone ab, damit Text nicht unter dem Rand klebt */
+            scroll-margin-top: 100px; 
+            transition: background-color 0.5s ease;
         }
 
         .id { 
@@ -86,7 +88,7 @@
             <p>
                 Das Unbegreifbare der Unverständlichkeit:
                 In der Informationstheorie beschreibt dies den Zustand maximaler Entropie, in dem ein Signal nicht mehr vom
-                Rauschen unterschieden werden kann.
+                Rauschen unterscheidet werden kann.
                 Wissenschaftlich verweist es auf die Grenzen der Erkenntnistheorie, an denen die menschliche Logik aufgrund
                 der Komplexität subatomarer oder kosmologischer Prozesse kollabiert.
             </p>
