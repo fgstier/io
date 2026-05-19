@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="data:,">
+    <title>ARKUSNAT Sektor-Glossar // DUSSELINES ERBE</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="matrix-logic.js" defer></script>
+
+    <style>
+        /* Spezifische Design-Anpassung für die reine Text-Oberfläche */
+        body {
+            font-family: "Courier New", Courier, Consolas, monospace;
+            background: #000; 
+            color: #fff;
+            line-height: 1.6; 
+            font-size: 18px;
+            padding: 20px; 
+            margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        h1 {
+            color: #ff1111;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 8px rgba(255, 17, 17, 0.6);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.4);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Die von Ihnen definierten Sprungmarken-Container (.entry) */
+        .entry {
+            display: block;
+            min-height: 200px;
+            margin-bottom: 40px;
+            border-top: 1px solid #ff1111; /* Cyberpunk-Rot statt Schwarz */
+            padding-top: 20px;
+            scroll-margin-top: 100px; /* Präziser iPhone-Anker-Stopp laut style.css */
+        }
+
+        .id { 
+            color: #ff1111; 
+            font-size: 0.8em; 
+            font-family: monospace; 
+            font-weight: bold;
+        }
+
+        .term { 
+            font-weight: bold; 
+            text-transform: uppercase;
+            font-size: 1.1em; 
+            display: block; 
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="reset-overlay" style="display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.95); color: #fff; z-index: 12000; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <h2 style="color: #ff1111; text-shadow: 0 0 8px #ff1111; font-family: monospace;">SYSTEM BEREIT</h2>
+        <p>Verbindung getrennt. Kehre zum Stabilitäts-Inspektorat zurück.</p>
+        <button onclick="window.close();" style="background: #000; color: #ff1111; border: 1px solid #ff1111; padding: 10px 20px; cursor: pointer; font-family: monospace; font-weight: bold; margin-top: 20px; box-shadow: 0 0 10px rgba(255,17,17,0.4);">X CLOSE_INTERFACE</button>
+    </div>
+
+    <h1>Edition ARKUSNAT: Defekt-Code-Protokoll</h1>
+
+    <div id="AR-Container">
+        
+        <div id="L1" class="entry">
+            <span class="id">#L1</span>
+            <span class="term">Incomprehensibilitatem</span>
+            <p>
+                Das Unbegreifbare der Unverständlichkeit:
+                In der Informationstheorie beschreibt dies den Zustand maximaler Entropie, in dem ein Signal nicht mehr vom
+                Rauschen unterschieden werden kann.
+                Wissenschaftlich verweist es auf die Grenzen der Erkenntnistheorie, an denen die menschliche Logik aufgrund
+                der Komplexität subatomarer oder kosmologischer Prozesse kollabiert.
+            </p>
+        </div>
+
+        <div id="L2" class="entry">
+            <span class="id">#L2</span>
+            <span class="term">Motus animi</span>
+            <p>
+                Eine breitseitige Streuung des Geistes:
+                Neurobiologisch lässt sich dies als "diffuse Aufmerksamkeit" oder "Global Workspace Theory" interpretieren,
+                bei der Informationen über weite Areale des Kortex verteilt verarbeitet werden. Es ist der Gegenentwurf zum
+                fokussierten Tunnelblick und ermöglicht die parallele Mustererkennung in komplexen Systemen.
+            </p>
+        </div>
+
+    </div>
+
+    <button id="btn-reset" onclick="resetSystem(); setTimeout(() => { window.close(); }, 300);">ZURÜCK</button>
+
+</body>
+</html>
