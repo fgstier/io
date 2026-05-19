@@ -387,13 +387,26 @@
             }
         } 
 
-        function executeTrigger(entry) {
+function executeTrigger(entry) {
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
-            // FIX: Audio-Aktivierung robuster gestaltet
+            // --- NEU: SPEZIFISCHER AUSBRUCH-VEKTOR FÜR TEXTMARKER-ZIELE ---
+            if (entry.jumpUrl) {
+                // Ermittelt, ob das System in einem Iframe gefangen ist
+                const targetWindow = (window.top !== window.self) ? window.top : window;
+                
+                // Kurze Verzögerung von 400ms, damit der Nutzer den HUD-Text lesen kann,
+                // bevor der brutale Sektor-Wechsel ausgeführt wird
+                setTimeout(() => {
+                    targetWindow.location.href = entry.jumpUrl;
+                }, 400);
+                return; // Beendet die Funktion, da wir die Seite verlassen
+            }
+
+            // FIX: Audio-Aktivierung robuster gestaltet (nur wenn kein Jump-Ziel vorhanden)
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
                 if (currentAudio) {
@@ -421,7 +434,7 @@
                 };
             }
 
-            // YouTube-Schiene
+            // YouTube-Schiene (nur wenn kein Jump-Ziel vorhanden)
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
                 
@@ -440,8 +453,7 @@
                     audioStopBtn.style.display = "block";
                 }
             }
-        }
-
+        }    
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
