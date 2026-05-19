@@ -356,7 +356,7 @@
                 {
                     if (normalizedText.includes(key))
                     {
-                        executeTrigger(database[key]);
+                        (database[key]);
                         found = true;
                         break;
                     }
@@ -388,49 +388,44 @@
         } 
 
 function executeTrigger(entry) {
-            // ==========================================
-            // PRIO 1: INSTANTANER MEDIEN-STOPP & RESET
-            // ==========================================
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-            }
-            ytContainer.style.display = "none";
-            ytPlayer.src = ""; // Stoppt das YouTube-Video sofort
-            
-            // Hier erzwingen wir das sofortige Verschwinden des Buttons!
-            audioStopBtn.style.setProperty('display', 'none', 'important'); 
-            
-            videoPlaying = false;
-            audioPlaying = false;
-
-            // ==========================================
-            // PRIO 2: HUD METADATEN SPEISEN
-            // ==========================================
+            // 1. HUD-Metadaten wie gewohnt speisen
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
             // ==========================================
-            // PRIO 3: SEKTOR-WEICHENSTELLUNG
+            // WEG A: REINER TEXTMARKER-SPRUNG
             // ==========================================
-
-            // WEG A: TEXTMARKER-SPRUNG (Mit stabiler Rendering-Pause)
             if (entry.jumpUrl) {
+                // Eventuell laufende Medien der Hauptseite im Hintergrund kappen
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                ytContainer.style.display = "none";
+                ytPlayer.src = ""; // Stoppt das YouTube-Video sofort
+                videoPlaying = false;
+                audioPlaying = false;
+
                 const targetWindow = (window.top !== window.self) ? window.top : window;
                 
-                // 250ms geben dem Browser die nötige Zeit, den Button unsichtbar 
-                // zu zeichnen, BEVOR die neue Seite geladen wird!
-                setTimeout(() => {
-                    targetWindow.location.href = entry.jumpUrl;
-                }, 250);
-                return; 
+                // Sofortiger System-Wechsel zur Textmarker-Seite. 
+                // Der Button bleibt bis zum Laden der neuen Seite sichtbar, friert aber nicht ein.
+                targetWindow.location.href = entry.jumpUrl;
+                return; // Beendet den Vektor sauber
             }
 
+            // ==========================================
             // WEG B: AUDIO-SEKTOR
-            if (entry.audio) {
+            // ==========================================
+            if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
                 
@@ -451,8 +446,10 @@ function executeTrigger(entry) {
                 };
             }
 
-            // WEG C: YOUTUBE-SEKTOR
-            if (entry.youtubeId) {
+            // ==========================================
+            // WEG C: YOUTUBE-VIDEO-SEKTOR
+            // ==========================================
+            if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
                 
                 if (entry.videoType === "short") {
@@ -470,7 +467,7 @@ function executeTrigger(entry) {
                     audioStopBtn.style.display = "block";
                 }
             }
-        }     
+        }
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
