@@ -395,15 +395,24 @@ function executeTrigger(entry) {
 
             // --- NEU: SPEZIFISCHER AUSBRUCH-VEKTOR FÜR TEXTMARKER-ZIELE ---
             if (entry.jumpUrl) {
-                // Ermittelt, ob das System in einem Iframe gefangen ist
+                // 1. Alle laufenden Medien sofort stoppen und Button ausblenden
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                ytContainer.style.display = "none";
+                ytPlayer.src = ""; // Stoppt das YouTube-Video im Hintergrund vollständig
+                audioStopBtn.style.display = "none"; // Entfernt den nutzlosen Button
+                videoPlaying = false;
+                audioPlaying = false;
+
                 const targetWindow = (window.top !== window.self) ? window.top : window;
                 
-                // Kurze Verzögerung von 400ms, damit der Nutzer den HUD-Text lesen kann,
-                // bevor der brutale Sektor-Wechsel ausgeführt wird
+                // 2. Blitzschneller Wechsel nach 150ms
                 setTimeout(() => {
                     targetWindow.location.href = entry.jumpUrl;
                 }, 150);
-                return; // Beendet die Funktion, da wir die Seite verlassen
+                return; 
             }
 
             // FIX: Audio-Aktivierung robuster gestaltet (nur wenn kein Jump-Ziel vorhanden)
