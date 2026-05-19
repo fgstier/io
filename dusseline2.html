@@ -388,41 +388,47 @@
         } 
 
 function executeTrigger(entry) {
+            // ==========================================
+            // PRIO 1: SYSTEM-CLEANUP (Brutaler Medien-Stopp)
+            // ==========================================
+            // Jedes Mal, wenn ein neuer Trigger gefangen wird, 
+            // stoppen wir alte Audio-Leichen und verbergen den Button sofort!
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            ytContainer.style.display = "none";
+            ytPlayer.src = ""; // Kappt die YouTube-Verbindung im Hintergrund vollständig
+            audioStopBtn.style.display = "none"; // Macht den Button unsichtbar
+            videoPlaying = false;
+            audioPlaying = false;
+
+            // ==========================================
+            // PRIO 2: HUD METADATEN INITIALISIEREN
+            // ==========================================
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
-            // --- NEU: SPEZIFISCHER AUSBRUCH-VEKTOR FÜR TEXTMARKER-ZIELE ---
-            if (entry.jumpUrl) {
-                // 1. Alle laufenden Medien sofort stoppen und Button ausblenden
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-                ytContainer.style.display = "none";
-                ytPlayer.src = ""; // Stoppt das YouTube-Video im Hintergrund vollständig
-                audioStopBtn.style.display = "none"; // Entfernt den nutzlosen Button
-                videoPlaying = false;
-                audioPlaying = false;
+            // ==========================================
+            // SEKTOR-WEICHENSTELLUNG
+            // ==========================================
 
+            // WEG A: REINER TEXT-SPRUNG (AUSBRUCH AUS DEM IFRAME)
+            if (entry.jumpUrl) {
                 const targetWindow = (window.top !== window.self) ? window.top : window;
                 
-                // 2. Blitzschneller Wechsel nach 150ms
+                // Blitzschneller Übergang nach 150ms
                 setTimeout(() => {
                     targetWindow.location.href = entry.jumpUrl;
                 }, 150);
-                return; 
+                return; // Funktion sicher beenden
             }
 
-            // FIX: Audio-Aktivierung robuster gestaltet (nur wenn kein Jump-Ziel vorhanden)
-            if (entry.audio && !audioPlaying) {
+            // WEG B: AUDIO-SEKTOR AKTIVIEREN (Nur wenn keine jumpUrl vorhanden)
+            if (entry.audio) {
                 audioPlaying = true;
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-                
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
                 
@@ -443,8 +449,8 @@ function executeTrigger(entry) {
                 };
             }
 
-            // YouTube-Schiene (nur wenn kein Jump-Ziel vorhanden)
-            if (entry.youtubeId && !videoPlaying) {
+            // WEG C: YOUTUBE-SEKTOR AKTIVIEREN (Nur wenn keine jumpUrl vorhanden)
+            if (entry.youtubeId) {
                 videoPlaying = true; 
                 
                 if (entry.videoType === "short") {
@@ -462,7 +468,7 @@ function executeTrigger(entry) {
                     audioStopBtn.style.display = "block";
                 }
             }
-        }    
+        }
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
