@@ -389,22 +389,23 @@
 
 function executeTrigger(entry) {
             // ==========================================
-            // PRIO 1: SYSTEM-CLEANUP (Brutaler Medien-Stopp)
+            // PRIO 1: INSTANTANER MEDIEN-STOPP & RESET
             // ==========================================
-            // Jedes Mal, wenn ein neuer Trigger gefangen wird, 
-            // stoppen wir alte Audio-Leichen und verbergen den Button sofort!
             if (currentAudio) {
                 currentAudio.pause();
                 currentAudio.currentTime = 0;
             }
             ytContainer.style.display = "none";
-            ytPlayer.src = ""; // Kappt die YouTube-Verbindung im Hintergrund vollständig
-            audioStopBtn.style.display = "none"; // Macht den Button unsichtbar
+            ytPlayer.src = ""; // Stoppt das YouTube-Video sofort
+            
+            // Hier erzwingen wir das sofortige Verschwinden des Buttons!
+            audioStopBtn.style.setProperty('display', 'none', 'important'); 
+            
             videoPlaying = false;
             audioPlaying = false;
 
             // ==========================================
-            // PRIO 2: HUD METADATEN INITIALISIEREN
+            // PRIO 2: HUD METADATEN SPEISEN
             // ==========================================
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
@@ -412,21 +413,22 @@ function executeTrigger(entry) {
             hud.classList.add('active');
 
             // ==========================================
-            // SEKTOR-WEICHENSTELLUNG
+            // PRIO 3: SEKTOR-WEICHENSTELLUNG
             // ==========================================
 
-            // WEG A: REINER TEXT-SPRUNG (AUSBRUCH AUS DEM IFRAME)
+            // WEG A: TEXTMARKER-SPRUNG (Mit stabiler Rendering-Pause)
             if (entry.jumpUrl) {
                 const targetWindow = (window.top !== window.self) ? window.top : window;
                 
-                // Blitzschneller Übergang nach 150ms
+                // 250ms geben dem Browser die nötige Zeit, den Button unsichtbar 
+                // zu zeichnen, BEVOR die neue Seite geladen wird!
                 setTimeout(() => {
                     targetWindow.location.href = entry.jumpUrl;
-                }, 150);
-                return; // Funktion sicher beenden
+                }, 250);
+                return; 
             }
 
-            // WEG B: AUDIO-SEKTOR AKTIVIEREN (Nur wenn keine jumpUrl vorhanden)
+            // WEG B: AUDIO-SEKTOR
             if (entry.audio) {
                 audioPlaying = true;
                 currentAudio = new Audio(entry.audio);
@@ -449,7 +451,7 @@ function executeTrigger(entry) {
                 };
             }
 
-            // WEG C: YOUTUBE-SEKTOR AKTIVIEREN (Nur wenn keine jumpUrl vorhanden)
+            // WEG C: YOUTUBE-SEKTOR
             if (entry.youtubeId) {
                 videoPlaying = true; 
                 
@@ -468,7 +470,7 @@ function executeTrigger(entry) {
                     audioStopBtn.style.display = "block";
                 }
             }
-        }
+        }     
         function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
