@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
             if (targetElement) {
                 // Sanft und präzise an den Ziel-Sektor heranscrollen
                 targetElement.scrollIntoView({ 
-                    behavior: 'smooth', 
+                    behavior: 'auto', 
                     block: 'start' 
                 });
 
