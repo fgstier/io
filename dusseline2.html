@@ -401,10 +401,24 @@ async function captureAndScan() {
             hud.classList.add('active');
 
             // ==========================================
-            // REINER TEXT-SPRUNG (Echtes neues Tab)
+            // FIX: ABGESICHERTER TEXT-SPRUNG (Tab-Weiche)
             // ==========================================
             if (entry.jumpUrl) {
-                window.open(entry.jumpUrl, '_blank');
+                // Laufende Medien stoppen, um Interferenzen zu verhindern
+                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+
+                // 1. Versuch: Neues Tab unblockiert im Hintergrund öffnen
+                const newTab = window.open(entry.jumpUrl, '_blank');
+                
+                // 2. Fallback-Ebene: Falls der Browser das Pop-up blockiert oder das Tab verweigert,
+                // laden wir das Glossar direkt im aktuellen Fenster, damit das System nicht einfriert!
+                if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+                    console.warn("Pop-up blockiert. Exekutiere Direkt-Transition im selben Sektor.");
+                    window.location.href = entry.jumpUrl;
+                }
                 return; 
             }
 
