@@ -109,16 +109,25 @@
 
     <script>
         function smartClose() {
-            // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
-            // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
+            // 1. WEG: Wenn der Leser aus Ihrer dusseline2.html kommt (Nahtloser Rücksprung)
             if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
                 window.history.back();
             } else {
-                // Versuch das Tab zu schließen (Erfolgreich bei unblockierten externen Handy-Scannern)
+                // 2. WEG: Wenn er direkt über den gedruckten Datenmatrix-Code kommt
                 window.close();
-                // Letzter Ausweg: Fallback-Leitung zur App-Oberfläche
+                
+                // FALLBACK: Falls der In-App-Scanner das Schließen hart blockiert,
+                // leiten wir nicht um, sondern verwandeln den Button in einen klaren Hinweis!
                 setTimeout(() => {
-                    window.location.href = "dusseline2.html";
+                    const btn = document.querySelector('button[onclick="smartClose();"]');
+                    if (btn) {
+                        btn.style.background = "#00ff00";
+                        btn.style.color = "#000";
+                        btn.style.boxShadow = "0 0 15px #00ff00";
+                        btn.innerText = "✓ SEKTOR BEENDET // SCANNER SCHLIESSEN";
+                    }
+                    // Optionaler visueller Hinweis für den Leser
+                    alert("Protokoll gelesen. Sie können dieses Fenster jetzt schließen und im Buch weiterspringen.");
                 }, 250);
             }
         }
