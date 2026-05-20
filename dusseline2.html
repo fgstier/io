@@ -398,15 +398,8 @@ function executeTrigger(entry) {
             // FIX: EXTERNER SPRUNG (Öffnet neues Tab)
             // ==========================================
             if (entry.jumpUrl) {
-                // Stoppt eventuell laufende Medien im HUD
-                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
-                ytContainer.style.display = "none";
-                ytPlayer.src = "";
-                videoPlaying = false;
-                audioPlaying = false;
-
-                // Öffnet das Ziel unblockiert in einem neuen Tab
-                window.open(entry.jumpUrl, '_blank');
+                // ERSETZEN SIE DEN ALTEN SPRUNGBEFEHL EINFACH DURCH DIESE EINE ZEILE:
+                window.open(entry.jumpUrl, '_blank')
                 
                 // WICHTIG: Kein abruptes "return", das die Schleife zerstört,
                 // sondern wir beenden nur diese Funktion sauber!
