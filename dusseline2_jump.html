@@ -109,13 +109,18 @@
 
     <script>
         function smartClose() {
-            // Versuch 1: Das Tab direkt schließen (funktioniert, wenn window.open unblockiert war)
-            window.close();
-            
-            // Fallback: Falls das Tab nach 200ms immer noch offen ist, leiten wir zurück um
-            setTimeout(() => {
-                window.location.href = "dusseline2.html";
-            }, 200);
+            // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
+            // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
+            if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
+                window.history.back();
+            } else {
+                // Versuch das Tab zu schließen
+                window.close();
+                // Letzter Ausweg: Fallback-Leitung
+                setTimeout(() => {
+                    window.location.href = "dusseline2.html";
+                }, 250);
+            }
         }
     </script>
     
