@@ -338,7 +338,7 @@
             setTimeout(scanLoop, 1000);
         }
         
-        async function captureAndScan() {
+async function captureAndScan() {
             isProcessing = true;
 
             const canvas = document.createElement('canvas');
@@ -349,21 +349,22 @@
 
             try {
                 const { data: { text } } = await worker.recognize(canvas);
-                const normalizedText = text.toLowerCase();
+                const normalizedText = text.toLowerCase().trim();
 
                 let found = false;
                 for (const key in database) 
                 {
-                    if (normalizedText.includes(key))
+                    // Toleranter Abgleich: Vergleicht sowohl den echten Schlüssel 
+                    // als auch eine komplett kleingeschriebene Version davon.
+                    if (normalizedText.includes(key.toLowerCase()))
                     {
-                        // FIX: Hier wird die Trigger-Routine wieder gestartet!
+                        // FIX: Reaktiviert den echten Funktionsaufruf!
                         executeTrigger(database[key]);
                         found = true;
                         break;
                     }
                 }
 
-               // OPTIMIERT: Der Timer schließt das Fenster jetzt nach exakt 3 Sekunden (3000ms)
                 if (!found && !videoPlaying && !audioPlaying) {
                     if (!clearOverlayTimeout) {
                         clearOverlayTimeout = setTimeout(() => {
@@ -371,10 +372,9 @@
                             ytContainer.style.display = "none";
                             ytPlayer.src = ""; 
                             clearOverlayTimeout = null;
-                        }, 3000); // Auf 3 Sekunden verkürzt für maximale Dynamik
+                        }, 3000);
                     }
                 } else if (found) {
-                    // Falls der Text wiedergefunden wird, löschen wir den Timer sofort
                     if (clearOverlayTimeout) {
                         clearTimeout(clearOverlayTimeout);
                         clearOverlayTimeout = null;
@@ -388,23 +388,35 @@
             }
         } 
 
-function executeTrigger(entry) {
+        function executeTrigger(entry) {
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
             // ==========================================
-            // REINER TEXT-SPRUNG (Echtes neues Tab)
+            // REINER TEXT-SPRUNG (Sicherer Abbruch bei Pop-up-Blocker)
             // ==========================================
             if (entry.jumpUrl) {
-                // Öffnet das Glossar-Tab völlig unabhängig
-                window.open(entry.jumpUrl, '_blank');
-                return; // Scan-Schleife läuft im Hintergrund stabil weiter!
+                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+
+                // Versuche das neue Tab zu öffnen
+                const newTab = window.open(entry.jumpUrl, '_blank');
+                
+                // FALLBACK: Falls der mobile Browser das neue Tab als Pop-up blockiert,
+                // laden wir die Seite im aktuellen Fenster, damit der Nutzer nicht festsitzt!
+                if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+                    console.warn("Tab-Sprung blockiert. Exekutiere Fallback im selben Fenster.");
+                    window.location.href = entry.jumpUrl;
+                }
+                return; 
             }
 
             // ==========================================
-            // AUDIO-SEKTOR (Unverändert aus Ihrem Ur-Stand)
+            // AUDIO-SEKTOR (Spielt bei core-sound_run_24)
             // ==========================================
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
@@ -434,7 +446,7 @@ function executeTrigger(entry) {
             }
 
             // ==========================================
-            // YOUTUBE-VIDEO-SEKTOR (Unverändert aus Ihrem Ur-Stand)
+            // YOUTUBE-VIDEO-SEKTOR (Spielt bei core-detection_run_64/_32)
             // ==========================================
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
