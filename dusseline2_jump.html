@@ -8,7 +8,7 @@
     <title>ARKUSNAT Sektor-Glossar // DUSSELINES ERBE</title>
     
     <link rel="stylesheet" href="style.css">
-    <script src="jump-logic.js"></script>
+    <script src="matrix-logic.js" defer></script>
 
     <style>
         /* Cyberpunk-Matrix-Branding passend zur Ausrichtung */
@@ -79,7 +79,8 @@
     </div>
 
     <h1>Edition ARKUSNAT: Defekt-Code-Protokoll</h1>
-
+    <p>Konstruktion: F.G. Stier</p>
+        
         <div id="L1" class="entry">
             <span class="id">#L1</span>
             <span class="term">Incomprehensibilitatem</span>
@@ -103,10 +104,8 @@
             </p>
         </div>
 
-   <button onclick="window.close();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111;">
-    ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
-</button>
-</body>
-</html>
+   
+    <button id="btn-reset" onclick="resetSystem(); setTimeout(() => { window.close(); }, 300);">ZURÜCK</button>
+
 </body>
 </html>
