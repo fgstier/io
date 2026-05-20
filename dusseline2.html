@@ -278,16 +278,16 @@
 
 
        
-        async function initializeEngine() {
+async function initializeEngine() {
             startOverlay.style.display = "none";
+            // Setze den persistenten Marker für diese Sitzung
+            sessionStorage.setItem("matrix_authorized", "true");
             
             // ==========================================
             // AUDIO-FREISCHALTUNG (AUDIO CONTEXT UNBLOCK)
             // ==========================================
-            // Wir erzeugen das Audio-Objekt global beim echten Klick des Nutzers
             currentAudio = new Audio();
             currentAudio.volume = 0.9;
-            // Kurzer, stiller Impuls, um die Browser-Sperre dauerhaft zu brechen
             currentAudio.play().catch(() => {});
 
             try {
@@ -307,6 +307,14 @@
             initOCR();
         }
 
+        // AUTOMATISCHER RE-ENTRY-CHECK BEIM LADEN
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem("matrix_authorized") === "true") {
+                // Falls bereits autorisiert, Engine direkt ohne Overlay zünden
+                initializeEngine();
+            }
+        });
+        
         async function startCamera() {
             const constraints = {
                 video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } },
