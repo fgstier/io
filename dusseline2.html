@@ -278,9 +278,11 @@
 
 
        
-async function initializeEngine() {
+async function initializeEngine()
+{
             startOverlay.style.display = "none";
-            // Setze den persistenten Marker für diese Sitzung
+            
+            // Setze den persistenten Marker für diese Browsersitzung
             sessionStorage.setItem("matrix_authorized", "true");
             
             // ==========================================
@@ -307,11 +309,29 @@ async function initializeEngine() {
             initOCR();
         }
 
-        // AUTOMATISCHER RE-ENTRY-CHECK BEIM LADEN
+        // =================================================================
+        // ERWEITERTER RE-ENTRY-CHECK FÜR MOBIL-GERÄTE (iOS / iPhone)
+        // =================================================================
         window.addEventListener('DOMContentLoaded', () => {
             if (sessionStorage.getItem("matrix_authorized") === "true") {
-                // Falls bereits autorisiert, Engine direkt ohne Overlay zünden
+                // Haupt-Engine direkt zünden
                 initializeEngine();
+                
+                // Da wir von der Jump-Seite zurückkehren, entzieht iOS die Audio-Rechte.
+                // Wir legen einen unsichtbaren, einmaligen Listener über den Bildschirm:
+                const reprimeAudio = () => {
+                    if (currentAudio) {
+                        // Ein kurzer, lautloser Impuls reaktiviert die Engine auf iOS
+                        currentAudio.play().catch(() => {});
+                        console.log("Akustisches Signalfeld erfolgreich re-initialisiert.");
+                    }
+                    // Sofort wieder entfernen, um Ressourcen zu schonen
+                    window.removeEventListener('touchstart', reprimeAudio);
+                    window.removeEventListener('click', reprimeAudio);
+                };
+                
+                window.addEventListener('touchstart', reprimeAudio);
+                window.addEventListener('click', reprimeAudio);
             }
         });
         
