@@ -123,9 +123,28 @@
         <div id="legal-content" style="color: #ffffff; font-size: 14px; white-space: pre-wrap; line-height: 1.5;"></div>
     </div>
 
+<button onclick="smartClose();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111; font-weight: bold;">
+        ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
+    </button>
+
+    <footer style="margin-top: 100px; padding: 40px 20px; text-align: center; border-top: 1px solid #111111; clear: both;">
+        <a href="impressum.html" target="_blank" rel="noopener"
+           style="color: #555555; text-decoration: none; font-family: monospace; font-size: 0.75em; letter-spacing: 1px; display: inline-block; margin: 5px 15px;">
+            IMPRESSUM // ARKUSNAT-SYS-ID
+        </a>
+        
+        <span style="color: #222222; font-size: 0.75em;">|</span>
+        
+        <a href="datenschutz.html" target="_blank" rel="noopener"
+           style="color: #555555; text-decoration: none; font-family: monospace; font-size: 0.75em; letter-spacing: 1px; display: inline-block; margin: 5px 15px;">
+            DATENSCHUTZ // F.G. STIER
+        </a>
+    </footer>
+
     <script>
         function smartClose() {
             // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
+            // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
             if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
                 window.history.back();
             } else {
@@ -137,33 +156,7 @@
                 }, 250);
             }
         }
-
-        // TEXT-ZUSTÄNDE FÜR IMPRESSUM UND DATENSCHUTZ
-        const legalTexts = {
-            impressum: `ANGABEN GEMÄSS § 5 TMG:\n\nARKUSNAT Publishing\nF.G. Stier\nDresden, Sektor Sachsen\nKontakt: info@arkusnat.de\n\nPROPORTIONAL-SYSTEM-ID: ARKUSNAT-2026-05-12`,
-            datenschutz: `DATENSCHUTZERKLÄRUNG:\n\nVerantwortlich im Sinne der Datenschutzgesetze:\nF.G. Stier, Dresden.\n\nBeim Aufruf dieser rein statischen GitHub-Pages werden von uns keine personenbezogenen Daten oder Cookies gespeichert. Die Server-Logfiles werden automatisiert durch GitHub Inc. verarbeitet.`
-        };
-
-        function openLegal(type) {
-            const overlay = document.getElementById('legal-overlay');
-            const title = document.getElementById('legal-title');
-            const content = document.getElementById('legal-content');
-            
-            if (overlay && legalTexts[type]) {
-                title.innerText = "LEGAL_SEC // " + type.toUpperCase();
-                content.innerText = legalTexts[type];
-                overlay.style.display = "block";
-            }
-        }
-
-        function closeLegal() {
-            const overlay = document.getElementById('legal-overlay');
-            if (overlay) {
-                overlay.style.display = "none";
-            }
-        }
     </script>
-
-    
 </body>
 </html>
+    
