@@ -281,8 +281,14 @@
         async function initializeEngine() {
             startOverlay.style.display = "none";
             
-            const contextAudio = new Audio();
-            contextAudio.play().catch(() => {});
+            // ==========================================
+            // AUDIO-FREISCHALTUNG (AUDIO CONTEXT UNBLOCK)
+            // ==========================================
+            // Wir erzeugen das Audio-Objekt global beim echten Klick des Nutzers
+            currentAudio = new Audio();
+            currentAudio.volume = 0.9;
+            // Kurzer, stiller Impuls, um die Browser-Sperre dauerhaft zu brechen
+            currentAudio.play().catch(() => {});
 
             try {
                 const response = await fetch('assets/database.json'); 
@@ -395,38 +401,23 @@ async function captureAndScan() {
             hud.classList.add('active');
 
             // ==========================================
-            // REINER TEXT-SPRUNG (Sicherer Abbruch bei Pop-up-Blocker)
+            // REINER TEXT-SPRUNG (Echtes neues Tab)
             // ==========================================
             if (entry.jumpUrl) {
-                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
-                ytContainer.style.display = "none";
-                ytPlayer.src = "";
-                videoPlaying = false;
-
-                // Versuche das neue Tab zu öffnen
-                const newTab = window.open(entry.jumpUrl, '_blank');
-                
-                // FALLBACK: Falls der mobile Browser das neue Tab als Pop-up blockiert,
-                // laden wir die Seite im aktuellen Fenster, damit der Nutzer nicht festsitzt!
-                if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
-                    console.warn("Tab-Sprung blockiert. Exekutiere Fallback im selben Fenster.");
-                    window.location.href = entry.jumpUrl;
-                }
+                window.open(entry.jumpUrl, '_blank');
                 return; 
             }
 
             // ==========================================
-            // AUDIO-SEKTOR (Spielt bei core-sound_run_24)
+            // REPARIERTER AUDIO-SEKTOR (Nutzt die freigeschaltete Engine)
             // ==========================================
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
-                if (currentAudio) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
                 
-                currentAudio = new Audio(entry.audio);
-                currentAudio.volume = 0.9;
+                // WICHTIG: Nicht neu erzeugen, sondern die bestehende, 
+                // vom Browser bereits legitimierte Instanz nutzen!
+                currentAudio.src = entry.audio;
+                currentAudio.load();
                 
                 currentAudio.play()
                     .then(() => { 
@@ -434,7 +425,7 @@ async function captureAndScan() {
                         audioStopBtn.style.display = "block"; 
                     })
                     .catch(e => { 
-                        console.error("Audio Playback-Fehler:", e); 
+                        console.error("Kritischer Audio-Blockade-Fehler:", e); 
                         audioPlaying = false; 
                     });
                 
@@ -446,7 +437,7 @@ async function captureAndScan() {
             }
 
             // ==========================================
-            // YOUTUBE-VIDEO-SEKTOR (Spielt bei core-detection_run_64/_32)
+            // YOUTUBE-VIDEO-SEKTOR
             // ==========================================
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
