@@ -388,30 +388,29 @@
         } 
 
 function executeTrigger(entry) {
-            // 1. HUD-Texte stabil befüllen und anzeigen
             hudTitle.innerText = entry.title;
             hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
             hudFooter.innerText = entry.index;
             hud.classList.add('active');
 
             // ==========================================
-            // FIX: EXTERNER SPRUNG (Öffnet neues Tab)
+            // REINER TEXT-SPRUNG (Echtes neues Tab)
             // ==========================================
             if (entry.jumpUrl) {
-                // ERSETZEN SIE DEN ALTEN SPRUNGBEFEHL EINFACH DURCH DIESE EINE ZEILE:
-                window.open(entry.jumpUrl, '_blank')
-                
-                // WICHTIG: Kein abruptes "return", das die Schleife zerstört,
-                // sondern wir beenden nur diese Funktion sauber!
-                return; 
+                // Öffnet das Glossar-Tab völlig unabhängig
+                window.open(entry.jumpUrl, '_blank');
+                return; // Scan-Schleife läuft im Hintergrund stabil weiter!
             }
 
             // ==========================================
-            // AUDIO-SEKTOR (Standard-Betrieb)
+            // AUDIO-SEKTOR (Unverändert aus Ihrem Ur-Stand)
             // ==========================================
             if (entry.audio && !audioPlaying) {
                 audioPlaying = true;
-                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
                 
                 currentAudio = new Audio(entry.audio);
                 currentAudio.volume = 0.9;
@@ -421,7 +420,10 @@ function executeTrigger(entry) {
                         audioStopBtn.innerText = "⏹ AUDIO MUTE";
                         audioStopBtn.style.display = "block"; 
                     })
-                    .catch(e => { console.error("Audio-Fehler:", e); audioPlaying = false; });
+                    .catch(e => { 
+                        console.error("Audio Playback-Fehler:", e); 
+                        audioPlaying = false; 
+                    });
                 
                 currentAudio.onended = function() {
                     audioStopBtn.style.display = "none";
@@ -431,13 +433,16 @@ function executeTrigger(entry) {
             }
 
             // ==========================================
-            // YOUTUBE-VIDEO-SEKTOR (Standard-Betrieb)
+            // YOUTUBE-VIDEO-SEKTOR (Unverändert aus Ihrem Ur-Stand)
             // ==========================================
             if (entry.youtubeId && !videoPlaying) {
                 videoPlaying = true; 
                 
-                if (entry.videoType === "short") { ytWrapper.classList.add('is-short'); } 
-                else { ytWrapper.classList.remove('is-short'); }
+                if (entry.videoType === "short") {
+                    ytWrapper.classList.add('is-short');
+                } else {
+                    ytWrapper.classList.remove('is-short');
+                }
 
                 const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
                 if (ytPlayer.src !== targetUrl) {
@@ -448,7 +453,9 @@ function executeTrigger(entry) {
                     audioStopBtn.style.display = "block";
                 }
             }
-        }        function manualAudioStop() {
+        }
+        
+        function manualAudioStop() {
             // Falls Musik läuft
             if (currentAudio) {
                 currentAudio.pause();
