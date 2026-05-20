@@ -356,7 +356,8 @@
                 {
                     if (normalizedText.includes(key))
                     {
-                        (database[key]);
+                        // FIX: Hier wird die Trigger-Routine wieder gestartet!
+                        executeTrigger(database[key]);
                         found = true;
                         break;
                     }
