@@ -104,7 +104,7 @@
         </div>
 
 <button onclick="smartClose();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111; font-weight: bold;">
-        ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
+        ❌ SEKTOR SCHLIESSEN // SYSTEM_RÜCKSPRUNG
     </button>
 
     <script>
@@ -114,9 +114,9 @@
             if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
                 window.history.back();
             } else {
-                // Versuch das Tab zu schließen
+                // Versuch das Tab zu schließen (Erfolgreich bei unblockierten externen Handy-Scannern)
                 window.close();
-                // Letzter Ausweg: Fallback-Leitung
+                // Letzter Ausweg: Fallback-Leitung zur App-Oberfläche
                 setTimeout(() => {
                     window.location.href = "dusseline2.html";
                 }, 250);
