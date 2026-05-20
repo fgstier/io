@@ -104,36 +104,23 @@
         </div>
 
 <button onclick="smartClose();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111; font-weight: bold;">
-        ❌ SEKTOR SCHLIESSEN // SYSTEM_RÜCKSPRUNG
+        ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
     </button>
 
     <script>
+        <script>
         function smartClose() {
-            // 1. WEG: Leser kommt aus dem Tesseract-Scanner (Nahtloser Rücksprung im RAM)
+            // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
+            // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
             if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
                 window.history.back();
             } else {
-                // 2. WEG: Leser kommt direkt über den gedruckten Datenmatrix-Code
+                // Versuch das Tab zu schließen
                 window.close();
-                
-                // FALLBACK: Falls das iPhone/Android das automatische Schließen blockiert,
-                // ändern wir das Design des Buttons visuell. Kein nerviges Alert-Fenster mehr!
+                // Letzter Ausweg: Fallback-Leitung
                 setTimeout(() => {
-                    const btn = document.querySelector('button[onclick="smartClose();"]');
-                    if (btn) {
-                        btn.style.background = "#00ff00"; // Wechsel zu Signal-Grün
-                        btn.style.color = "#000000";
-                        btn.style.border = "2px solid #000000";
-                        btn.style.boxShadow = "0 0 20px #00ff00";
-                        btn.innerHTML = "✓ PROTOKOLL BEENDET<br><span style='font-size:11px;'>HIER TIPPEN ZUM SCHLIESSEN</span>";
-                        
-                        // Wenn der Leser JETZT noch einmal auf den grün blinkenden Button drückt,
-                        // leiten wir ihn als allerletzten Ausweg direkt zurück, um ein Feststecken zu verhindern.
-                        btn.onclick = function() {
-                            window.location.href = "dusseline2.html";
-                        };
-                    }
-                }, 200);
+                    window.location.href = "dusseline2.html";
+                }, 250);
             }
         }
     </script>
