@@ -124,7 +124,7 @@
     </button>
 
     <script>
-        function smartClose() {
+       function smartClose() {
             // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
             // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
             if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
@@ -138,6 +138,16 @@
                 }, 250);
             }
         }
+        // =================================================================
+        // FIX: CACHE-BUSTER FÜR RE-ENTRY (Verhindert das Einfrieren des Buttons)
+        // =================================================================
+        window.addEventListener('pageshow', function(event) {
+            // Wenn die Seite aus dem Cache geladen wurde (z.B. nach Zurück-Geste)
+            if (event.persisted) {
+                console.log("Sektor-Cache erkannt. Erzwinge Neu-Initialisierung der Skript-Engine.");
+                window.location.reload();
+            }
+        });
     </script>
 
 
