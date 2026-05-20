@@ -103,10 +103,21 @@
             </p>
         </div>
 
-   
-    <button onclick="window.close();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111;">
-    ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
-</button>
+<button onclick="smartClose();" style="position: fixed; top: 20px; right: 20px; background: #ff1111; color: #fff; border: 2px solid #fff; padding: 10px 20px; font-family: monospace; cursor: pointer; z-index: 9999; box-shadow: 0 0 10px #ff1111; font-weight: bold;">
+        ❌ SEKTOR SCHLIESSEN // ZURÜCK ZUM SCANNER
+    </button>
 
+    <script>
+        function smartClose() {
+            // Versuch 1: Das Tab direkt schließen (funktioniert, wenn window.open unblockiert war)
+            window.close();
+            
+            // Fallback: Falls das Tab nach 200ms immer noch offen ist, leiten wir zurück um
+            setTimeout(() => {
+                window.location.href = "dusseline2.html";
+            }, 200);
+        }
+    </script>
+    
 </body>
 </html>
