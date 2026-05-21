@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Loop: Bug: Dusseline // Interface_v6</title>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Courier New', Courier, Consolas, monospace;
+        }
+
+        /* Sicherheits-Schranke für Audio-Freigabe */
+        #start-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #start-btn {
+            background: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 15px 30px;
+            font-family: inherit;
+            font-size: 14px;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        #start-btn:active {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Live-Kamera-Stream füllt den ganzen Bildschirm */
+        #video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* YouTube Container (Über das HUD gelegt für freie Bedienung) */
+        #youtube-overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5; 
+            display: none;
+            background: rgba(0, 0, 0, 0.85); 
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+            border: 1px solid #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .video-wrapper.is-short {
+            max-width: 320px;
+            aspect-ratio: 9 / 16;
+        }
+
+        #youtube-player {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Transparentes AR-Overlay für die Text-Einblendungen */
+        #overlay-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4; 
+            pointer-events: none; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Das HUD-Interface */
+        .hud-box {
+            border: 1px solid #ff1111; /* NEU: Knallroter, durchgehender Rahmen */
+            background: rgba(0, 0, 0, 0.9); 
+            color: #fff;
+            padding: 18px;
+            max-width: 90%;
+            width: 420px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            /*box-shadow: 0 0 20px rgba(255, 255, 255, 0.15); */
+            /* NEU: Intensiver, roter Neon-Glüheffekt nach außen */
+            box-shadow: 0 0 15px rgba(255, 17, 17, 0.4);
+        }
+
+        .hud-box.active {
+            opacity: 1;
+        }
+
+        .hud-header {
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.6);
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            font-size: 15px; 
+            display: flex;
+            justify-content: space-between;
+            /*text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);*/
+            /* NEU: Macht den Header (Titel & Buchtitel) permanent knallrot */
+            color: #ff1111; 
+            text-shadow: 0 0 8px rgba(255, 17, 17, 0.6); /* Optionaler Cyberpunk-Glüheffekt */
+        }
+
+        #hud-body {
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hud-footer {
+            margin-top: 12px;
+            padding-top: 4px;
+            border-top: 1px dotted rgba(255, 255, 255, 0.2);
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+            display: block;
+        }
+
+        /* FIX: Absolut höchste Ebene, damit er immer sichtbar und anklickbar ist */
+        #audio-stop-btn {
+            position: absolute;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99; /* Maximaler Schutz gegen Überlagerung */
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 12px 18px;
+            font-family: inherit;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: none; 
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        #audio-stop-btn:active {
+            background: #fff;
+            color: #000;
+        }
+
+        #status-bar {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 6; /* Über das HUD gehoben */
+            color: #fff;
+            font-size: 11px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        .blink {
+            animation: blinker 1.5s linear infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="start-overlay">
+        <h2>KOPPLUNG_INITIALISIEREN</h2>
+        <p style="font-size: 11px; margin-top: 10px; color: rgba(255,255,255,0.6);">Erlaubt die Audio- und Videoausführung des Novia-Dekrets.</p>
+        <button id="start-btn" onclick="initializeEngine()">SYSTEM_START</button>
+    </div>
+
+    <div id="status-bar">
+        <span class="blink">●</span> SCANNER_MODE: ACTIVE // NATIVE_EMBED_OK
+    </div>
+
+    <video id="video" autoplay playsinline muted></video>
+
+    <button id="audio-stop-btn" onclick="manualAudioStop()">⏹ AUDIO MUTE</button>
+
+    <div id="youtube-overlay-container">
+        <div id="video-wrapper" class="video-wrapper">
+            <iframe id="youtube-player" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div id="overlay-container">
+        <div id="hud" class="hud-box">
+            <div class="hud-header">
+                <span id="hud-title">Target Found</span>
+                <span>Dusseline</span>
+            </div>
+            <div id="hud-body">
+                Analyse läuft...
+            </div>
+            <div id="hud-footer" class="hud-footer">
+                INDEX // PENDING
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const ytContainer = document.getElementById('youtube-overlay-container');
+        const ytWrapper = document.getElementById('video-wrapper');
+        const ytPlayer = document.getElementById('youtube-player');
+        const hud = document.getElementById('hud');
+        const hudTitle = document.getElementById('hud-title');
+        const hudBody = document.getElementById('hud-body');
+        const hudFooter = document.getElementById('hud-footer');
+        const startOverlay = document.getElementById('start-overlay');
+        const audioStopBtn = document.getElementById('audio-stop-btn');
+
+        let worker = null;
+        let isProcessing = false;
+        let clearOverlayTimeout = null;
+        let currentAudio = null; 
+        let audioPlaying = false; 
+        let videoPlaying = false; 
+
+        let database = {};
+
+// NEU: Globales Speicher-Canvas für die entkoppelte Performance-Schleife
+const offscreenCanvas = document.createElement('canvas');
+const offscreenCtx = offscreenCanvas.getContext('2d');
+       
+async function initializeEngine()
+{
+            startOverlay.style.display = "none";
+            
+            // Setze den persistenten Marker für diese Browsersitzung
+            sessionStorage.setItem("matrix_authorized", "true");
+            
+            // ==========================================
+            // AUDIO-FREISCHALTUNG (AUDIO CONTEXT UNBLOCK)
+            // ==========================================
+            currentAudio = new Audio();
+            currentAudio.volume = 0.9;
+            currentAudio.play().catch(() => {});
+
+            try {
+                const response = await fetch('assets/database.json'); 
+                if (!response.ok) throw new Error('Netzwerk-Antwort war nicht OK');
+                database = await response.json();
+                console.log("Kybernetische Datenbank erfolgreich aus /assets/ synchronisiert.");
+            } catch (error) {
+                console.error("Kritischer Fehler beim Laden der Trigger-Datenbank:", error);
+                hudTitle.innerText = "❌ DB_LOAD_ERROR";
+                hudBody.innerText = "Die externe Datenbank konnte nicht geladen werden.";
+                hud.classList.add('active');
+                return; 
+            }
+
+            startCamera();
+            initOCR();
+        }
+
+        // =================================================================
+        // ERWEITERTER RE-ENTRY-CHECK FÜR MOBIL-GERÄTE (iOS / iPhone)
+        // =================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem("matrix_authorized") === "true") {
+                // Haupt-Engine direkt zünden
+                initializeEngine();
+                
+                // Da wir von der Jump-Seite zurückkehren, entzieht iOS die Audio-Rechte.
+                // Wir legen einen unsichtbaren, einmaligen Listener über den Bildschirm:
+                const reprimeAudio = () => {
+                    if (currentAudio) {
+                        // Ein kurzer, lautloser Impuls reaktiviert die Engine auf iOS
+                        currentAudio.play().catch(() => {});
+                        console.log("Akustisches Signalfeld erfolgreich re-initialisiert.");
+                    }
+                    // Sofort wieder entfernen, um Ressourcen zu schonen
+                    window.removeEventListener('touchstart', reprimeAudio);
+                    window.removeEventListener('click', reprimeAudio);
+                };
+                
+                window.addEventListener('touchstart', reprimeAudio);
+                window.addEventListener('click', reprimeAudio);
+            }
+        });
+        
+        async function startCamera() {
+    const constraints = {
+        video: { facingMode: "environment", width: { ideal: 640 }, height: { ideal: 480 } },
+        audio: false
+    };
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
+        video.srcObject = stream;
+        
+        // ASYNCHRONER TAKT: Video wird flüssig im Hintergrund auf das Canvas übertragen
+        function updateCanvasFrame() {
+            if (video.videoWidth > 0) {
+                offscreenCanvas.width = video.videoWidth;
+                offscreenCanvas.height = video.videoHeight;
+                offscreenCtx.drawImage(video, 0, 0, offscreenCanvas.width, offscreenCanvas.height);
+            }
+            requestAnimationFrame(updateCanvasFrame);
+        }
+        requestAnimationFrame(updateCanvasFrame);
+        
+    } catch (err) {
+        console.error("Kamera blockiert:", err);
+    }
+}
+
+async function initOCR() {
+    try {
+        // Upgrade auf den schnellen Core für maximale Stabilität im Live-Stream
+        worker = await Tesseract.createWorker('eng');
+        video.addEventListener('play', () => {
+            // Unabhängiger, fester 500ms Analyse-Takt
+            setInterval(captureAndScan, 500);
+        });
+    } catch (e) {
+        console.error("OCR-Initialisierungsfehler:", e);
+    }
+}
+
+// Die alte, langsame scanLoop() wird komplett durch den setInterval-Takt oben ersetzt
+// Wir springen direkt in die performante Verarbeitungs-Funktion:
+
+async function captureAndScan() {
+    if (isProcessing || !worker || video.videoWidth === 0) return;
+    isProcessing = true;
+
+    try {
+        // Nutzt das im Hintergrund flüssig aktualisierte Canvas
+        const { data: { text } } = await worker.recognize(offscreenCanvas);
+        
+        // Direkte, schlanke Vereinheitlichung ohne störende replace-Filter
+        const normalizedText = text.toLowerCase().trim();
+
+        let found = false;
+        for (const key in database) {
+            // Reiner, direkter Abgleich mit Ihren Triggerworten
+            if (normalizedText.includes(key.toLowerCase())) {
+                executeTrigger(database[key]);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found && !videoPlaying && !audioPlaying) {
+            if (!clearOverlayTimeout) {
+                clearOverlayTimeout = setTimeout(() => {
+                    hud.classList.remove('active');
+                    ytContainer.style.display = "none";
+                    ytPlayer.src = ""; 
+                    clearOverlayTimeout = null;
+                }, 3000);
+            }
+        } else if (found) {
+            if (clearOverlayTimeout) {
+                clearTimeout(clearOverlayTimeout);
+                clearOverlayTimeout = null;
+            }
+        }
+
+    } catch (ocrError) {
+        console.error("OCR Fehler:", ocrError);
+    } finally {
+        isProcessing = false;
+    }
+}
+        function executeTrigger(entry) {
+            hudTitle.innerText = entry.title;
+            hudBody.innerHTML = entry.text.replace(/\n/g, '<br>');
+            hudFooter.innerText = entry.index;
+            hud.classList.add('active');
+
+            // ==========================================
+            // FIX: ABGESICHERTER TEXT-SPRUNG (Tab-Weiche)
+            // ==========================================
+            if (entry.jumpUrl) {
+                // Laufende Medien stoppen, um Interferenzen zu verhindern
+                if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+
+                // 1. Versuch: Neues Tab unblockiert im Hintergrund öffnen
+                const newTab = window.open(entry.jumpUrl, '_blank');
+                
+                // 2. Fallback-Ebene: Falls der Browser das Pop-up blockiert oder das Tab verweigert,
+                // laden wir das Glossar direkt im aktuellen Fenster, damit das System nicht einfriert!
+                if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+                    console.warn("Pop-up blockiert. Exekutiere Direkt-Transition im selben Sektor.");
+                    window.location.href = entry.jumpUrl;
+                }
+                return; 
+            }
+
+            // ==========================================
+            // REPARIERTER AUDIO-SEKTOR (Nutzt die freigeschaltete Engine)
+            // ==========================================
+            if (entry.audio && !audioPlaying) {
+                audioPlaying = true;
+                
+                // WICHTIG: Nicht neu erzeugen, sondern die bestehende, 
+                // vom Browser bereits legitimierte Instanz nutzen!
+                currentAudio.src = entry.audio;
+                currentAudio.load();
+                
+                currentAudio.play()
+                    .then(() => { 
+                        audioStopBtn.innerText = "⏹ AUDIO MUTE";
+                        audioStopBtn.style.display = "block"; 
+                    })
+                    .catch(e => { 
+                        console.error("Kritischer Audio-Blockade-Fehler:", e); 
+                        audioPlaying = false; 
+                    });
+                
+                currentAudio.onended = function() {
+                    audioStopBtn.style.display = "none";
+                    audioPlaying = false;
+                    hud.classList.remove('active');
+                };
+            }
+
+            // ==========================================
+            // YOUTUBE-VIDEO-SEKTOR
+            // ==========================================
+            if (entry.youtubeId && !videoPlaying) {
+                videoPlaying = true; 
+                
+                if (entry.videoType === "short") {
+                    ytWrapper.classList.add('is-short');
+                } else {
+                    ytWrapper.classList.remove('is-short');
+                }
+
+                const targetUrl = `https://www.youtube.com/embed/${entry.youtubeId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1`;
+                if (ytPlayer.src !== targetUrl) {
+                    ytPlayer.src = targetUrl;
+                    ytContainer.style.display = "flex"; 
+                    
+                    audioStopBtn.innerText = "❌ VIDEO BEENDEN";
+                    audioStopBtn.style.display = "block";
+                }
+            }
+        }
+        
+        function manualAudioStop() {
+            // Falls Musik läuft
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+            }
+            
+            // Falls ein Video läuft
+            if (videoPlaying) {
+                ytContainer.style.display = "none";
+                ytPlayer.src = "";
+                videoPlaying = false;
+            }
+
+            // Schließt das HUD-Textfeld sofort
+            hud.classList.remove('active');
+            if (clearOverlayTimeout) {
+                clearTimeout(clearOverlayTimeout);
+                clearOverlayTimeout = null;
+            }
+
+            audioStopBtn.style.display = "none";
+            audioStopBtn.innerText = "⏹ AUDIO MUTE"; 
+            audioPlaying = false;
+        }
+
+
+        
+    </script>
+
+    <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 6; font-size: 10px; color: rgba(255,255,255,0.4); font-family: monospace; letter-spacing: 1px; text-shadow: 0 0 2px #000;">
+        <a href="impressum.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">IMPRESSUM</a> | 
+        <a href="datenschutz.html" target="_blank" style="color: rgba(255,255,255,0.4); text-decoration: underline;">DATENSCHUTZ</a>
+    </div>
+
+</body>
+</html>
