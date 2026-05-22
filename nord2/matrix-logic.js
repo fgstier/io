@@ -1,12 +1,11 @@
 function resetSystem() {
     console.log("Reset-Vektor initialisiert...");
     
-    // 1. Alle Videos stoppen, aber Vorschaubilder erhalten (Synchronisations-Exekutive)
+    // 1. Alle Videos stoppen, aber Vorschaubilder erhalten
     document.querySelectorAll('iframe').forEach(f => {
         const source = f.getAttribute('data-src');
         if (source) {
-            // Wir überschreiben die src mit den Basis-Parametern ohne Autoplay.
-            // Das stoppt das Video sofort und lädt die Vorschau neu, statt alles schwarz zu färben.
+            // Setzt das Video zurück und stoppt die Wiedergabe, ohne das Vorschaubild zu zerstören
             f.src = source + "?playsinline=1&rel=0&modestbranding=1";
         }
     });
@@ -83,7 +82,7 @@ function activateSektor(elementId, coordString) {
         
         const source = iframe.getAttribute('data-src');
         if (source) {
-            // Muted=1 ist zwingend erforderlich, damit Mobilgeräte Autoplay erlauben
+            // Autoplay und Mute für die direkte, skriptbasierte Aktivierung per QR-Code
             const inlineParams = "?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
             iframe.src = source + inlineParams;
         }
