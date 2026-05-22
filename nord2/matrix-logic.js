@@ -1,7 +1,7 @@
 function resetSystem() {
     console.log("Reset-Vektor initialisiert...");
     
-    // 1. Alle Videos stoppen (Synchronisations-Exekutive [cite: 2026-03-28])
+    // 1. Alle Videos stoppen (Synchronisations-Exekutive)
     document.querySelectorAll('iframe').forEach(f => {
         f.src = "";
     });
@@ -24,6 +24,36 @@ function resetSystem() {
 
 window.addEventListener('load', () => {
     const fullHash = window.location.hash;
+
+    // --- NEU: INITIALISIERUNG DES INTERSECTION-OBSERVERS FÜR LINEARES SCROLLEN ---
+    // Lädt Videos dynamisch nach, sobald man sich ihnen im Sektor nähert
+    const sektorObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const iframe = entry.target.querySelector('iframe');
+                // Nur laden, wenn ein IFrame existiert und noch keine src gesetzt wurde
+                if (iframe && !iframe.src) {
+                    const source = iframe.getAttribute('data-src');
+                    if (source) {
+                        iframe.src = source + "?playsinline=1&rel=0&modestbranding=1";
+                        console.log(`Sektor ${entry.target.id} via Scroll-Integrität geladen.`);
+                    }
+                }
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        rootMargin: "120px 0px", // Lädt das Video etwas vor dem Sichtkontakt
+        threshold: 0.05
+    });
+
+    // Alle Einträge im System für die Scroll-Überwachung registrieren
+    document.querySelectorAll('.entry').forEach(sektor => {
+        sektorObserver.observe(sektor);
+    });
+
+
+    // --- BESTEHENDE DIREKT-AUFRUF-LOGIK (UNVERÄNDERT & ERWEITERT) ---
     if (!fullHash) return;
 
     // Splitten in Anker (#L111) und Parameter (?p=1...)
@@ -40,6 +70,7 @@ window.addEventListener('load', () => {
             const idPart = coordsData.split('|')[0].split(':')[0];
             const coordValues = coordsData.split('|')[0].split(':')[1];
             
+            // Aktiviert das Video und setzt die korrekten Dimensionen
             activateSektor("L" + idPart, coordValues);
             
             setTimeout(() => {
@@ -49,13 +80,23 @@ window.addEventListener('load', () => {
         }
     } else {
         // --- LOGIK FÜR REINE TEXT-SEKTOREN (z.B. #L111) ---
+        // Lädt das Video direkt, falls der Anker zufällig auf ein Video ohne Parameter zeigt
+        const directId = targetAnchor.replace('#', '');
+        const directEl = document.getElementById(directId);
+        if (directEl) {
+            const iframe = directEl.querySelector('iframe');
+            if (iframe && !iframe.src) {
+                const source = iframe.getAttribute('data-src');
+                if (source) iframe.src = source + "?playsinline=1&rel=0&modestbranding=1";
+            }
+        }
+
+        // Der visuelle Trigger für die Kohärenz-Kuratoren
         setTimeout(() => {
             const targetEl = document.querySelector(targetAnchor);
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Optional: Kurzes Flashen für die Kohärenz-Kuratoren [cite: 2026-03-28]
-                //targetEl.style.backgroundColor = "rgba(0, 243, 255, 0.1)";
-                // Änderung in matrix-logic.js für das rote Neon-Design:
+                // Rotes Neon-Design bei Fokus
                 targetEl.style.backgroundColor = "rgba(255, 17, 17, 0.2)";
                 setTimeout(() => { targetEl.style.backgroundColor = "transparent"; }, 1000);
             }
@@ -81,10 +122,9 @@ function activateSektor(elementId, coordString) {
         const source = iframe.getAttribute('data-src');
         if (source) {
             // playsinline=1 ist kritisch für iPhone-Stabilität
+            // autoplay=1 zündet hier direkt, weil der Nutzer den Sektor explizit aufgerufen hat
             const inlineParams = "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
             iframe.src = source + inlineParams;
         }
     }
 }
-
-
