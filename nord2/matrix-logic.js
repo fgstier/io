@@ -1,9 +1,14 @@
 function resetSystem() {
     console.log("Reset-Vektor initialisiert...");
     
-    // 1. Alle Videos stoppen (Synchronisations-Exekutive)
+    // 1. Alle Videos stoppen, aber Vorschaubilder erhalten (Synchronisations-Exekutive)
     document.querySelectorAll('iframe').forEach(f => {
-        f.src = "";
+        const source = f.getAttribute('data-src');
+        if (source) {
+            // Wir überschreiben die src mit den Basis-Parametern ohne Autoplay.
+            // Das stoppt das Video sofort und lädt die Vorschau neu, statt alles schwarz zu färben.
+            f.src = source + "?playsinline=1&rel=0&modestbranding=1";
+        }
     });
 
     // 2. Das Overlay sicher adressieren
@@ -24,45 +29,15 @@ function resetSystem() {
 
 window.addEventListener('load', () => {
     const fullHash = window.location.hash;
-
-    // --- NEU: INITIALISIERUNG DES INTERSECTION-OBSERVERS FÜR LINEARES SCROLLEN ---
-    // Lädt Videos dynamisch nach, sobald man sich ihnen im Sektor nähert
-    const sektorObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const iframe = entry.target.querySelector('iframe');
-                // Nur laden, wenn ein IFrame existiert und noch keine src gesetzt wurde
-                if (iframe && !iframe.src) {
-                    const source = iframe.getAttribute('data-src');
-                    if (source) {
-                        iframe.src = source + "?playsinline=1&rel=0&modestbranding=1";
-                        console.log(`Sektor ${entry.target.id} via Scroll-Integrität geladen.`);
-                    }
-                }
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        rootMargin: "120px 0px", // Lädt das Video etwas vor dem Sichtkontakt
-        threshold: 0.05
-    });
-
-    // Alle Einträge im System für die Scroll-Überwachung registrieren
-    document.querySelectorAll('.entry').forEach(sektor => {
-        sektorObserver.observe(sektor);
-    });
-
-
-    // --- BESTEHENDE DIREKT-AUFRUF-LOGIK (UNVERÄNDERT & ERWEITERT) ---
     if (!fullHash) return;
 
-    // Splitten in Anker (#L111) und Parameter (?p=1...)
+    // Splitten in Anker (#L111) und Parameter (?p=1...)[cite: 2]
     const parts = fullHash.split('?');
     const targetAnchor = parts[0]; 
     const paramString = parts[1];
 
     if (paramString) {
-        // --- LOGIK FÜR VIDEO-SEKTOREN ---
+        // --- LOGIK FÜR VIDEO-SEKTOREN ---[cite: 2]
         const urlParams = new URLSearchParams(paramString);
         const coordsData = urlParams.get('coords');
 
@@ -70,7 +45,6 @@ window.addEventListener('load', () => {
             const idPart = coordsData.split('|')[0].split(':')[0];
             const coordValues = coordsData.split('|')[0].split(':')[1];
             
-            // Aktiviert das Video und setzt die korrekten Dimensionen
             activateSektor("L" + idPart, coordValues);
             
             setTimeout(() => {
@@ -79,28 +53,16 @@ window.addEventListener('load', () => {
             }, 500); 
         }
     } else {
-        // --- LOGIK FÜR REINE TEXT-SEKTOREN (z.B. #L111) ---
-        // Lädt das Video direkt, falls der Anker zufällig auf ein Video ohne Parameter zeigt
-        const directId = targetAnchor.replace('#', '');
-        const directEl = document.getElementById(directId);
-        if (directEl) {
-            const iframe = directEl.querySelector('iframe');
-            if (iframe && !iframe.src) {
-                const source = iframe.getAttribute('data-src');
-                if (source) iframe.src = source + "?playsinline=1&rel=0&modestbranding=1";
-            }
-        }
-
-        // Der visuelle Trigger für die Kohärenz-Kuratoren
+        // --- LOGIK FÜR REINE TEXT-SEKTOREN (z.B. #L111) ---[cite: 2]
         setTimeout(() => {
             const targetEl = document.querySelector(targetAnchor);
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Rotes Neon-Design bei Fokus
+                // Rotes Neon-Design bei Fokus[cite: 2]
                 targetEl.style.backgroundColor = "rgba(255, 17, 17, 0.2)";
                 setTimeout(() => { targetEl.style.backgroundColor = "transparent"; }, 1000);
             }
-        }, 100); // 100ms reicht für Text-Sektoren auf GitHub aus
+        }, 100); // 100ms reicht für Text-Sektoren auf GitHub aus[cite: 2]
     }
 });
 
@@ -121,9 +83,8 @@ function activateSektor(elementId, coordString) {
         
         const source = iframe.getAttribute('data-src');
         if (source) {
-            // playsinline=1 ist kritisch für iPhone-Stabilität
-            // autoplay=1 zündet hier direkt, weil der Nutzer den Sektor explizit aufgerufen hat
-            const inlineParams = "?autoplay=1&playsinline=1&rel=0&modestbranding=1";
+            // Muted=1 ist zwingend erforderlich, damit Mobilgeräte Autoplay erlauben
+            const inlineParams = "?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
             iframe.src = source + inlineParams;
         }
     }
