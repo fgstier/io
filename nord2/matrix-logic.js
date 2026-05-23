@@ -1,42 +1,26 @@
 function resetSystem() {
-    console.log("Reset-Vektor initialisiert...");
-    
-    // 1. Alle Videos stoppen, aber Vorschaubilder erhalten
+    console.log("Reset init...");
     document.querySelectorAll('iframe').forEach(f => {
         const source = f.getAttribute('data-src');
         if (source) {
-            // Setzt das Video zurück und stoppt die Wiedergabe, ohne das Vorschaubild zu zerstören
             f.src = source + "?playsinline=1&rel=0&modestbranding=1";
         }
     });
-
-    // 2. Das Overlay sicher adressieren
     const overlay = document.getElementById('reset-overlay');
-    if (overlay) {
-        overlay.style.display = 'block';
-    } else {
-        console.error("Fehler: reset-overlay im Ur-Depot nicht gefunden!");
-    }
-
-    // 3. URL säubern (Anker entfernen)
+    if (overlay) overlay.style.display = 'block';
     history.pushState("", document.title, window.location.pathname);
-    
-    // 4. Sanfter Scroll nach oben
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 
 window.addEventListener('load', () => {
     const fullHash = window.location.hash;
     if (!fullHash) return;
 
-    // Splitten in Anker (#L111) und Parameter (?p=1...)[cite: 2]
     const parts = fullHash.split('?');
     const targetAnchor = parts[0]; 
     const paramString = parts[1];
 
     if (paramString) {
-        // --- LOGIK FÜR VIDEO-SEKTOREN ---[cite: 2]
         const urlParams = new URLSearchParams(paramString);
         const coordsData = urlParams.get('coords');
 
@@ -52,16 +36,14 @@ window.addEventListener('load', () => {
             }, 500); 
         }
     } else {
-        // --- LOGIK FÜR REINE TEXT-SEKTOREN (z.B. #L111) ---[cite: 2]
         setTimeout(() => {
             const targetEl = document.querySelector(targetAnchor);
             if (targetEl) {
                 targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                // Rotes Neon-Design bei Fokus[cite: 2]
                 targetEl.style.backgroundColor = "rgba(255, 17, 17, 0.2)";
                 setTimeout(() => { targetEl.style.backgroundColor = "transparent"; }, 1000);
             }
-        }, 100); // 100ms reicht für Text-Sektoren auf GitHub aus[cite: 2]
+        }, 100);
     }
 });
 
@@ -82,9 +64,7 @@ function activateSektor(elementId, coordString) {
         
         const source = iframe.getAttribute('data-src');
         if (source) {
-            // Autoplay und Mute für die direkte, skriptbasierte Aktivierung per QR-Code
-            const inlineParams = "?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
-            iframe.src = source + inlineParams;
+            iframe.src = source + "?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
         }
     }
 }
