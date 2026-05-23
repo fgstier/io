@@ -3,6 +3,7 @@ function resetSystem() {
     document.querySelectorAll('iframe').forEach(f => {
         const source = f.getAttribute('data-src');
         if (source) {
+            // Sicherstellen, dass beim Reset nur saubere Parameter gesetzt werden
             f.src = source + "?playsinline=1&rel=0&modestbranding=1";
         }
     });
@@ -64,6 +65,7 @@ function activateSektor(elementId, coordString) {
         
         const source = iframe.getAttribute('data-src');
         if (source) {
+            // KORREKTUR: Wir nutzen das Fragezeichen, da data-src die reine Basis-URL ohne "?" enthält
             iframe.src = source + "?autoplay=1&mute=1&playsinline=1&rel=0&modestbranding=1";
         }
     }
