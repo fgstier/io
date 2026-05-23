@@ -51,12 +51,14 @@
 </head>
 
 <body>
-    <div id="reset-overlay">
-        <h2>SYSTEM BEREIT</h2>
-        <p>Bitte scannen Sie den nächsten Sektor.</p>
-        <button onclick="document.getElementById('reset-overlay').style.display='none'">X</button>
-    </div>
-
+    <div id="reset-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; color:#fff; z-index:9999; text-align:center; padding-top:20%;">
+    <h2>SYSTEM CLONE DEAKTIVIERT</h2>
+    <p style="color: #ff1111; font-weight: bold; margin: 20px;">
+        ⚠️ BITTE SCHLIESSEN SIE DIESEN TAB JETZT MANUELL IN IHREM BROWSER!
+    </p>
+    <p>Der Sektor wurde entkoppelt. Das Zurückgehen per Pfeil hält den Tab offen.</p>
+    <button onclick="document.getElementById('reset-overlay').style.display='none'" style="background:#222; color:#fff; border:1px solid #444; padding:10px 20px; cursor:pointer;">X (Zurück zum Glossar)</button>
+</div>
 
     <h1>Edition ARKUSNAT: Glossar</h1>
     <p>Konstruktion: F.G. Stier</p>
