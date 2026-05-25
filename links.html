@@ -13,47 +13,61 @@
     </div>
 
     <script>
-        // 1. Parameter auslesen
+        // 1. Parameter isolieren
         const urlParams = new URLSearchParams(window.location.search);
-        
-        // Versuche zuerst '?buch=duss2', danach als Fallback den puren Text nach dem '?'
         let buchKey = urlParams.get('buch');
+        
+        // Fallback für puren Text nach dem Fragezeichen (?duss2)
         if (!buchKey) {
             buchKey = window.location.search.substring(1).split('=')[0];
         }
 
-        // 2. Bereinigen (Leerzeichen weg und alles in Kleinbuchstaben)
+        // 2. Text säubern
         if (buchKey) {
             buchKey = buchKey.trim().toLowerCase();
         }
-        
+
+        // Visuelle Bestätigung auf dem Display ausgeben
         document.getElementById('sektor-id').innerText = buchKey || "Kein Sektor übergeben";
 
-        // 3. Das zentrale Verzeichnis deiner Werke [cite: 2025-10-13, 2026-02-19]
-        const linkVerzeichnis = {
-            "compiler": "https://amzn.eu/d/0fiMECim",
-            "duss2": "https://amzn.eu/d/07lPWfsY",
-            "dusseline": "https://amzn.eu/d/4TqVMAw",
-            "segel": "https://amzn.eu/d/fBF2a4X",
-            "rattara": "https://amzn.eu/d/6QqjoCU",
-            "verursachung": "https://amzn.eu/d/2rTGehY",
-			"almanach1":"https://amzn.eu/d/07DjMGLp"
-            "norden": "https://amzn.eu/d/aiSdaVb"
-        };
+        // 3. Logik-Weiche für die Ziel-URLs
+        let zielUrl = "";
 
-        // 4. Umleitung mit minimaler Verzögerung ausführen (gibt dem Browser Zeit)
-        setTimeout(() => {
-            if (buchKey && linkVerzeichnis[buchKey]) {
-                window.location.href = linkVerzeichnis[buchKey];
-            } else {
-                // Falls der Sektor unbekannt ist, zeigen wir eine klare Meldung
-                document.getElementById('status-message').innerHTML = `
-                    <h2 style="color: #ff1111;">SEKTOR-KONFLIKT</h2>
-                    <p>Der Code <strong>"${buchKey}"</strong> konnte im Ur-Depot nicht aufgelöst werden.</p>
-                    <a href="index.html" style="color: #fff; text-decoration: underline;">Zurück zur Hauptseite</a>
-                `;
-            }
-        }, 300); // 300 Millisekunden Puffer
+        switch(buchKey) {
+            case "duss2":
+                zielUrl = "https://amzn.eu/d/07lPWfsY";
+                break;
+            case "compiler":
+                zielUrl = "https://amzn.eu/d/0fiMECim";
+                break;
+            case "dusseline":
+                zielUrl = "https://amzn.eu/d/4TqVMAw";
+                break;
+            case "segel":
+                zielUrl = "https://amzn.eu/d/fBF2a4X";
+                break;
+            case "rattara":
+                zielUrl = "https://amzn.eu/d/6QqjoCU";
+                break;
+            case "verursachung":
+                zielUrl = "https://amzn.eu/d/2rTGehY";
+                break;
+            case "norden":
+                zielUrl = "https://amzn.eu/d/aiSdaVb";
+                break;
+            default:
+                zielUrl = ""; // Unbekannter Code
+        }
+
+        // 4. Ausführung der Umleitung
+        if (zielUrl !== "") {
+            window.location.replace(zielUrl);
+        } else {
+            document.getElementById('status-message').innerHTML = `
+                <h2 style="color: #ff1111;">SEKTOR-KONFLIKT</h2>
+                <p>Der Code <strong>"${buchKey || 'LEER'}"</strong> existiert nicht im Basis-Bestand.</p>
+            `;
+        }
     </script>
 </body>
 </html>
