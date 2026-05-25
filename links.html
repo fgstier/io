@@ -1,30 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System-Weiterleitung</title>
 </head>
-<body style="background: #000; color: #ccc; font-family: sans-serif; padding: 20px;">
-    <script>
-        // 1. Parameter aus der URL auslesen
-        const urlParams = new URLSearchParams(window.location.search);
-        const buchKey = urlParams.get('buch');
+<body style="background: #000; color: #ccc; font-family: sans-serif; text-align: center; padding-top: 20%;">
 
-        // 2. Das zentrale Link-Verzeichnis (Hier trägt man später die echten URLs ein)
-		// eine-domain.de/links.html?buch=nord2
+    <div id="status-message">
+        <p>Verbindung zum Sektor-Zentral-Depot wird aufgebaut...</p>
+        <p style="font-size: 0.8em; color: #555;">Sektor: <span id="sektor-id">Analyse...</span></p>
+    </div>
+
+    <script>
+        // 1. Parameter auslesen
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Versuche zuerst '?buch=duss2', danach als Fallback den puren Text nach dem '?'
+        let buchKey = urlParams.get('buch');
+        if (!buchKey) {
+            buchKey = window.location.search.substring(1).split('=')[0];
+        }
+
+        // 2. Bereinigen (Leerzeichen weg und alles in Kleinbuchstaben)
+        if (buchKey) {
+            buchKey = buchKey.trim().toLowerCase();
+        }
+        
+        document.getElementById('sektor-id').innerText = buchKey || "Kein Sektor übergeben";
+
+        // 3. Das zentrale Verzeichnis deiner Werke [cite: 2025-10-13, 2026-02-19]
         const linkVerzeichnis = {
-            "almanach1": https://amzn.eu/d/07lPWfsY", 
-            "duss2": "https://amzn.eu/d/07lPWfsY", // Wird später durch den echten Amazon-Link ersetzt
-            "nord2": "https://amzn.eu/d/07lPWfsY"
+            "compiler": "https://amzn.eu/d/0fiMECim",
+            "duss2": "https://amzn.eu/d/07lPWfsY",
+            "dusseline": "https://amzn.eu/d/4TqVMAw",
+            "segel": "https://amzn.eu/d/fBF2a4X",
+            "rattara": "https://amzn.eu/d/6QqjoCU",
+            "verursachung": "https://amzn.eu/d/2rTGehY",
+			"almanach1":"https://amzn.eu/d/07DjMGLp"
+            "norden": "https://amzn.eu/d/aiSdaVb"
         };
 
-        // 3. Umleitung ausführen
-        if (buchKey && linkVerzeichnis[buchKey]) {
-            window.location.href = linkVerzeichnis[buchKey];
-        } else {
-            // Fallback, falls der Begriff nicht existiert
-            window.location.href = "index.html"; 
-        }
+        // 4. Umleitung mit minimaler Verzögerung ausführen (gibt dem Browser Zeit)
+        setTimeout(() => {
+            if (buchKey && linkVerzeichnis[buchKey]) {
+                window.location.href = linkVerzeichnis[buchKey];
+            } else {
+                // Falls der Sektor unbekannt ist, zeigen wir eine klare Meldung
+                document.getElementById('status-message').innerHTML = `
+                    <h2 style="color: #ff1111;">SEKTOR-KONFLIKT</h2>
+                    <p>Der Code <strong>"${buchKey}"</strong> konnte im Ur-Depot nicht aufgelöst werden.</p>
+                    <a href="index.html" style="color: #fff; text-decoration: underline;">Zurück zur Hauptseite</a>
+                `;
+            }
+        }, 300); // 300 Millisekunden Puffer
     </script>
 </body>
 </html>
