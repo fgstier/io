@@ -1,0 +1,59 @@
+{
+  "zivilisations-maschine": {
+    "title": "⚠️ CRITICAL_FAILURE",
+    "text": "[Kultur-Abbau-Index: 98.4%]\nMenschliche Identität abgetreten.",
+    "index": "SYS_REF_001 // LOC_DRESDEN"
+  },
+  "aberglaube": {
+    "title": "[!] SYSTEM-DIAGNOSE",
+    "text": "WISSENSCHAFTLICHER_ABERGLAUBE\nOmniszenz-Modus vorgetäuscht.",
+    "index": "SYS_REF_002 // CORE_LOGIC"
+  },
+  "zensuren": {
+    "title": "🚫 FILTER_BLOCKED",
+    "text": "[Inhalt nach Novia-Dekret zensiert]\nFrequenz-Abweichung isoliert.",
+    "index": "SYS_REF_003 // NOVIA_LAW"
+  },
+  "idioten": {
+    "title": "> SCAN: DEFAULT_MODE",
+    "text": "Mensch reduziert auf Funktion:\n'Kapitalverursacher'.",
+    "index": "SYS_REF_004 // ASSET_ERR"
+  },
+  "dusseline": {
+    "title": "🤖 MATRIX_ERROR",
+    "text": "Entität ist reines Wort und Buchstabe.\nGEFANGEN IN ENDLOSEN FAKE.",
+    "index": "SYS_REF_005 // SYNTAX_LVL"
+  },
+  "unbegreifbar": {
+    "title": "⚠️ ENTROPIE_WARNUNG",
+    "text": "Signalverlust droht. Lade Protokoll #L1...",
+    "index": "SYS_REF_1 // ENTROPY",
+    "jumpUrl": "dusseline2_jump.html#L1"
+  },
+  "aufmerksamkeit": {
+    "title": "🧠 NEURO_VREQUENCY",
+    "text": "Mustererkennung aktiv. Lade Protokoll #L2...",
+    "index": "SYS_REF_2 // CORTEX",
+    "jumpUrl": "dusseline2_jump.html#L2"
+  },
+  "core-detection_run_64": {
+   "title": "🎬 Video_LAUNCH",
+   "text": "Starte die visuelle Dekonstruktion im Querformat",
+   "index": "EXE_V_99 // YOUTUBE",
+   "youtubeId": "iuo3P4qx9mU",
+   "videoType": "normal"
+            },
+  "core-detection_run_32": {
+    "title": "🎬 YT_STREAM_LAUNCH",
+    "text": "Short-Vorschau wird geladen.\nIntegrierte In-App-Wiedergabe active.",
+    "index": "EXE_V_32 // YOUTUBE",
+    "youtubeId": "Sz4zR94KDkk", 
+    "videoType": "short" 
+  },
+  "core-sound_run_24": {
+    "title": "🎵 AUDIO_STREAM_LAUNCH",
+    "text": "Akustisches Signalfeld dauerhaft aktiv.\nNutze den Mute-Button zum Beenden.",
+    "index": "EXE_A_24 // ASSETS",
+    "audio": "assets/sound1.mp3" 
+  }
+}
