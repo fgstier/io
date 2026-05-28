@@ -131,21 +131,17 @@
 </footer>
 
 
-    <script>
+     <script>
         function smartClose() {
-            // Falls das Fenster im selben Tab geöffnet wurde, gehen wir in der Historie zurück
-            // Dadurch bleibt der RAM-Zustand des Scanners im Browser oft unberührt!
-            if (window.history.length > 1 && document.referrer.includes("dusseline2.html")) {
-                window.history.back();
-            } else {
-                // Versuch das Tab zu schließen
-                window.close();
-                // Letzter Ausweg: Fallback-Leitung
-                setTimeout(() => {
-                    window.location.href = "dusseline2.html";
-                }, 250);
-            }
-        }
+    // 1. Prüfen, ob wir wirklich von d.html kommen und zurückspringen können
+    if (document.referrer && document.referrer.includes("d.html") && window.history.length > 1) {
+        window.history.back();
+    } else {
+        // 2. Direktes Überschreiben der Location, falls window.close() blockiert wird
+        // Das verhindert, dass der Browser im leeren Zustand hängen bleibt.
+        window.location.href = "d.html";
+    }
+}
     </script>
 </body>
 </html>
