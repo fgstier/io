@@ -3,7 +3,7 @@
     "title": "[!] SYSTEM-WARNUNG",
     "text": "System-Fake.\nDu atmest Pixel. Du f\u00FChlst Frequenzen. Das Zentral-Habitat speist deine Wahrnehmung mit einer optimierten Simulation. ",
     "index": "SYS_REF_002 // CORE_LOGIC",
-    "audio": "gitarren fake .mp3"
+    "audio": "assets/gitarren fake .mp3"
   },
   "loop": {
     "title": "\uD83D\uDEAB FILTER_BLOCKED",
@@ -29,7 +29,7 @@
     "title": "\uD83E\uDDE0 Sektor-Schnittstelle",
     "text": "ARKUSNAT\nDas Wort ben\u00F6tigt keine Seele mehr, um als Bildmaschine zu operieren. ARKUSNAT verankert das wissenschaftlich-philosophische Konzept der zeitlosen Verursachung mitten in deinem Feed.",
     "index": "SYS_REF_2 // CORTEX",
-    "audio": "fusion Gitarrentraum1.mp3"
+    "audio": "assets/fusion Gitarrentraum1.mp3"
   },
   "computerkeller": {
     "title": "\uD83C\uDFAC UR-DEPOT DER COMPILATION",
@@ -156,6 +156,6 @@
     "title": "",
     "text": "",
     "index": "",
-    "audio": "donner.mp3"
+    "audio": "assets/donner.mp3"
   }
 }
