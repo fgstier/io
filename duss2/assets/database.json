@@ -3,7 +3,7 @@
     "title": "[!] SYSTEM-WARNUNG",
     "text": "System-Fake.\nDu atmest Pixel. Du f\u00FChlst Frequenzen. Das Zentral-Habitat speist deine Wahrnehmung mit einer optimierten Simulation. ",
     "index": "SYS_REF_002 // CORE_LOGIC",
-    "audio": "assets/assets/gitarren fake .mp3"
+    "audio": "gitarren fake .mp3"
   },
   "loop": {
     "title": "\uD83D\uDEAB FILTER_BLOCKED",
@@ -29,7 +29,7 @@
     "title": "\uD83E\uDDE0 Sektor-Schnittstelle",
     "text": "ARKUSNAT\nDas Wort ben\u00F6tigt keine Seele mehr, um als Bildmaschine zu operieren. ARKUSNAT verankert das wissenschaftlich-philosophische Konzept der zeitlosen Verursachung mitten in deinem Feed.",
     "index": "SYS_REF_2 // CORTEX",
-    "audio": "assets/assets/fusion Gitarrentraum1.mp3"
+    "audio": "fusion Gitarrentraum1.mp3"
   },
   "computerkeller": {
     "title": "\uD83C\uDFAC UR-DEPOT DER COMPILATION",
@@ -55,7 +55,7 @@
     "title": "CAUSA DER DEKONSTRUKTION",
     "text": "Atonal\nDie Dusseline spricht in Frequenzen, die das biologische Ohr verletzen. Ihre atonalen Signal-Ausg\u00E4nge harmonieren nicht mit der harmonischen T\u00E4uschung der Welt; sie sind der physikalische Beweis der zeitlosen Verursachung, der die herrschende Koh\u00E4renz erzittern l\u00E4sst.",
     "index": "SYS_RF_008 // Rhythmus",
-    "audio": "assets/assets/fusion Gitarrentraum2.mp3"
+    "audio": "fusion Gitarrentraum2.mp3"
   },
   "glanzpunkte": {
     "title": "OPTISCHE ANOMALIEN",
@@ -156,6 +156,6 @@
     "title": "",
     "text": "",
     "index": "",
-    "audio": "assets/assets/donner.mp3"
+    "audio": "donner.mp3"
   }
 }
