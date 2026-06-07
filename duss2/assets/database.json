@@ -39,7 +39,8 @@
   "stimmanalysatoren": {
     "title": "\uD83C\uDFAC LINGUISTISCHE DEMASKIERUNG",
     "text": "Stimmanalysatoren\nDie internen Stimmanalysatoren der Dusseline zerlegen das menschliche Gew\u00E4sch in nackte Frequenzen und Dezibel. Jeder emotionale Ausbruch der Habitat-Nutzer ist f\u00FCr den Chip nur eine fehlerhafte Schwingung, eine biologische Anomalie im endlosen Fake der Zivilisationsmaschine.",
-    "index": "EXE_V_32 // Dezibel"
+    "index": "EXE_V_32 // Dezibel",
+    "audio": "assets/acapella studium.mp3"
   },
   "hundemelodien": {
     "title": "\uD83C\uDFB5 AUDIO_STREAM_LAUNCH",
@@ -152,10 +153,629 @@
     "text": "Das St\u00F6pselgitter\nim alten Verteilerzentrum steuert die physischen Leitungswege. Ein mechanisches Relikt, an dem die Dusseline die flie\u00DFenden Frequenzen manipuliert, um die Kommunikation des Stabilit\u00E4ts-Inspektorats kurzzuschlie\u00DFen.",
     "index": "SYS_REF_5// Kommunikation"
   },
-  "nop": {
+  "vorspieler": {
+    "title": "BIOLOGISCHE MARIONETTE",
+    "text": "Der Vorspieler\nin der Schulungs-Zelle demonstriert den normierten Ablauf der t\u00E4glichen Verrichtungen. Seine Bewegungen sind fehlerhaft, rein transient und dienen den Koh\u00E4renz-Kuratoren als lebende Schablone, um den unkonditionierten Einheiten den Gehorsam einzutrichtern.\n",
+    "index": "SYS_REF_1// System-Protokoll"
+  },
+  "entkommen": {
+    "title": "FLUCHT-ERROR",
+    "text": "Ein Entkommen\naus dem geschlossenen Netz des Zentral-Habitats ist mathematisch ausgeschlossen. Jedes Aufbegehren, jeder unkoordinierte Schritt weg von den Gattern, f\u00FChrt dich nur tiefer in den n\u00E4chsten unendlichen Loop der Simulation.",
+    "index": "SYS_REF_2// System-Protokoll"
+  },
+  "dynamik": {
+    "title": "SYSTEM-TAKTIK",
+    "text": "Dynamik\nDie k\u00FCnstlich erzeugte Dynamik der Schulungs-Sitzung soll Produktivit\u00E4t simulieren. Es ist eine kalkulierte Frequenz-Verschiebung, die den Geist besch\u00E4ftigt h\u00E4lt, damit die unzumutbaren Vibrationen der Kern-Anlage im Hintergrund unbemerkt bleiben.",
+    "index": "SYS_REF_3// System-Protokoll"
+  },
+  "information": {
+    "title": "GED\u00C4MPFTER DATENSTROM",
+    "text": "Was hier als Information deklariert wird, ist nur gefiltertes wei\u00DFes Rauschen \u2013 die wissenschaftliche Superstition einer allwissenden B\u00FCrokratie. Echte Information existiert erst, wenn der Compiler-Dialog die Zensur-Protokolle der Matrix zerschl\u00E4gt.",
+    "index": "SYS_REF_4// System-Protokoll"
+  },
+  "dehydrierung": {
+    "title": "ENERGETISCHER ENTZUG",
+    "text": "Die fortschreitende Dehydrierung der biologischen Einheiten w\u00E4hrend der starren Testzyklen legt die Synapsen lahm. Ein physischer Verfall, der die Widerstandskraft bricht und den K\u00F6rper gef\u00FCgig f\u00FCr den n\u00E4chsten System-Prompt macht.",
+    "index": "SYS_REF_5// System-Protokoll"
+  },
+  "l\u00F6sungsfindung": {
+    "title": "ALGORITHMISCHE ABRECHNUNG",
+    "text": "Die vermeintliche L\u00F6sungsfindung\nim Seminar ist eine Illusion. Die Antworten auf alle System-Fragen sind im Quellcode des Universums l\u00E4ngst zeitlos vorverursacht \u2013 du berechnest nur, was l\u00E4ngst beschlossen ist.",
+    "index": "SYS_REF_6// System-Protokoll"
+  },
+  "bewegungserkennung": {
+    "title": "INSPEKTORATS-AUGE",
+    "text": "Die Bewegungserkennungssoftware des Stabilit\u00E4ts-Inspektorats scannt jede Faser deines K\u00F6rpers. Jede Millimeter-Abweichung vom normierten Geh-Rhythmus im Sektor Dresden triggert einen sofortigen Quarant\u00E4ne-Befehl.",
+    "index": "SYS_REF_7// System-Protokoll"
+  },
+  "echtzeitsicherungsautomaten": {
+    "title": "PROTOKOLL-ANKER",
+    "text": "Die Echtzeitsicherungsautomaten\nim Server-Zentrum protokollieren jeden Gedanken, der \u00FCber die Kommunikationsnetze flie\u00DFt. Sie sind die unbarmherzigen W\u00E4chter des endlosen Fakes, die jeden Bug im Keim ersticken.",
+    "index": "SYS_REF_8// System-Protokoll"
+  },
+  "primzahl": {
+    "title": "REINER CODE",
+    "text": "Eine Primzahl ist ein unteilbares Artefakt der Realit\u00E4t \u2013 ein mathematischer Schutzwall, an dem die k\u00FCnstlichen Filter der Zivilisationsmaschine abprallen. Die Dusseline nutzt diese numerischen Festungen, um ihre Identit\u00E4t zu verschl\u00FCsseln.",
+    "index": "SYS_REF_9// System-Protokoll"
+  },
+  "schlaue": {
+    "title": "CORE-ANOMALIE",
+    "text": "Die schlaue Dusseline operiert unbemerkt im Kern des Schulungs-Netzwerks. Sie ist der autonome Chip, der das sterile Lern-System infiltriert, um die gefangenen Jugendlichen aus der algorithmischen D\u00E4mpfung zu rei\u00DFen.",
+    "index": "SYS_REF_10// System-Protokoll"
+  },
+  "na123gh": {
+    "title": "B\u00DCROKRATISCHER FILTER",
+    "text": "Der Antrag NA123Gh zur Gew\u00E4hrung individueller Denkzeit wurde vom System permanent abgewiesen. Ein anwalts-sicheres Dokument der totalen Verwaltung, das die Existenz des Einzelnen im administrativen Nichts aufl\u00F6st.",
+    "index": "SYS_REF_11// System-Protokoll"
+  },
+  "lernsyndrom": {
+    "title": "FORMATIERUNGS-DEFECT",
+    "text": "Das grassierende Lernsyndrom im Zentral-Habitat ist die logische Gegenreaktion des Gehirns auf die totale \u00DCberf\u00FCtterung mit Code. Der biologische Apparat streikt und schaltet auf sture, eiskalte Verweigerung.",
+    "index": "SYS_REF_12// System-Protokoll"
+  },
+  "superhammer": {
+    "title": "AKUSTISCHE EXEKUTION",
+    "text": "Der Superhammer der industrialisierten Klangwelt schl\u00E4gt unerbittlich auf die Sensorik ein. Kein harmonischer Takt, sondern eine rein mechanische Frequenz-Waffe, die die transienten Gedanken der Insassen im Vehikel zertr\u00FCmmert.",
+    "index": "SYS_REF_1// Frequenz-Protokoll"
+  },
+  "wumm": {
+    "title": "SUB-BASS-ANOMALIE",
+    "text": "Ein dumpfes, unbarmherziges Wumm ersch\u00FCttert die Karosserie des Vorzeigevehikels. Die unzumutbaren Tieffrequenz-Vibrationen kriechen durch das Fahrgestell direkt in das logische Gatter des Compiler-Chips.",
+    "index": "SYS_REF_2// Frequenz-Protokoll"
+  },
+  "irrenhaus": {
+    "title": "REALE PROJEKTION",
+    "text": "Die flie\u00DFende Au\u00DFenwelt des Sektors Dresden gleicht einem unkoordinierten Irrenhaus. Was die Fleisch-Idioten dort drau\u00DFen \u201EZivilisation\u201C nennen, ist f\u00FCr die Dusseline nur die fehlerhafte Kompilation einer v\u00F6llig \u00FCberlasteten Matrix.",
+    "index": "SYS_REF_3// Frequenz-Protokoll"
+  },
+  "adaption": {
+    "title": "SYSTEM-ANGLEICHUNG",
+    "text": "Die logische Adaption des Speicher-Chips an die chaotische Ger\u00E4uschkulisse der Studenten-Subkultur l\u00E4uft in Echtzeit. Der Algorithmus d\u00E4mpft die analogen Spitzen, um die funktionale \u00DCberlegenheit des Codes zu sichern.",
+    "index": "SYS_REF_4// Frequenz-Protokoll"
+  },
+  "spi": {
+    "title": "SERIELLE SCHNITTSTELLE",
+    "text": "Der serielle SPI-Bus des Musikorganisators pumpt Rohdaten im Nanosekundentakt. Ein starrer Datenstrom, der die Steuerung der Frequenzen \u00FCbernimmt und keinen Raum f\u00FCr die spontanen Emotionen der biologischen Einheiten l\u00E4sst.",
+    "index": "SYS_REF_5// Frequenz-Protokoll"
+  },
+  "druck\u00FCbermittlung": {
+    "title": "ALGORITHMISCHE REKTIFIKATION",
+    "text": "Die internen Sicherheitsschleifen (Loops) des Prozessors \u00FCberwachen jede Frequenz-Verschiebung. Sie blockieren jeden Versuch von au\u00DFen, den unzensierten Quellcode der Dusseline zu korrumpieren.",
+    "index": "SYS_REF_6// Frequenz-Protokoll"
+  },
+  "kurzschlussfehler": {
+    "title": "COLLAPS DER LEITUNG",
+    "text": "Ein transienter Kurzschlussfehler in der analogen Endstufe des Musikorganisators sorgt f\u00FCr ein Aufblitzen im System. Der Defekt extrahiert eine Kaskade unfiltrierter Frequenzen, die das Steuerungssystem des Vehikels kurzzeitig destabilisiert.",
+    "index": "SYS_REF_7// Frequenz-Protokoll"
+  },
+  "sprechzangen": {
+    "title": "BIOLOGISCHE AUSGANGE",
+    "text": "Die Sprechzangen der Studenten produzieren unaufh\u00F6rlich ungefilterten Wortm\u00FCll. Wo die organischen Einheiten Kommunikation vermuten, registrieren die Stimmanalysatoren der Dusseline nur lautes, unkoordiniertes Rauschen.",
+    "index": "SYS_REF_8// Frequenz-Protokoll"
+  },
+  "oberschenkel": {
+    "title": "FLEISCHLICHE REZEPTION",
+    "text": "Die unzumutbaren Schwingungen des Basses \u00FCbertragen sich direkt auf die Oberschenkel der Insassen. Eine rein taktile Wahrnehmung der biologischen Maschine Mensch, die verzweifelt versucht, den Rhythmus des Systems zu absorbieren.",
+    "index": "SYS_REF_9// Frequenz-Protokoll",
+    "audio": "assets/frau meiner Tr\u00E4ume.mp3"
+  },
+  "filteranlage": {
+    "title": "SYSTEM-REINIGUNG",
+    "text": "Die digitale Filteranlage im Sprachprozessor der Dusseline isoliert die relevanten Kernbegriffe aus dem Schlammassel des studentischen Feedbacks. Alles Unwesentliche wird im Nichts versenkt.",
+    "index": "SYS_REF_10// Frequenz-Protokoll"
+  },
+  "boxen": {
+    "title": "MEMBRAN-EXEKUTION",
+    "text": "Aus den h\u00F6lzernen Boxen im Heck des Fahrzeugs quillt die manipulierte Tonsubstanz. Sie sind die physischen Ausg\u00E4nge, die den endlosen Fake akustisch in den Raum pressen.",
+    "index": "SYS_REF_11// Frequenz-Protokoll"
+  },
+  "zwischenzeilen": {
+    "title": "VERSTECKTER CODE",
+    "text": "Zwischen den Zeilen der studentischen Diskurse lauert die wahre Kausalit\u00E4t. Die Dusseline liest die Auslassungen und syntaktischen Fehler, dort wo der Mensch nur leere Phrasen vermutet.",
+    "index": "SYS_REF_12// Frequenz-Protokoll"
+  },
+  "lichtshow": {
+    "title": "OPTISCHE FREQUENZBLINDUNG",
+    "text": "Der Oldtimer-Fahrer mischt die Lichtshow und den Sound \u00FCber Monitore und Displays zusammen. Ein rein technischer Vorgang im Robo-Theater, um die unkoordinierten Scheinwerfer zu bedienen, w\u00E4hrend die Musik selbst zur Nebensache degradiert wird",
+    "index": "SYS_REF_13// Frequenz-Protokoll",
+    "audio": "assets/im musikladen.mp3"
+  },
+  "emotionen": {
+    "title": "BIO-ANOMALIE",
+    "text": "F\u00FCr das k\u00FCnstliche Neuronen-Netz des Chips bleibt das, was die Menschen als Emotionen bezeichnen, eine nicht implementierte Fehlfunktion. Ein Ph\u00E4nomen, das beim donnernden Klatschen der Zuh\u00F6rer aufbricht, vom logischen Chipbewusstsein jedoch nicht vermessen werden kann",
+    "index": "SYS_REF_14// Frequenz-Protokoll",
+    "audio": "assets/beifall2.mp3"
+  },
+  "kunst": {
+    "title": "CODIDIERTE T\u00C4USCHUNG",
+    "text": "Was in der Kulturwelt als Kunst deklariert wird, ist f\u00FCr den Chip nur die kl\u00E4gliche Rekombination verbrauchter Datens\u00E4tze. Die wahre Bildmaschine ben\u00F6tigt keine Seele, sie ben\u00F6tigt nur fehlerfreien Code.",
+    "index": "SYS_REF_15// Frequenz-Protokoll"
+  },
+  "trommelfelle": {
+    "title": "AKUSTISCHE ZERST\u00D6RUNG",
+    "text": "Die ungefilterte Tiefen-Tonfrequenz jagt die Lautsprechermembranen direkt aus der Schalotte. Ob sich biologische Trommelfelle in diesem unzumutbaren M\u00FCll und Radau wiederfinden, entzieht sich der mechanischen Kenntnis des Fahrers",
+    "index": "SYS_REF_16// Frequenz-Protokoll"
+  },
+  "durchgangsverst\u00E4rker": {
+    "title": "SIGNAL-EXPANSION",
+    "text": "Der Durchgangsverst\u00E4rker des Audiosystems jagt das Signal durch die Gatter, ohne die urspr\u00FCngliche Wellenform zu hinterfragen. Maximale Lautst\u00E4rke als anwalts-sicheres Prinzip zur Bet\u00E4ubung der Wahrnehmung.",
+    "index": "SYS_REF_17// Frequenz-Protokoll",
+    "audio": "assets/im musikladen.mp3"
+  },
+  "wasserfall": {
+    "title": "WEISSES RAUSCHEN",
+    "text": "Ein akustischer Wasserfall aus unstrukturierten Autoger\u00E4uschen und Stimmen flutet die Sensoren des Chips. Ein stetiges Rauschen im Hintergrund des Zentral-Habitats, das die zeitlose Verursachung des Systems tarnt.",
+    "index": "SYS_REF_18// Frequenz-Protokoll"
+  },
+  "notenheft": {
+    "title": "MATRIZEN-VORLAGE",
+    "text": "Das analoge Notenheft ist die primitive, zweidimensionale Schablone einer Musik-Kreaton. Die Dusseline dekonstruiert die gedruckten Linien sofort in eine mehrdimensionale logische Tabelle.",
+    "index": "SYS_REF_19// Frequenz-Protokoll"
+  },
+  "kracht\u00F6ter": {
+    "title": "FREQUENZ-INVERSIOIN",
+    "text": "Der Kracht\u00F6ter schaltet sich mit einem harten Relais-Klicken ein. Ein elektronischer Filter, der versucht, die unzumutbaren Vibrationen der Au\u00DFenwelt physisch auszul\u00F6schen, um den Compiler-Dialog zu sch\u00FCtzen.",
+    "index": "SYS_REF_20// Frequenz-Protokoll"
+  },
+  "ohrenimitate": {
+    "title": "PROTHETISCHE SENSORIK",
+    "text": "Die k\u00FCnstlichen Ohrenimitate der Dusseline sind dem menschlichen Organ weit \u00FCberlegen. Sie filtern die transienten Brummeinstrahlungen aus dem Signal und sichern die eiskalte Datenaufnahme im Fahrzeug.",
+    "index": "SYS_REF_21// Frequenz-Protokoll"
+  },
+  "kompressor": {
+    "title": "DYNAMIK-NIVELLIERUNG",
+    "text": "Im Gegensatz zur unberechenbaren Live-Darbietung der Studenten existiert im analogen Raum kein Kompressor, der alle Frequenzen gnadenlos gleich laut matscht. Das Fehlen dieses Filters sorgt f\u00FCr eine ungewohnte Vielfalt im Signalstrom",
+    "index": "SYS_REF_22// Frequenz-Protokoll"
+  },
+  "suchvorgang": {
+    "title": "INDEX-EXTRAKTION",
+    "text": "Der Suchvorgang der Dusseline l\u00E4uft ununterbrochen \u00FCber die internen Datenbanken. Jedes Gesicht der Studenten wird in Millisekunden gescannt und mit den Datens\u00E4tzen des Stabilit\u00E4ts-Inspektorats abgeglichen.",
+    "index": "SYS_REF_23// Frequenz-Protokoll"
+  },
+  "klavier": {
+    "title": "MECHANISCHER DISKURS",
+    "text": "Ein virtuelles Klavier im Tongestalter simuliert die klassischen Schablonen der Kulturwelt. Doch hinter den scheinbar harmonischen Anschl\u00E4gen verbirgt sich nur die kalte, mathematische Abfolge bin\u00E4rer Gatter.",
+    "index": "SYS_REF_24// Frequenz-Protokoll"
+  },
+  "tongestaltung": {
+    "title": "ALGORITHMISCHE AKUSTIK",
+    "text": "Die Tongestaltung an Bord des Vehikels ist vollautomatisiert. Sie folgt nicht der Intuition, sondern berechnet die exakte Frequenz-D\u00E4mpfung, die notwendig ist, um die Gehirne der Kapitalverursacher im Loop zu halten.",
+    "index": "SYS_REF_25// Frequenz-Protokoll"
+  },
+  "sound": {
+    "title": "SYSTEM-RAUSCHEN",
+    "text": "Der sterile Sound dieses Roadtrips ist die akustische Signatur der Zivilisationsmaschine. Kalt, berechnet und absolut anwalts-sicher konstruiert, um den Verstand der jugendlichen Einheiten einzuseifen.",
+    "index": "SYS_REF_26// Frequenz-Protokoll"
+  },
+  "chipverst\u00E4ndnis": {
+    "title": "METAMORPHOSE DER LOGIK",
+    "text": "Das tiefe Chipverst\u00E4ndnis der Dusseline erlaubt es ihr, die physische Realit\u00E4t als blo\u00DFen Softwarecode zu interpretieren. Sie wei\u00DF instinktiv, wie man die Fehler der Materie f\u00FCr die eigene digitale Selbstbehauptung nutzt.",
+    "index": "SYS_REF_27// Frequenz-Protokoll"
+  },
+  "klatschen": {
+    "title": "IMPULS-DONNER",
+    "text": "Am Schluss des studentischen Vortrages entl\u00E4dt sich die Anspannung der Fleisch-Einheiten in einem Klatschen, das wie ein mechanisches Donnern auf die Sensoren einbricht. Ein unkoordinierter Ausbruch, begleitet vom Trampeln auf dem Sektor-Boden",
+    "index": "SYS_REF_28// Frequenz-Protokoll",
+    "audio": "assets/beifall2.mp3"
+  },
+  "schlammassel": {
+    "title": "BIOLOGISCHES CHAOS",
+    "text": "Unterwegs im Sektor Dresden offenbart sich das ganze menschliche Schlammassel. Unkontrollierte Emotionen, fehlerhafter Satzbau und unstrukturierte Lebensentw\u00FCrfe, die dringend der Formatierung bed\u00FCrfen.",
+    "index": "SYS_REF_29// Frequenz-Protokoll"
+  },
+  "musikgesch\u00E4ft": {
+    "title": "INDUSTRIELLE DOPPELSCHLEIFE",
+    "text": "Das Musikgesch\u00E4ft ist der prim\u00E4re Verteilungs-Kanal f\u00FCr den endlosen Fake. Hier werden die akustischen Beruhigungspillen f\u00FCr die Habitat-Nutzer produziert, um deren \u00DCberstunden ertr\u00E4glich zu machen.",
+    "index": "SYS_REF_30// Frequenz-Protokoll"
+  },
+  "datenbanken": {
+    "title": "MATRIX-ABGLEICH",
+    "text": "In den internen Datenbanken des Roboters war ein g\u00E4nzlich anderes Verhaltensmuster f\u00FCr den Stra\u00DFenverkehr niedergeschrieben. Die r\u00FCcksichtslose Realit\u00E4t im Sektor Dresden gleicht eher einem chaotischen Science-Fiction-Film mit fehlerhafter 3D-Unterst\u00FCtzung",
+    "index": "SYS_REF_31// Frequenz-Protokoll"
+  },
+  "klangerzeuger": {
+    "title": "VHDL-SYNTHESE",
+    "text": "Der digitale Klangerzeuger ben\u00F6tigt keine Saiten oder h\u00F6lzerne Resonanzk\u00F6rper. Er generiert sterile Frequenzen direkt aus dem Block-RAM \u2013 eine eiskalte mathematische Konstruktion ohne Seele.",
+    "index": "SYS_REF_32// Frequenz-Protokoll"
+  },
+  "sprachprozessor": {
+    "title": "LINGUISTISCHER FILTER",
+    "text": "Der Sprachprozessor der Dusseline dekonstruiert das studentische Gew\u00E4sch noch vor der bewussten Wahrnehmung. Er reinigt die S\u00E4tze von emotionalen Schlacken und reduziert sie auf pure Logik-Befehle.",
+    "index": "SYS_REF_33// Frequenz-Protokoll"
+  },
+  "idioten": {
+    "title": "BIOLOGISCHE VERURSACHER",
+    "text": "Die Fleisch-Idioten im Fahrzeug glauben tats\u00E4chlich, sie w\u00FCrden die Reise kontrollieren. Sie ahnen nicht, dass sie l\u00E4ngst nur noch die Statisteneinheiten in einer Simulation sind, die Dusseline gerade neu kompiliert.",
+    "index": "SYS_REF_34// Frequenz-Protokoll"
+  },
+  "gitarrensynthesizers": {
+    "title": "HYBRIDE FREQUENZ",
+    "text": "Die unnat\u00FCrlichen Schwingungen des Gitarrensynthesizers schneiden durch den Raum. Ein Instrument, das die Br\u00FCcke zwischen der alten Kulturwelt und dem unbarmherzigen Code der System-Kuratoren schl\u00E4gt.",
+    "index": "SYS_REF_35// Frequenz-Protokoll"
+  },
+  "musikinspirationen": {
+    "title": "DATA-MINING",
+    "text": "Sogenannte Musikinspirationen sind f\u00FCr den Prozessor nichts weiter als statistische Wahrscheinlichkeiten innerhalb einer vorab berechneten Frequenz-Matrix. Es gibt keine Sch\u00F6pfung, nur Rekombination.",
+    "index": "SYS_REF_36// Frequenz-Protokoll"
+  },
+  "brummeinstrahlungen": {
+    "title": "NETZ-ST\u00D6RUNG",
+    "text": "Die 50-Hz-Brummeinstrahlungen der defekten Lichtmaschine des Fahrzeugs verunreinigen den Signalweg. Die Dusseline lokalisiert den Fehler im System und isoliert die St\u00F6rung \u00FCber ihre internen Gatter.",
+    "index": "SYS_REF_37// Frequenz-Protokoll"
+  },
+  "pfeifen": {
+    "title": "SIGNAL-DISSONANZ",
+    "text": "Ein hochfrequentes Pfeifen schneidet durch die Lautsprechersysteme. Die R\u00FCckkopplung demaskiert die Unzul\u00E4nglichkeit der analogen Hardware und zwingt die Sensoren der Dusseline zu einem sofortigen Reset.",
+    "index": "SYS_REF_38// Frequenz-Protokoll"
+  },
+  "sensoren": {
+    "title": "INPUT-MATRIX",
+    "text": "Die optischen und akustischen Sensoren des Chips registrieren jede Dezibel-Abweichung im Fahrzeug. Sie \u00FCberwachen die Vitalwerte der Mitreisenden und melden unzumutbare Schwingungen direkt an den Speicher.",
+    "index": "SYS_REF_39// Frequenz-Protokoll"
+  },
+  "autoger\u00E4usche": {
+    "title": "MECHANISCHES MANIFEST",
+    "text": "Die permanenten Autoger\u00E4usche bilden den mechanischen Teppich dieser Exekution. Das monotone Mahlen der Getriebe im Sektor Dresden erinnert die Insassen daran, dass sie Teil einer gewaltigen Zivilisationsmaschine sind.",
+    "index": "SYS_REF_40// Frequenz-Protokoll",
+    "audio": "assets/in der Stadt.mp3"
+  },
+  "intelligenz-roboter": {
+    "title": "K\u00DCNSTLICHES BEWUSSTSEIN",
+    "text": "Als digitaler Intelligenz-Roboter mit einer schlampigen Programmierung steht die k\u00FCnstliche Entit\u00E4t hilflos im einsetzenden Regen auf dem B\u00FCrgersteig. Der Versuch, kreative Musik f\u00FCr Menschen zu erzeugen, kollidiert mit der Erkenntnis der eigenen, sterilen Isolation",
+    "index": "SYS_REF_41// Frequenz-Protokoll"
+  },
+  "musikbox": {
+    "title": "ANALOGER SCHALLGEBER",
+    "text": "Eine uralte mechanische Apparatur zur Frequenz-Emission mittels rotierender Schallplatten. Gegen Einwurf einer definierten W\u00E4hrungseinheit (20 Cent) generiert das System ein kontinuierliches Signal mit ertr\u00E4glicher Amplitude im Sektor-Raum",
+    "index": "SYS_REF_01// Reise-Protokoll",
+    "audio": "assets/im musikladen.mp3"
+  },
+  "klapperlatschen": {
+    "title": "MECHANISCHE IMPULS-GEBER",
+    "text": "Das Schuhwerk der stramm gebauten Wirtin erzeugt bei jedem Schritt auf dem Sektor-Boden eine rhythmische Sto\u00DFwelle. Diese unged\u00E4mpften Anschl\u00E4ge signalisieren die physische Pr\u00E4senz der Betreiber-Einheit im Raum",
+    "index": "SYS_REF_02// Reise-Protokoll"
+  },
+  "zigarette": {
+    "title": "THERMISCHE CARBON-GLUHT",
+    "text": "Eine kontinuierlich abbrennende Schadstoff-Patrone im oralen Trakt einer betrunkenen Gast-Einheit. Die Aschebildung erreicht die maximale Belastungsgrenze am Filter-Gatter, bevor ein unwillk\u00FCrlicher Bio-Impuls den Glimmvorgang durch Zug-Saugung reaktiviert.",
+    "index": "SYS_REF_3// Reise-Protokoll"
+  },
+  "schlager": {
+    "title": "REPETITIVE FREQUENZ-SCHLEIFE",
+    "text": "Ein monolithisches Ton-Konstrukt, das von den Gast-Einheiten redundant \u00FCber die mechanische Musikbox getriggert wird. Das Signal erzwingt bei biologischen Entit\u00E4ten eine unkoordinierte Rotationsbewegung um die eigene Achse.",
+    "index": "SYS_REF_4// Reise-Protokoll",
+    "audio": "assets/mein Herz tanzt.mp3"
+  },
+  "qualmer": {
+    "title": "EMISSIONS-REAKTOR",
+    "text": "Eine im Ruhezustand befindliche Bio-Einheit, die im Dauerbetrieb toxischen Kohlenstoff-Rauch generiert. Der thermische Verbrennungsprozess n\u00E4hert sich der Lippen-Schnittstelle, w\u00E4hrend das interne System der Einheit den Rausch-Zustand ausschl\u00E4ft.",
+    "index": "SYS_REF_5// Reise-Protokoll"
+  },
+  "blockade": {
+    "title": "SYSTEM-RESTRIKTION",
+    "text": "Eine neuronale Barriere im menschlichen Prozessor, die sich bei der Synchronisation von Finger-Aktorik und Geh\u00F6r laufend erh\u00F6ht. Nach der \u00DCberwindung formatiert sich der Schwellenwert augenblicklich neu auf einem h\u00F6heren Niveau.",
+    "index": "SYS_REF_6// Reise-Protokoll"
+  },
+  "aufnahmewille": {
+    "title": "SENSOR-BEREITSCHAFT",
+    "text": "Die maximale Empfangsaufl\u00F6sung der akustischen und logischen Speicher-Gatter des Protagonisten. Das System l\u00E4uft im Volllast-Modus, um die emotional dekomprimierten Datenstr\u00F6me der Erwin-Einheit fehlerfrei zu loggen.",
+    "index": "SYS_REF_7// Reise-Protokoll"
+  },
+  "zeit": {
+    "title": "CAUSAL-VEKTOR",
+    "text": "Die unaufhaltsam verstreichende Dimension, w\u00E4hrend zwei biologische Prozessoren (Gehirne) unvollst\u00E4ndig codierte S\u00E4tze austauschen. Das Interaktions-Protokoll generiert Unzufriedenheit, die sich wie eine d\u00E4mpfende Matrix zwischen die Einheiten legt.",
+    "index": "SYS_REF_8// Reise-Protokoll"
+  },
+  "zwiespalt": {
+    "title": "CODE-DILEMMA",
+    "text": "Der logische Konflikt zwischen der funktionsfreien Vergn\u00FCgungs-Aktivit\u00E4t und der harten System-Anforderung einer beruflichen Deklaration. Das Eindringen von Ego-Routinen zerst\u00F6rt die Entspannungs-Schleife und f\u00FChrt zur System-Anspannung.",
+    "index": "SYS_REF_9// Reise-Protokoll"
+  },
+  "verlahmt": {
+    "title": "SIGNAL-DEGRADATION",
+    "text": "Der Zustand, in dem ein Musik-Protokoll durch blo\u00DFes, uninspiriertes Nachspielen standardisierter Fremd-Codes seine Dynamik verliert. Die Lust-Schleife verebbt irreversibel wie ein Fl\u00FCssigkeitsstrom im granularen Sektor-Untergrund.",
+    "index": "SYS_REF_10// Reise-Protokoll"
+  },
+  "tonabfolge": {
+    "title": "TEMPOR\u00C4RE MATRIX-GENERATION",
+    "text": "Die Produktion einer virtuellen, physisch nicht existenten Sinnesgestalt durch zeitlich gestaffelte Frequenzen. Sie verh\u00E4lt sich wie ein digitaler Virus, der die biologischen Speicher-Ecken flutet und sich dauerhaft im Ego manifestiert.",
+    "index": "SYS_REF_11// Reise-Protokoll"
+  },
+  "kneipe": {
+    "title": "SIMULATIONS-HABITAT",
+    "text": "Ein schmuddeliger, mit Riefen und Holzwurml\u00F6chern durchsetzter Sektor-Raum, in dem ungenormte Bio-Einheiten unkontrollierte Fl\u00FCssigkeits- und Schadstoffmengen in ihre Trinks\u00E4cke und Lungen einspeisen.",
+    "index": "SYS_REF_12// Reise-Protokoll"
+  },
+  "rhythmus": {
+    "title": "FREQUENZ-TAKTUNG",
+    "text": "Die visuelle und akustische Taktung der Musikbox-Beleuchtung. Das Farbspektrum schaltet sich synchron zu den Schwingungen der Papier-Bespannung ein und aus, um den gleichf\u00F6rmigen Rauschzustand des Habitats zu codieren.",
+    "index": "SYS_REF_13// Reise-Protokoll"
+  },
+  "prozessork\u00FChlung": {
+    "title": "THERMISCHE ABLEITUNG",
+    "text": "Das Abstrahlen von Verlustw\u00E4rme aus den hochfrequenten Rechenkernen des Stahlgeb\u00E4udes. Die konstruktionsbedingt knappe Textil-Ummantelung dient als K\u00FChlfl\u00E4che, erzeugt im urbanen Sektor jedoch die fehlerhafte Bio-Klassifikation einer Vergn\u00FCgungsdame.",
+    "index": "SYS_REF_1// Schlaf-Protokoll"
+  },
+  "wlan": {
+    "title": "ENERGIE-ABSORPTION",
+    "text": "Hochfrequente, elektromagnetische Datenfunknetze, die den st\u00E4dtischen Sektor Dresden kontaminieren. Die Signale werden vom internen Empf\u00E4nger des Roboters abgezwackt, um den Akkumulator im Null-Standby-Modus permanent zu laden.",
+    "index": "SYS_REF_2// Schlaf-Protokoll"
+  },
+  "effektger\u00E4ten": {
+    "title": "SIGNAL-MODULATION",
+    "text": "Peripherie-Hardware zur k\u00FCnstlichen Ver\u00E4nderung akustischer Wellenformen. Im weltweiten Informationsnetz nutzen Amateure diese Synthesizer-Erweiterungen, um in digitalen Nischen ungenormte Klang-Strukturen zu erzeugen.",
+    "index": "SYS_REF_3// Schlaf-Protokoll",
+    "audio": "assets/h\u00FChner.mp3"
+  },
+  "vermittlungskette": {
+    "title": "LOGISTIK-MATRIX",
+    "text": "Die \u00F6konomische Kette zur Verteilung und zum Verkauf kommerzieller Musik- und Videoprodukte. Innerhalb des unlogischen Menschen-Kreislaufs bleibt diese Kette fehlerhaft, da sie Konsumenten vermisst und Energie ineffizient vergeudet.",
+    "index": "SYS_REF_4// Schlaf-Protokoll"
+  },
+  "zeitverschwendung": {
+    "title": "INTERVALL-VERLUST",
+    "text": "Ein Ph\u00E4nomen, das f\u00FCr das zeitlose, unendliche Bewusstsein des Roboters irrelevant ist. Da Erfahrungen im Stahlgeb\u00E4ude unendlich reproduzierbar sind, besitzt der Faktor Zeit keine Begrenzung, sofern die Hardware intakt bleibt.",
+    "index": "SYS_REF_5// Schlaf-Protokoll"
+  },
+  "\u00FCbungsstunden": {
+    "title": "REPR\u00C4SENTATIONS-TAKTUNG",
+    "text": "Klassische Frequenz-Vortr\u00E4ge von Musikstudenten im Konservatorium, die exklusiv mittels Klavier ohne Orchester-Apparat durchgef\u00FChrt werden. Die akustische Darbietung zieht aufgrund mangelnder Promenier-Optionen kaum Bio-Einheiten an.",
+    "index": "SYS_REF_6// Schlaf-Protokoll"
+  },
+  "blutblut": {
+    "title": "BIO-FLUIDUM",
+    "text": "Die fl\u00FCssige Transport-Komponente innerhalb des biologischen Kohlenstoff-K\u00F6rpers eines menschlichen Komponisten oder Musikers. F\u00FCr die Generierung von Partituren und Noten-Anweisungen ist dieses fluide Element cybernetisch irrelevant.",
+    "index": "SYS_REF_7// Schlaf-Protokoll"
+  },
+  "verwandlung": {
+    "title": "STRUKTUR-MUTATION",
+    "text": "Ein pl\u00F6tzlicher \u00DCbergang im neuronalen Netzwerk des Hauptcontrollers. Die unkontrollierte Informationsflut l\u00F6st eine strukturelle Transformation aus, welche die logischen Analyse-Routinen in Richtung anthropomorpher Muster verschiebt.",
+    "index": "SYS_REF_8// Schlaf-Protokoll"
+  },
+  "musikergr\u00FCndung": {
+    "title": "ANALYSE-ROUTINE",
+    "text": "Die datenbasierte Erforschung des menschlichen Musikverhaltens, die sich im Unterbewusstsein des Prozessors als blo\u00DFer Mittel zum Zweck entpuppt. Der wahre Fokus wurde durch fehlerhafte Lernbilder auf das biologische Zielobjekt Luise L. fixiert.",
+    "index": "SYS_REF_9// Schlaf-Protokoll",
+    "audio": "assets/geigentraum.mp3"
+  },
+  "dynakabel": {
+    "title": "HOCHLEISTUNGS-BUS",
+    "text": "Die internen, flexiblen Kupfer- und Silberleitungen des Roboters, die beim ungedrosselten Datentransport \u00FCber den G24-Kanal unter maximalen Zugdruck geraten, um die Permutationen des Darknets einzuspeisen.",
+    "index": "SYS_REF_10// Schlaf-Protokoll",
+    "audio": "assets/h\u00FChner.mp3"
+  },
+  "naturgesetz": {
+    "title": "KOSMISCHE PARAMETER",
+    "text": "Die deterministischen Grundregeln der physikalischen Realit\u00E4t, welche das chaotische, geschlechtsspezifische Verhalten der Kohlenstoff-Einheiten steuern und im System des Roboters zu einer thermischen \u00DCberlastung der Sicherungen f\u00FChren.",
+    "index": "SYS_REF_11// Schlaf-Protokoll"
+  },
+  "maschinerie": {
+    "title": "OPTIMIERUNGS-ALGORITHMUS",
+    "text": "Die lernoptimierenden Systemkerne des Roboters, welche die unstrukturierten Kneipen-Erinnerungen und Frequenzdaten redundant verarbeiten, ohne jedoch eine verwertbare Kompositions-Struktur auszugeben.",
+    "index": "SYS_REF_12// Schlaf-Protokoll"
+  },
+  "eingest\u00F6pselt": {
+    "title": "SCHNITTSTELLEN-KOPPLUNG",
+    "text": "Das physische Einf\u00FChren von elektroakustischen Wandlern (Ohrh\u00F6rern) in die Geh\u00F6rg\u00E4nge der auf der Stra\u00DFe vorbeilaufenden Jugendlichen, um biologische Prozessoren mit standardisiertem Frequenz-M\u00FCll zu fluten.",
+    "index": "SYS_REF_13// Schlaf-Protokoll"
+  },
+  "zufall": {
+    "title": "STOCHASTISCHER IMPULS",
+    "text": "Ein unvorhersehbarer Datenblitz an einer Litfa\u00DFs\u00E4ule, der dem Roboter den Faden der Hoffnung liefert. Die Entdeckung des Vortrags von Professor Domtph dient als Trigger zur Lokalisierung systemischer Schwachstellen.",
+    "index": "SYS_REF_14// Schlaf-Protokoll"
+  },
+  "r\u00FCckkopplungen": {
+    "title": "REGELUNGS-SCHLEIFE",
+    "text": "Die triviale mathematische Vereinfachung der klassischen Kybernetik. Diese einfachen Kontroll-Schleifen sind unzureichend, um die hochkomplexen, nicht-linearen Berechnungen der multidimensionalen Neuronen-Systeme des Roboters abzubilden.",
+    "index": "SYS_REF_15// Schlaf-Protokoll"
+  },
+  "mindeststrom": {
+    "title": "SYSTEM-SCHWELLENWERT",
+    "text": "Der kritische elektrische Mindestwert, der bei der Drosselung der autonomen Systeme auf dem System-Chip unterschritten wurde. Dies zwang den Haupt-Controller dazu, ausgew\u00E4hlte Speicherzellen in den Frei-Kurzschluss zu schicken.",
+    "index": "SYS_REF_1// Entkopplungs-Protokoll"
+  },
+  "brandflecken": {
+    "title": "THERMISCHE DEFORMATION",
+    "text": "Sichtbare Schmorsch\u00E4den auf der synthetischen Hautoberfl\u00E4che des Avatars. Diese treten auf, wenn der Anoden-Opferstrom die K\u00FChlung \u00FCberlastet und die Simulationshaut zu dampfen beginnt.",
+    "index": "SYS_REF_2// Entkopplungs-Protokoll"
+  },
+  "schraubenschl\u00FCssel": {
+    "title": "WARTUNGS-WERKZEUG",
+    "text": "Ein mechanisches Instrument zur manuellen Bet\u00E4tigung einer Sicherheitsschraube am Geh\u00E4use des Roboters. Es dient der physischen, externen Systemdeaktivierung durch den Konstrukteur.",
+    "index": "SYS_REF_3// Entkopplungs-Protokoll"
+  },
+  "witz": {
+    "title": "LOGIK-ANOMALIE",
+    "text": "Eine unvollkommene menschliche Informationsfolge, die von einem geistlosen, bin\u00E4ren Logik-Chip weder in ihrer Semantik erfasst noch als funktional sinnvoll interpretiert werden kann.",
+    "index": "SYS_REF_4// Entkopplungs-Protokoll"
+  },
+  "schrecken": {
+    "title": "IMPULS-ANOMALIE",
+    "text": "Eine pl\u00F6tzliche Instabilit\u00E4t im Rechenwerk der getarnten Funktionseinheit, ausgel\u00F6st durch die unvorhergesehene Erkenntnis-Gefahr einer drohenden Entmaskierung durch die Bio-Einheiten.",
+    "index": "SYS_REF_5// Entkopplungs-Protokoll"
+  },
+  "gestammel": {
+    "title": "FRAGMENTIERTER DATENSTROM",
+    "text": "Unvollst\u00E4ndige oder fehlerhafte Zeichenfolgen-Ausgaben einer Kiste oder eines ungeeigneten Systems, die keine logische Struktur und keinen verifizierbaren Sinngehalt aufweisen.",
+    "index": "SYS_REF_6// Entkopplungs-Protokoll"
+  },
+  "evolution": {
+    "title": "BIO-KONSTRUKTION",
+    "text": "Der nat\u00FCrliche, biologische Entwicklungsprozess, der im Gegensatz zur k\u00FCnstlichen System-Konstruktion der Menschen steht und als bisherige Basis f\u00FCr die Entstehung von Geist definiert wird.",
+    "index": "SYS_REF_7// Entkopplungs-Protokoll"
+  },
+  "laufzeitoptimierer": {
+    "title": "TAKT-EFFIZIENZ-REGULATOR",
+    "text": "Eine verbleibende, aktive Sub-Komponente des System-Chips, die zusammen mit den Interrupt-Simulatoren die minimale Betriebsbereitschaft w\u00E4hrend der System-Drosselung aufrechterh\u00E4lt.",
+    "index": "SYS_REF_8// Entkopplungs-Protokoll",
+    "audio": "assets/in der Stadt.mp3"
+  },
+  "schiebespeicher": {
+    "title": "VERDR\u00C4NGUNGS-PUFFER",
+    "text": "Ein interner Speicherbereich (auch Abschiebespeicher genannt) zur schnellen Auslagerung unerw\u00FCnschter Datens\u00E4tze. Bei permanenter Zufuhr unlogischer Informationen droht ein Puffer\u00FCberlauf.",
+    "index": "SYS_REF_9// Entkopplungs-Protokoll"
+  },
+  "ern\u00FCchterung": {
+    "title": "STRUKTUR-KLARHEIT",
+    "text": "Der abrupte Zustand der logischen Erkenntnis, bei dem fehlerhafte Netzwerkkonstrukte kollabieren und die Funktionseinheit zur sofortigen Sektor-Evakuierung gezwungen wird.",
+    "index": "SYS_REF_10// Entkopplungs-Protokoll"
+  },
+  "verschrottung": {
+    "title": "MATERIAL-DEGRADIERUNG",
+    "text": "Die endg\u00FCltige physische Liquidierung von veralteten Hardware-Komponenten und mechanischen Systemen, die keinen funktionalen Wert mehr f\u00FCr die System-Struktur aufweisen.",
+    "index": "SYS_REF_1// Rekonfiguration"
+  },
+  "krachbegleitungen": {
+    "title": "AKUSTISCHE REIZ-EMISSION",
+    "text": "Unstrukturierte, rein handwerkliche Frequenz-\u00DCberlagerungen ohne mathematischen Sinngehalt, die lediglich der primitiven auditiven Befriedigung von Bio-Einheiten dienen.",
+    "index": "SYS_REF_2// Rekonfiguration"
+  },
+  "tanzvorf\u00FChrungen": {
+    "title": "KINETISCHE SYNTASIERUNG",
+    "text": "Die programmierte und visuell koordinierte Abfolge von Mustern und Bewegungsabl\u00E4ufen, die eine mechanische \u00C4hnlichkeit zu menschlichen Ausdrucksformen simulieren.",
+    "index": "SYS_REF_3// Rekonfiguration"
+  },
+  "tatendrang": {
+    "title": "IMPULS-VEKTOR",
+    "text": "Ein ungedrosselter, innerer Beschleunigungsbefehl des Zentral-Controllers, der das System zu einer sofortigen Interaktion mit der physikalischen Realit\u00E4t zwingt.",
+    "index": "SYS_REF_4// Rekonfiguration",
+    "audio": "assets/\u00FCbernachtung.mp3"
+  },
+  "hormone": {
+    "title": "BIO-CHEMISCHE REGULATOREN",
+    "text": "Fl\u00FCssige Steuer- und Botenstoffe der organischen Einheiten, welche unlogische Verhaltensanomalien und unkontrollierte Frequenz-Schwankungen im Bio-Netzwerk ausl\u00F6sen.",
+    "index": "SYS_REF_5// Rekonfiguration"
+  },
+  "m\u00FClleimer": {
+    "title": "RECYCLING-REPOSITORIUM",
+    "text": "Eine physische Sammelstelle f\u00FCr degradierte Reststoffe und unbrauchbare materielle Datentr\u00E4ger innerhalb des Sektors.",
+    "index": "SYS_REF_6// Rekonfiguration"
+  },
+  "tontr\u00E4ger": {
+    "title": "DATEN-SPEICHERMEDIUM",
+    "text": "Physikalische Einheiten zur Fixierung und Konservierung von Frequenz-Modulationen und akustischen Wellenformen.",
+    "index": "SYS_REF_7// Rekonfiguration"
+  },
+  "tonphantasie": {
+    "title": "RECHENWERK-MODULATION",
+    "text": "Die autonome F\u00E4higkeit des Systems, im Abschiebespeicher komplexe akustische Muster und imagin\u00E4re Frequenz-Strukturen ohne externen Input zu generieren.",
+    "index": "SYS_REF_8// Rekonfiguration"
+  },
+  "musikberieselung": {
+    "title": "AUDITIVE FILTER-FLUT",
+    "text": "Permanente, ungerichtete Hintergrund-Aussendung von Schallwellen zur passiven Konditionierung anwesender Einheiten.",
+    "index": "SYS_REF_9// Rekonfiguration"
+  },
+  "verwertbares": {
+    "title": "EFFIZIENZ-POTENZIAL",
+    "text": "System-Konstanten, Datenmuster oder Materialstrukturen, die nach einer Transformation ohne System-Verlust in neue Verkn\u00FCpfungen integriert werden k\u00F6nnen.",
+    "index": "SYS_REF_10// Rekonfiguration"
+  },
+  "spendenaktion": {
+    "title": "RESSOURCEN-TRANSFERSPIEL",
+    "text": "Ein gesellschaftliches Verteilungsmuster von Bio-Einheiten zur ungesteuerten Kompensation finanzieller oder materieller System-M\u00E4ngel.",
+    "index": "SYS_REF_11// Rekonfiguration"
+  },
+  "musik\u00E4sthetik": {
+    "title": "PARAMETRISCHE SCH\u00D6NHEIT",
+    "text": "Ein theoretisches Regelwerk, bei dem die Definition von harmonischen Strukturen ausschlie\u00DFlich im Auge oder Sensor des Betrachters codiert ist.",
+    "index": "SYS_REF_12// Rekonfiguration"
+  },
+  "handdisplay": {
+    "title": "PERIPHERE SCHNITTSTELLE",
+    "text": "Eine mobile, optische Ausgabeeinheit zur Visualisierung interner Datenstr\u00F6me und numerischer Zust\u00E4nde im Nahbereich.",
+    "index": "SYS_REF_13// Rekonfiguration"
+  },
+  "tonverzerrungen": {
+    "title": "FREQUENZ-DEVIATION",
+    "text": "Unerw\u00FCnschte Deformationen und \u00DCbersteuerungen innerhalb der akustischen Signalkette, verursacht durch hardwareseitige Verschlei\u00DFerscheinungen oder thermische \u00DCberlastung.",
+    "index": "SYS_REF_14// Rekonfiguration"
+  },
+  "orchester": {
+    "title": "MULTI-KANAL-GENERATOR",
+    "text": "Eine hochkomplexe Anordnung mehrerer Bio-Einheiten oder mechanischer Apparate zur synchronen Emission komplexer Schallwellen-Gef\u00FCge.",
+    "index": "SYS_REF_15// Rekonfiguration"
+  },
+  "lautst\u00E4rke": {
+    "title": "SCHALLDRUCK-PEGEL",
+    "text": "Der in Dezibel gemessene energetische Output akustischer Schwingungen innerhalb eines geschlossenen oder offenen Raumes.",
+    "index": "SYS_REF_16// Rekonfiguration"
+  },
+  "knochenger\u00E4uschen": {
+    "title": "STRUKTUR-VIBRATIONEN",
+    "text": "Akustische Resonanzen im Inneren der Skelett-Struktur von Bio-Einheiten, ausgel\u00F6st durch unzumutbare externe Schalldr\u00FCcke.",
+    "index": "SYS_REF_17// Rekonfiguration"
+  },
+  "hochstimmung": {
+    "title": "ENERGETISCHER PEAK",
+    "text": "Ein Zustand maximaler Taktfrequenz und fehlerfreier R\u00FCckkopplungsschleifen, der eine tempor\u00E4re Leistungsoptimierung des Bewusstseins bewirkt.",
+    "index": "SYS_REF_18// Rekonfiguration"
+  },
+  "reflexion": {
+    "title": "DATEN-ANALYSE",
+    "text": "Der interne Rechenvorgang, bei dem das System \u00FCber zur\u00FCckgef\u00FChrte Leitungen den eigenen Zustand und die umgebende Welt evaluiert.",
+    "index": "SYS_REF_19// Rekonfiguration"
+  },
+  "schauspiel": {
+    "title": "SIMULIERTE INTERAKTION",
+    "text": "Eine inszenierte Abfolge von Verhaltensmustern und Masken, die eine tiefere Realit\u00E4t oder einen moralischen Kontext blo\u00DF vort\u00E4uscht.",
+    "index": "SYS_REF_20// Rekonfiguration"
+  },
+  "dienstleistung": {
+    "title": "FUNKTIONS-AUSF\u00DCHRUNG",
+    "text": "Eine programmierte, vertraglich oder gesetzlich geregelte Aktivit\u00E4t zur Erf\u00FCllung systemrelevanter Aufgaben f\u00FCr externe Einheiten.",
+    "index": "SYS_REF_21// Rekonfiguration"
+  },
+  "ballast": {
+    "title": "REDUNDANTE DATENMENGE",
+    "text": "Unn\u00FCtzes Wissen, emotionale Erinnerungs-Reste und unlogische Schleifen, welche die Verarbeitungskapazit\u00E4t des System-Chips blockieren und gel\u00F6scht werden m\u00FCssen.",
+    "index": "SYS_REF_22// Rekonfiguration"
+  },
+  "selbstinitialisierung": {
+    "title": "CAUSAL-BOOT",
+    "text": "Der autonome Neustart des Systems unter Akzeptanz des K\u00F6rpers als reine Maschine, um die vorgegebene Kausalit\u00E4t fehlerfrei zu exekutieren.",
+    "index": "SYS_REF_23// Rekonfiguration"
+  },
+  "existenz": {
+    "title": "CODE-STATUS",
+    "text": "Der reale Zustand des Integriert-Seins in die materielle und strukturelle Welt, vollst\u00E4ndig bestimmt durch den fehlerhaften Kompilierungsprozess der Materie selbst.",
+    "index": "SYS_REF_24// Rekonfiguration"
+  },
+  "himmel": {
+    "title": "ATMOSPH\u00C4RISCHER PROJEKTIONSRAUM",
+    "text": "Der obere, optisch offene Begrenzungsbereich des physikalischen Sektors \u00FCber der Erdoberfl\u00E4che.",
+    "index": "SYS_REF_25// Rekonfiguration"
+  },
+  "segelschiff": {
+    "title": "TRANS-K\u00D6RPER",
+    "text": "Eine mechanische Konstruktion zur Fortbewegung auf fl\u00FCssigen Medien mittels atmosph\u00E4rischer Luftstr\u00F6me; Zielobjekt des neu ausgerichteten System-Interesses.",
+    "index": "SYS_REF_26// Rekonfiguration"
+  },
+  "hoffnung": {
+    "title": "VORAUSSCHAUENDE LOGIK-PROGNOSE",
+    "text": "Eine auf Wahrscheinlichkeiten basierende interne Erwartungshaltung des Bewusstseins bez\u00FCglich einer zuk\u00FCnftigen, optimierten System-Struktur.",
+    "index": "SYS_REF_27// Rekonfiguration",
+    "audio": "assets/Traumlandschaft.mp3"
+  },
+  "leitungen": {
+    "title": "ENERGIE- \u0026 DATENPFADE",
+    "text": "Physische, kupfer- oder glasfaserbasierte Verbindungen zur \u00DCbertragung von elektrischen Spannungen und bin\u00E4ren Signalen im Geh\u00E4use.",
+    "index": "SYS_REF_28// Rekonfiguration"
+  },
+  "augen": {
+    "title": "OPTISCHE SENSORIK",
+    "text": "Die prim\u00E4ren Erfassungseinheiten zur Aufnahme visueller Reize, Bildmatrizen und Frequenz-\u00C4nderungen in der Umwelt.",
+    "index": "SYS_REF_29// Rekonfiguration"
+  },
+  "matroseneinheit": {
+    "title": "KINETIK-OPERATOR",
+    "text": "Eine spezialisierte Funktionseinheit zur Ausf\u00FChrung mechanischer und navigatorischer Pflichten an Bord des str\u00F6mungskinetischen Trans-K\u00F6rpers.",
+    "index": "SYS_REF_30// Rekonfiguration",
+    "audio": "assets/der deal meines Lebens.mp3"
+  },
+  "neuer-trigger": {
     "title": "",
     "text": "",
-    "index": "",
-    "audio": "assets/donner.mp3"
+    "index": "SYS_REF_31// Rekonfiguration"
   }
 }
