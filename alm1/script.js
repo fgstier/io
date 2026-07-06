@@ -346,11 +346,15 @@ window.onload = async function() {
 // =================================================================
 // GLOBALER AUDIO-SPEICHER & KONTROLL-FUNKTIONEN
 // =================================================================
+// =================================================================
+// GLOBALER AUDIO-SPEICHER & KONTROLL-FUNKTIONEN
+// =================================================================
 let globalAudio = null;
 
 function VersucheAutomatischesAudio(audioDatei) {
     globalAudio = new Audio(`./audio/${audioDatei}`);
-    globalAudio.loop = false; //nur einmal
+    // KORREKTUR: Loop deaktiviert, damit die MP3 nur einmal abgespielt wird
+    globalAudio.loop = false; 
     
     globalAudio.play().catch(err => {
         console.log("Autoplay von Browser verhindert. Fallback-Link aktiviert.");
@@ -362,13 +366,17 @@ function VersucheAutomatischesAudio(audioDatei) {
 function ErzwingeAudioKopplung(audioDatei) {
     if (!globalAudio) {
         globalAudio = new Audio(`./audio/${audioDatei}`);
-        globalAudio.loop = false; //nur einmal
+        // KORREKTUR: Loop deaktiviert, damit die MP3 nur einmal abgespielt wird
+        globalAudio.loop = false;
+    } else {
+        // Falls das Objekt bereits existiert (z.B. durch den Autoplay-Versuch),
+        // stellen wir auch hier sicher, dass die Schleife abgeschaltet ist
+        globalAudio.loop = false;
     }
     globalAudio.play();
     const fallbackContainer = document.getElementById('audio-fallback-container');
     if (fallbackContainer) fallbackContainer.style.display = 'none';
 }
-
 // =================================================================
 // SEKTOR DRESDEN // APIS FÜR DEN ELB-STROM (10-BLOCK)
 // =================================================================
