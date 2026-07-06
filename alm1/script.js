@@ -350,7 +350,7 @@ let globalAudio = null;
 
 function VersucheAutomatischesAudio(audioDatei) {
     globalAudio = new Audio(`./audio/${audioDatei}`);
-    globalAudio.loop = true;
+    globalAudio.loop = false; //nur einmal
     
     globalAudio.play().catch(err => {
         console.log("Autoplay von Browser verhindert. Fallback-Link aktiviert.");
@@ -362,7 +362,7 @@ function VersucheAutomatischesAudio(audioDatei) {
 function ErzwingeAudioKopplung(audioDatei) {
     if (!globalAudio) {
         globalAudio = new Audio(`./audio/${audioDatei}`);
-        globalAudio.loop = true;
+        globalAudio.loop = false; //nur einmal
     }
     globalAudio.play();
     const fallbackContainer = document.getElementById('audio-fallback-container');
