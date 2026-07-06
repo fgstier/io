@@ -1,0 +1,14 @@
+var almanachDaten = {
+  "18_1": {
+    "titel": "SEKTOR I // ELBSTROM-MATRIX 1",
+    "status": "OFFLINE-SIMULATION // AKTIV",
+    "bild": "dampferflotte final (1).png",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Die signifikante Fluktuation der hydrostatischen Pegelwerte im Raum Dresden. "
+    ]
+  }
+};
+
