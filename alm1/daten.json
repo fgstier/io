@@ -1,14 +1,2690 @@
 var almanachDaten = {
-  "18_1": {
-    "titel": "SEKTOR I // ELBSTROM-MATRIX 1",
-    "status": "OFFLINE-SIMULATION // AKTIV",
-    "bild": "dampferflotte final (1).png",
+	"1_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
     "farbe": "#00f0ff",
     "audio": "donner.mp3",
     "textGroesse": "20px",
     "zeilen": [
-      "Die signifikante Fluktuation der hydrostatischen Pegelwerte im Raum Dresden. "
+      "Scheitelwasserstände an der Augustusbrücke"
+    ]
+  },
+	
+	"2_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Bewegungs-Matrix der Stadtbezirke"
+    ]
+  },
+  
+  "3_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS-Empfänger am Elbufer"
+    ]
+  },
+  
+
+  "4_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Bewegungs-Matrix über die Haupt-Quartale"
+    ]
+  },
+
+  "5_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Erfassung der 10 Haupt-Stadtbezirke"
+    ]
+  },
+
+  "6_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Bausubstanz- & Traglast-Parameter der Elbquerungen"
+    ]
+  },
+
+  "7_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "24h-Schallmessnetz-Knoten"
+    ]
+  },
+
+  "8_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Umweltatlas-Parameter / Sektor-Bodenbedeckung"
+    ]
+  },
+
+  "9_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Echtzeit-Kapazitätsabfrage der Mensen auf dem TUD-Campus"
+    ]
+  },
+
+"10_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Wissens-Arbeitsplätze und Netz-Knoten"
+    ]
+  },
+	
+"11_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Alterskohorten laut Melderegister"
+    ]
+  },
+
+"12_1": {
+    "titel": "SEKTOR 0: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Abfrage der aggregierten OpenData-Schnittstelle der Stadt Dresden"
+    ]
+  },
+
+
+	
+  "18_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "donner.mp3",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "19_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (2).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "20_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (1).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "21_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (12).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "22_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (6).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "23_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (5).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DER WASSERSTAND"
+    ]
+  },
+  "24_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (14).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "25_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (55).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "26_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (21).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "27_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (11).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "28_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (9).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "29_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (14).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "30_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (15).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "31_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (14).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "32_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s32.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STR\u00D6MUNG ALBERTBR\u00DCCKE"
+    ]
+  },
+  "33_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s33.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "MARIENBR\u00DCCKE WINDRUCK"
+    ]
+  },
+  "34_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s34.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "WALDSCHL\u00D6SSCHENBR\u00DCCKE NEBELINDEX"
+    ]
+  },
+  "35_1": {
+    "titel": "SEKTOR I: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "dresden (14).jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIE LEITF\u00C4HIGKEIT ELBE"
+    ]
+  },
+  "36_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s36.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "F\u00C4HRSTELLE PILLNITZ WIDERSTAND"
+    ]
+  },
+  "37_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s37.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DICHTE SCHILLERPLATZ"
+    ]
+  },
+  "38_1": {
+    "titel": "SEKTOR II: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s38.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "RESONANZWARNUNG ELBE"
+    ]
+  },
+  "39_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s39.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD DIESBAR SCHAUFELRAD-FREQUENZ"
+    ]
+  },
+  "40_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s40.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD LEIPZIG HYDROMECH. TIEFGANG"
+    ]
+  },
+  "41_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s41.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD DRESDEN ZYLINDER-W\u00C4RMEBILANZ"
+    ]
+  },
+  "42_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s42.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD KRIPPEN STR\u00D6MUNGSWIDERSTAND AM BUG"
+    ]
+  },
+  "43_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s43.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD STADT WEHLEN TRAGF\u00C4HIGKEITS-GRADIENT"
+    ]
+  },
+  "44_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s44.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD MEISSEN WINDDRIFT - SEITEN-ABTRIEB"
+    ]
+  },
+  "45_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s45.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD KURORT RATHEN KAVITATIONSRISIKO"
+    ]
+  },
+  "46_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s46.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD PILLNITZ REIBUNGSWIDERSTAND DER RADWELLEN-LAGER"
+    ]
+  },
+  "47_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s47.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PD PIRNA HYDRATION SCHWEBSTOFFBELASTUNG"
+    ]
+  },
+  "48_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s48.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "MS GR\u00C4FIN COSEL PROPELLER-VORTRIEB"
+    ]
+  },
+  "49_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s49.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "MS AUGUST DER STARKE K\u00DCHLUNGS-TEMPERATUR"
+    ]
+  },
+  "50_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s50.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ANLEGESTELLE TERRASSENUFER ANLEGE-SCHWINGUNGSINDEX"
+    ]
+  },
+  "51_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s51.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FAHRVERBOTS-INDIKATOR (NIEDRIGWASSERWARNUNG)"
+    ]
+  },
+  "52_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s52.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SCHIFFSWERFT LAUBEGAST DOCK-HYDRAULIKSWERTE"
+    ]
+  },
+  "53_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s53.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LOSCHWITZ LOKALER STR\u00D6MUNGSSTAU"
+    ]
+  },
+  "54_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s54.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "KONDENSATIONS - KOEFFIZIENT AM SCHORNSTEIN"
+    ]
+  },
+  "55_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s55.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "UKW-ST\u00D6RUNGSRATE"
+    ]
+  },
+  "56_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s56.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ANLEGER PILLNITZ RECHTLICHE ANLEGEZONEN-SICHERHEIT"
+    ]
+  },
+  "57_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s57.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "TR\u00C4GHEITSKOEFFIZIENT STROMABW\u00C4RTS"
+    ]
+  },
+  "58_1": {
+    "titel": "SEKTOR III: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s58.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLOTTEN-GESAMT-ENERGIEINDEX"
+    ]
+  },
+  "59_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s59.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBTAL WINDGESCHWINDIGKEIT"
+    ]
+  },
+  "60_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s60.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBTAL WINDRICHTUNG"
+    ]
+  },
+  "61_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s61.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "62_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s62.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "63_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s63.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "64_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s64.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "65_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s65.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "66_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s66.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "67_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s67.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      ""
+    ]
+  },
+  "68_1": {
+    "titel": "SEKTOR IV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s68.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBTAL FEUCHTE ZIRKULATION"
+    ]
+  },
+  "69_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s69.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN WINDGESCHWINDIGKEIT"
+    ]
+  },
+  "70_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s70.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN WINDRICHTUNG"
+    ]
+  },
+  "71_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s71.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN WINDBOEEN"
+    ]
+  },
+  "72_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s72.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN QNH"
+    ]
+  },
+  "73_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s73.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFENSCHERWINDFAKTOR"
+    ]
+  },
+  "74_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s74.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFENTEMPERATUR KLOTZSCHE"
+    ]
+  },
+  "75_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s75.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN BEWOELKUNG"
+    ]
+  },
+  "76_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s76.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN WEATHER CODE"
+    ]
+  },
+  "77_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s77.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FLUGHAFEN LUFTDICHTE"
+    ]
+  },
+  "78_1": {
+    "titel": "SEKTOR V: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s78.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DIVERGENZ TAL FLUGHAFEN"
+    ]
+  },
+  "79_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s79.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS-STATUS DIESBAR"
+    ]
+  },
+  "80_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s80.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS GESCHWINDIGKEIT DIESBAR"
+    ]
+  },
+  "81_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s81.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS - KURS LEIPZIG"
+    ]
+  },
+  "82_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s82.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LATITUDE DAMPFER DRESDEN"
+    ]
+  },
+  "83_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s83.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS - LONGITUDE DAMPFER DRESDEN"
+    ]
+  },
+  "84_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s84.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS RSSI DAMPFER KRIPPEN"
+    ]
+  },
+  "85_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s85.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS MMSI STADT WEHLEN"
+    ]
+  },
+  "86_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s86.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS INTERVALL MEISSEN"
+    ]
+  },
+  "87_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s87.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ATIS GRAEFIN COSEL"
+    ]
+  },
+  "88_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s88.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AKTIVE AIS TRANSPONDER DRESDEN"
+    ]
+  },
+  "89_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s89.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS STATUS PILLNITZ"
+    ]
+  },
+  "90_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s90.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS GESCHWINDIGKEIT PILLNITZ"
+    ]
+  },
+  "91_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s91.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS KURS PIRNA"
+    ]
+  },
+  "92_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s92.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS MMSI PIRNA"
+    ]
+  },
+  "93_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s93.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS STATUS AUGUST DER STARKE"
+    ]
+  },
+  "94_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s94.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS KURS AUGUST DER STARKE"
+    ]
+  },
+  "95_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s95.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LATITUDE RATHEN"
+    ]
+  },
+  "96_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s96.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LONGITUDE RATHEN"
+    ]
+  },
+  "97_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s97.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS MMSI RATHEN"
+    ]
+  },
+  "98_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s98.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ATIS PIRNA"
+    ]
+  },
+  "99_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s99.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LATITUDE COSEL"
+    ]
+  },
+  "100_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s100.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LONGITUDE COSEL"
+    ]
+  },
+  "101_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s101.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS SIGNALLAUFZEIT"
+    ]
+  },
+  "102_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s102.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS ROTATIONSRATE FLOTTE"
+    ]
+  },
+  "103_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s103.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS KURS DRESDEN"
+    ]
+  },
+  "104_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s104.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS GESCHWINDIGKEIT DRESDEN"
+    ]
+  },
+  "105_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s105.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LATITUDE MEISSEN"
+    ]
+  },
+  "106_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s106.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS LONGITUDE MEISSEN"
+    ]
+  },
+  "107_1": {
+    "titel": "SEKTOR VI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s107.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "AIS INTEGRITAETSINDEX"
+    ]
+  },
+  "108_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s108.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN UV - INDEX"
+    ]
+  },
+  "109_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s109.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN SOLARSTRAHLUNG"
+    ]
+  },
+  "110_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s110.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN LUFTDRUCK MSL"
+    ]
+  },
+  "111_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s111.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN BEWOELKUNG HOCH"
+    ]
+  },
+  "112_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s112.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN VERDUNSTUNG"
+    ]
+  },
+  "113_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s113.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN DAMPFDRUCK DEFIZIT"
+    ]
+  },
+  "114_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s114.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN UV MAX ABSCH\u00C4TZUNG"
+    ]
+  },
+  "115_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s115.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DACHFLAECHEN ABSORPTION"
+    ]
+  },
+  "116_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s116.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "DRESDEN ALBEDO EFFEKT"
+    ]
+  },
+  "117_1": {
+    "titel": "SEKTOR VII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s117.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ATMOSPHAERISCHE STABILITAET"
+    ]
+  },
+  "118_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s118.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL ABFAHRT STADTLINIE"
+    ]
+  },
+  "119_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s119.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL SLOT STADTLINIE"
+    ]
+  },
+  "120_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s120.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL SCHLOESSERFAHRT 01"
+    ]
+  },
+  "121_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s121.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL ANKUNFT SCHLOESSERFAHRT 01"
+    ]
+  },
+  "122_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s122.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL SLOT SCHLOESSERFAHRT"
+    ]
+  },
+  "123_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s123.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL ABFAHRT SAECHSISCHESCHWEIZ"
+    ]
+  },
+  "124_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s124.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL KORRIDOR SCHWEIZ"
+    ]
+  },
+  "125_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s125.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL ABFAHRT ABENDFAHRT"
+    ]
+  },
+  "126_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s126.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL ANKUNFT ABENDFAHRT"
+    ]
+  },
+  "127_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s127.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL EINSATZ DIESBAR"
+    ]
+  },
+  "128_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s128.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL EINSATZ LEIPZIG"
+    ]
+  },
+  "129_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s129.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL EINSATZ DAMPFER DRESDEN"
+    ]
+  },
+  "130_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s130.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL AUSLASTUNG PIER1"
+    ]
+  },
+  "131_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s131.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL AUSLASTUNG PIER4"
+    ]
+  },
+  "132_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s132.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL FREQUENZ TERRASSENUFER"
+    ]
+  },
+  "133_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s133.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL SAISON STATUS"
+    ]
+  },
+  "134_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s134.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL MINDEST-LIEGEZEIT"
+    ]
+  },
+  "135_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s135.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL SCHLOESSERFAHRT 02"
+    ]
+  },
+  "136_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s136.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL BEREITSCHAFTS-QUOTE"
+    ]
+  },
+  "137_1": {
+    "titel": "SEKTOR VIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s137.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SOLL FAHRPLANINTEGRIT\u00C4T"
+    ]
+  },
+  "138_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s138.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM KINETISCHE ENERGIE"
+    ]
+  },
+  "139_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s139.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM HYDRAULISCHE LEISTUNG"
+    ]
+  },
+  "140_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s140.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM SOHLSCHUBSPANNUNG"
+    ]
+  },
+  "141_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s141.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM REYNOLDSZAHL"
+    ]
+  },
+  "142_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s142.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROMVISKOSITAET"
+    ]
+  },
+  "143_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s143.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM MASSENDURCHSATZ"
+    ]
+  },
+  "144_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s144.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ELBE STROM FROUDEZAHL"
+    ]
+  },
+  "145_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s145.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "COSEL HYDROSTATISCHER DRUCK"
+    ]
+  },
+  "146_1": {
+    "titel": "SEKTOR IX: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s146.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ZELLE KINETISCHER IMPULS"
+    ]
+  },
+  "147_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s147.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR WELLENLAENGE DIESBAR"
+    ]
+  },
+  "148_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s148.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR THERMISCHE SIGNATUR DIESBAR"
+    ]
+  },
+  "149_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s149.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR HYDROAKUSTIK LEIPZIG"
+    ]
+  },
+  "150_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s150.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR VERDR\u00C4NGUNG DRESDEN"
+    ]
+  },
+  "151_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s151.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR TURBULENZ MEISSEN"
+    ]
+  },
+  "152_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s152.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR KAVITATION COSEL"
+    ]
+  },
+  "153_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s153.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR BUGWELLEN ENERGIE PILLNITZ"
+    ]
+  },
+  "154_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s154.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR ABGAS AUGUST DER STARKE"
+    ]
+  },
+  "155_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s155.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR SCHAUFELRAD ECHO REICHWEITE"
+    ]
+  },
+  "156_1": {
+    "titel": "SEKTOR X: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s156.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SPUR WIDERSTAND COSEL"
+    ]
+  },
+  "157_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s157.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "POSTPLATZ (ZENTRALER KNOTEN)"
+    ]
+  },
+  "157_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s157.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "POSTPLATZ VERZOEGERUNG"
+    ]
+  },
+  "157_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s157.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "POSTPLATZ BARRIERE"
+    ]
+  },
+  "158_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s158.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ALBERTPLATZ (NEUSTADT-ACHSE)"
+    ]
+  },
+  "158_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s158.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ALBERTPLATZ VERZOEGERUNG"
+    ]
+  },
+  "158_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s158.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ALBERTPLATZ BARRIERE"
+    ]
+  },
+  "159_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s159.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PIRNAISCHER PLATZ (ALTSTADT-RING)"
+    ]
+  },
+  "159_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s159.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PIRNAISCHER PLATZ VERZOEGERUNG"
+    ]
+  },
+  "159_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s159.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PIRNAISCHER PLATZ BARRIERE"
+    ]
+  },
+  "160_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s160.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "HAUPTBAHNHOF (ZENTRAL-HABITAT-EINGANG)"
+    ]
+  },
+  "160_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s160.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "HAUPTBAHNHOF VERZOEGERUNG"
+    ]
+  },
+  "160_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s160.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "HAUPTBAHNHOF BARRIERE"
+    ]
+  },
+  "161_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s161.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "BAHNHOF NEUSTADT (NORD-KNOTEN)"
+    ]
+  },
+  "161_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s161.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "BAHNHOF NEUSTADT VERZOEGERUNG"
+    ]
+  },
+  "161_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s161.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "BAHNHOF NEUSTADT BARRIERE"
+    ]
+  },
+  "162_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s162.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSENBAHNHOF MICKTEN (NORD-WEST-KNOTEN)"
+    ]
+  },
+  "162_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s162.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSENBAHNHOF MICKTEN VERZOEGERUNG"
+    ]
+  },
+  "162_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s162.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSENBAHNHOF MICKTEN BARRIERE"
+    ]
+  },
+  "163_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s163.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "THARANDTER STRASSE (KNOTEN L\u00D6BTAU)"
+    ]
+  },
+  "163_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s163.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "THARANDTER STRASSE VERZOEGERUNG"
+    ]
+  },
+  "163_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s163.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "THARANDTER STRASSE BARRIERE"
+    ]
+  },
+  "164_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s164.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSBURGER PLATZ (GL\u00C4SERNE MANUFAKTUR)"
+    ]
+  },
+  "164_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s164.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSBURGER PLATZ VERZOEGERUNG"
+    ]
+  },
+  "164_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s164.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "STRASSBURGER PLATZ BARRIERE"
+    ]
+  },
+  "165_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s165.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SACHSENPLATZ (GERICHTS-SEKTOR)"
+    ]
+  },
+  "165_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s165.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SACHSENPLATZ VERZOEGERUNG"
+    ]
+  },
+  "165_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s165.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SACHSENPLATZ BARRIERE"
+    ]
+  },
+  "166_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s166.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "REICK (DEPOT-KNOTEN OST)"
+    ]
+  },
+  "166_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s166.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "REICK VERZOEGERUNG"
+    ]
+  },
+  "166_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s166.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "REICK BARRIERE"
+    ]
+  },
+  "167_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s167.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SCHILLERPLATZ (BLAUES WUNDER)"
+    ]
+  },
+  "167_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s167.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SCHILLERPLATZ VERZOEGERUNG"
+    ]
+  },
+  "167_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s167.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "SCHILLERPLATZ BARRIERE"
+    ]
+  },
+  "168_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s168.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "WASAPLATZ (STREHLEN-SEKTOR)"
+    ]
+  },
+  "168_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s168.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "WASAPLATZ VERZOEGERUNG"
+    ]
+  },
+  "168_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s168.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "WASAPLATZ BARRIERE"
+    ]
+  },
+  "169_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s169.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LENN\u00C9PLATZ (REICHSTRASSEN-ACHSE)"
+    ]
+  },
+  "169_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s169.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LENN\u00C9PLATZ VERZOEGERUNG"
+    ]
+  },
+  "169_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s169.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LENN\u00C9PLATZ BARRIERE"
+    ]
+  },
+  "170_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s170.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LISTSTRASSE (TRACHENBERGE-KNOTEN)"
+    ]
+  },
+  "170_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s170.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LISTSTRASSE VERZOEGERUNG"
+    ]
+  },
+  "170_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s170.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "LISTSTRASSE BARRIERE"
+    ]
+  },
+  "171_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s171.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "B\u00DCHLAU (URBANE NORD-GRENZE)"
+    ]
+  },
+  "171_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s171.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "B\u00DCHLAU VERZOEGERUNG"
+    ]
+  },
+  "171_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s171.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "B\u00DCHLAU BARRIERE"
+    ]
+  },
+  "172_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s172.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "N\u00DCRNBERGER PLATZ (UNIVERSIT\u00C4TS-ZELLE)"
+    ]
+  },
+  "172_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s172.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "N\u00DCRNBERGER PLATZ VERZOEGERUNG"
+    ]
+  },
+  "172_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s172.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "N\u00DCRNBERGER PLATZ BARRIERE"
+    ]
+  },
+  "173_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s173.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ZSCHERTNITZ (S\u00DCD-ENDPUNKT)"
+    ]
+  },
+  "173_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s173.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ZSCHERTNITZ VERZOEGERUNG"
+    ]
+  },
+  "173_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s173.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "ZSCHERTNITZ BARRIERE"
+    ]
+  },
+  "174_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s174.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PLATZ DER EINHEIT (NEUSTADT-ZENTRUM)"
+    ]
+  },
+  "174_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s174.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PLATZ DER EINHEIT VERZOEGERUNG"
+    ]
+  },
+  "174_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s174.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PLATZ DER EINHEIT BARRIERE"
+    ]
+  },
+  "175_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s175.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FINANZMINISTERIUM (REGIERUNGS-VIERTEL)"
+    ]
+  },
+  "175_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s175.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FINANZMINISTERIUM VERZOEGERUNG"
+    ]
+  },
+  "175_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s175.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "FINANZMINISTERIUM BARRIERE"
+    ]
+  },
+  "176_1": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s176.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PROHLIS (URBANER S\u00DCD-OST-KNOTEN)"
+    ]
+  },
+  "176_2": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s176.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PROHLIS VERZOEGERUNG"
+    ]
+  },
+  "176_3": {
+    "titel": "SEKTOR XI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s176.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "PROHLIS BARRIERE"
+    ]
+  },
+  "177_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s177.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Wiener Bruecke"
+    ]
+  },
+  "178_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s178.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Blaues Wunder"
+    ]
+  },
+  "179_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s179.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Terrassenufer"
+    ]
+  },
+  "180_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s180.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Bautzner Steigung"
+    ]
+  },
+  "181_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s181.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Marienbruecke Lichte Weite"
+    ]
+  },
+  "182_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s182.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Neumarkt"
+    ]
+  },
+  "183_1": {
+    "titel": "SEKTOR XII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s183.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dauer Sperrung Elbwiesen"
+    ]
+  },
+  "184_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s184.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Bergstrasse"
+    ]
+  },
+  "185_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s185.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Bautzner Str."
+    ]
+  },
+  "186_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s186.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos St.Petersburgerstr."
+    ]
+  },
+  "187_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s187.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Meissner Landstr."
+    ]
+  },
+  "188_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s188.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Koenigsbruecker Str."
+    ]
+  },
+  "189_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s189.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Wiener Str."
+    ]
+  },
+  "190_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s190.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Loebtauer Str."
+    ]
+  },
+  "191_1": {
+    "titel": "SEKTOR XIII: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s191.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Vamos Dohnaer Str."
+    ]
+  },
+  "192_1": {
+    "titel": "SEKTOR XIV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s192.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Astronomie Sonnenstand Dresden"
+    ]
+  },
+  "192_2": {
+    "titel": "SEKTOR XIV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s192.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Astronomie Mondphase Dresden:"
+    ]
+  },
+  "192_3": {
+    "titel": "SEKTOR XIV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s192.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Astronomie Tageslaenge Dresden:"
+    ]
+  },
+  "193_1": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s193.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "RSS Stadtgeschehen Dresden:"
+    ]
+  },
+  "193_2": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s193.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "RSS Kultur Dresden"
+    ]
+  },
+  "193_3": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s193.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dresdner Kalender Gedenktag"
+    ]
+  },
+  "194_1": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s194.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Autor Matrix Segment"
+    ]
+  },
+  "194_2": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s194.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Verursachungsprozessor-Segment"
+    ]
+  },
+  "194_3": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s194.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Sektor Resonanz"
+    ]
+  },
+  "195_1": {
+    "titel": "SEKTOR XV: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s195.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Philosophische Resonanz Scan Datum"
+    ]
+  },
+  "196_1": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s196.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Historische Sport Trag\u00F6die Flugzeug"
+    ]
+  },
+  "196_2": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s196.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Historisches Dynamo Ausschluss 1991"
+    ]
+  },
+  "197_1": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s197.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Historischer Erster Aufstieg"
+    ]
+  },
+  "197_2": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s197.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Dsc Volleyball Erster Titel"
+    ]
+  },
+  "198_1": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s198.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Stadion Geometrie"
+    ]
+  },
+  "198_2": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s198.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Steyer Stadion Profil"
+    ]
+  },
+  "199_1": {
+    "titel": "SEKTOR XVI: // ELBSTROM-MATRIX",
+    "status": "ONLINE-STATUS - AKTIV",
+    "bild": "s199.jpg",
+    "farbe": "#00f0ff",
+    "audio": "",
+    "textGroesse": "20px",
+    "zeilen": [
+      "Sport Jubilaeum"
     ]
   }
 };
-
