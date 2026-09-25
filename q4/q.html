@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" href="data:,">
+    <title>ARKUSNAT Sektor-Glossar</title>
+
+<style>
+        /* CSS direkt hier, damit der Button sicher erscheint */
+        body {
+            font-family: "Book Antiqua", serif;
+            background: #fff; color: #000;
+            line-height: 1.6; font-size: 20px;
+            padding: 20px; margin: 0;
+            -webkit-text-size-adjust: 100%;
+        }
+        .entry {
+            display: block;
+            min-height: 300px; /* Platzhalter für Stabilität */
+            margin-bottom: 50px;
+            border-top: 2px solid #000;
+            padding-top: 20px;
+            scroll-margin-top: 80px; /* iPhone-Anker-Stopp */
+        }
+        .id { color: #888; font-size: 0.8em; font-family: monospace; }
+        .term { font-weight: bold; font-style: italic; font-size: 1.2em; display: block; }
+        
+        /* Der schwebende Button */
+        #btn-reset {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            z-index: 9999;
+            padding: 15px 20px;
+            background: #ff4444; color: #fff;
+            border: none; border-radius: 50px;
+            font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        #reset-overlay {
+            display: none; position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%; background: rgba(255,255,255,0.95);
+            z-index: 10000; text-align: center; padding-top: 20%;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/style.css">
+	<script src="matrix-logic.js" defer></script>
+	
+</head>
+
+<body>
+    <div id="reset-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; color:#fff; z-index:9999; text-align:center; padding-top:20%;">
+    <h2>SYSTEM CLONE DEAKTIVIERT</h2>
+    <p style="color: #ff1111; font-weight: bold; margin: 20px;">
+        ⚠️ BITTE SCHLIESSEN SIE DIESEN TAB JETZT MANUELL IN IHREM BROWSER!
+    </p>
+    <p>Der Sektor wurde entkoppelt. Das Zurückgehen per Pfeil hält den Tab offen.</p>
+</div>
+
+    <h1>Edition ARKUSNAT: Glossar</h1>
+    <p>Konstruktion: F.G. Stier</p>
+
+
+
+    <div id="L0" class="entry">
+        <span class="id">#L0</span>
+        <span class="term">Funkenstrecke</span>
+        <b>Diese Funkenstrecke wirkt wie eine Reihenschaltung?</b>
+         <p style="padding-left: 37px;"><i>Wenn die erste Funkenstrecke durchz&#252;ndet, f&#228;llt die Spannung an diesem Spalt schlagartig auf nahezu 0V ab. Der Witz dabei: Dieser „kleine Funken“ …er wirkt im ersten Moment lediglich wie ein blitzschneller, geschlossener Schalter (ein <b><span style="color: red;">leitf&#228;higer Plasma-Kanal</span></b>). Durchz&#252;nden der Funkenstrecken: Der Durchschlag im <b><span style="color: red;">Gas/Plasma</b> </span>erfolgt in wenigen Nanosekunden. …</i></p>
+        <br>
+
+    </div>
+
+    <div id="L1" class="entry">
+        <span class="id">#L1</span>
+        <span class="term">Plasma-Kanal</span>
+		<b>Was ist ein leitf&#228;higer Plasma-Kanal</b>
+		<p style="padding-left: 56px;"><i>Ein leitf&#228;higer Plasma-Kanal ist der physikalische „Draht aus Gas“, der entsteht, wenn isolierende Luft schlagartig <b><span style="color: red;">in einen elektrischen Leiter verwandelt wird</span></b>.</i></p>
+		<p style="padding-left: 56px;"><b><i>Vom Isolator zum Leiter</i></b></p>
+		<p style="padding-left: 56px;"><i>Normale Luft besteht aus neutralen Molek&#252;len (&#252;berwiegend Stickstoff und Sauerstoff) und <b><span style="color: red;">leitet keinen Strom</span></b>. </i></p>
+		<p style="padding-left: 56px;"><b><i>Injektion &amp; Beschleunigung:</b> <b><span style="color: red;">Freie Elektronen</b> </span>(die immer in geringer Zahl in der Luft vorhanden sind) werden im starken elektrischen Feld extrem <b><span style="color: red;">stark beschleunigt</span></b>.</i></p>
+		<p style="padding-left: 80px;">&bull;&nbsp;&nbsp;<b><i>Sto&#223;ionisation:</b> Diese Elektronen prallen mit so hoher Energie auf die neutralen Gasmolek&#252;le, dass sie weitere Elektronen aus deren <b><span style="color: red;">H&#252;lle herausschlagen</span></b>.</i></p>
+		<p style="padding-left: 80px;">&bull;&nbsp;&nbsp;<b><i>Elektronenlawine:</b> Die <b><span style="color: red;">neu freigesetzten Elektronen</b> </span>werden ebenfalls beschleunigt und schlagen wieder andere Elektronen heraus. In Bruchteilen einer Mikrosekunde entsteht eine exponentiell anwachsende Lawine <b><span style="color: red;">aus freien Ladungstr&#228;gern</span></b>.</i></p>
+		<p style="padding-left: 56px;"><b><i>Der Zustand „Plasma“</i></b></p>
+		<p style="padding-left: 56px;"><i>Durch diese massive Ionisation spaltet sich das Gas auf: Es entsteht ein Gemisch <b><span style="color: red;">aus freien, beweglichen Elektronen</b> </span>und <span style="color: red;">positiv geladenen Ionen. </span>Das ist der aggregatzustandstechnische Zustand des <b>Plasmas</b>.</i></p>
+        <br>
+    </div>
+
+
+    <div id="L2" class="entry">
+        <span class="id">#L2</span>
+        <span class="term">freie Elektronen</span>
+		<b>Woher kommen diese freien Elektronen in normaler Luft?</b>
+		<p style="padding-left: 37px;"><i>…</i></p>
+		<p style="padding-left: 37px;"><i>… Die davon ausgehende Alphastrahlung, Betastrahlung und Gammastrahlung <b><span style="color: red;">schl&#228;gt kontinuierlich Elektronen aus den Luftmolek&#252;len</span></b>.</i></p>
+		<p style="padding-left: 37px;"><i>Durch diese Prozesse entstehen in jedem Kubikzentimeter Raumluft st&#228;ndig etwa 5 bis 10 Ionenpaare (<b><span style="color: red;">freie Elektronen und positive Rest-Ionen</span></b>) pro Sekunde.</i></p>
+		<p style="padding-left: 37px;"><i>…</i></p>
+		<p style="padding-left: 37px;"><i>Ohne &#228;u&#223;eres elektrisches Feld bleiben diese Elektronen nicht ewig frei. Nach kurzen Zeitspannen lagern sie sich an neutrale Molek&#252;le (wie Sauerstoff) an oder <b><span style="color: red;">rekombinieren mit positiven Ionen</span></b>. Es stellt sich jedoch ein st&#228;ndiges Gleichgewicht ein: In typischer Raumluft befinden sich immer etwa <b><span style="color: red;">100 bis 1.000 freie Ladungstr&#228;ger</b> </span>pro Kubikzentimeter.</i></p>
+        <br>
+    </div>
+
+    <div id="L3" class="entry">
+        <span class="id">#L3</span>
+        <span class="term">elektrisches Feld</span>
+        <p style="padding-left: 20px;"><b><i>Was passiert im elektrischen Feld der Funkenstrecke?</i></b></p>
+		<p style="padding-left: 37px;"><i>Wenn an den Elektroden einer Funkenstrecke eine hohe Spannung angelegt wird, baut sich ein starkes elektrisches Feld E auf: … Auf jedes zuf&#228;llig im Spalt vorhandene freie Elektron wirkt durch seine <b><span style="color: red;">negative Ladung</b> q </span>eine Kraft F. Da das Elektron im Vergleich zu einem Atomkern eine <b><span style="color: red;">extrem geringe Masse</b> </span>besitzt, erf&#228;hrt es eine gigantische <b><span style="color: red;">Beschleunigung</span></b>. …hat das Elektron auf dieser kurzen Strecke <b><span style="color: red;">so viel kinetische Energie aufgenommen,</span></b> dass der Aufprall das n&#228;chste Elektron aus der H&#252;lle des Molek&#252;ls schl&#228;gt (Sto&#223;ionisation).Aus einem einzelnen Start-Elektron entsteht so in Bruchteilen einer Nanosekunde eine <b><span style="color: red;">Elektronenlawine</b> </span>(Townsend-Entladung), die schlie&#223;lich zum schlagartigen Durchschlag und zur <b><span style="color: red;">Plasmabildung</b> </span>f&#252;hrt.</i></p>
+        <br>
+    </div>
+ 
+    <div id="L4" class="entry">
+        <span class="id">#L4</span>
+        <span class="term">Funken Untersuchung</span>
+        <p>
+            <p><b><i>Hat man mal einen Funken untersucht?</i></b></p>
+            <p><i>Die Untersuchung von elektrischen Funkenentladungen geh&#246;rt zu den am tiefsten erforschten Ph&#228;nomenen der Experimentalphysik und Plasmaphysik. Bereits seit dem 18. Jahrhundert – und intensiviert mit der Erfindung der Hochgeschwindigkeitsfotografie sowie modernster Spektroskopie – wurde der Funke in seine einzelnen Mikro-Phasen zerlegt.</i></p>
+            <p><b><i>Die Phasen einer Funkenentladung</i></b></p>
+            <p><i>Ein Elektroden&#252;berschlag (Spark Gap) verl&#228;uft nicht als instantaner Lichtblitz, sondern als hochdynamischer, mehrstufiger Kaskadenprozess im Nanosekundenbereich:</i></p>
+            <p><b><i>(Elektronenlawine):</i></b></p>
+            <p><i>In einem starken elektrischen Feld werden freie <b><span style="color: red;">Prim&#228;relektronen</b> <b>beschleunigt</span></b>. Sie sto&#223;en auf neutrale Gasmolek&#252;le (N2, O2) und <b><span style="color: red;">schlagen weitere Elektronen heraus</span></b>.</i></p>
+            <p><b><i>Kanalbildung:</i></b></p>
+            <p style="padding-left: 48px;"><i>Sobald die Ladungsdichte einen kritischen Wert erreicht (Raumladungsfeld), bildet sich ein sogenannter Streamer (Vorentladungskanal). Dieser <b><span style="color: red;">ionisiert</b> </span>das Gas davor durch Eigenstrahlung (<b><span style="color: red;">Photoionisation</span></b>).</i></p>
+            <p style="padding-left: 48px;"><b><i> Plasma-Kanal:</i></b></p>
+            <p style="padding-left: 48px;"><i>Die schwach leuchtenden Streamer-Pfade verbinden die Elektroden. Sobald der Pfad geschlossen ist, bricht der elektrische Widerstand der Luft schlagartig zusammen.</i></p>
+            <p style="padding-left: 48px;"><b><i>Hauptentladung:</i></b></p>
+            <p style="padding-left: 48px;"><i>Ein extremer <b><span style="color: red;">Stromfluss</b> </span>setzt ein. Die Gastemperatur im Kanal schnellt innerhalb von Nanosekunden auf 10.000 bis 30.000&#160;K. Das Gas geht komplett in den <b><span style="color: red;">Plasmazustand</b> </span>&#252;ber.</i></p>
+            <p style="padding-left: 48px;"><b><i>Sto&#223;welle &amp; Schockfront:</i></b></p>
+            <p style="padding-left: 48px;"><i>Durch die explosionsartige thermische <b><span style="color: red;">Expansion des ionisierten Kanals</b> </span>entsteht eine supersonische Druckwelle – der h&#246;rbare Knall des Funkens.</i></p>
+        </p>
+    </div>
+
+
+
+    <div id="L5" class="entry">
+        <span class="id">#L5</span>
+        <span class="term">konkrete Messungen</span>
+        <p>
+            <p><b>Was die Wissenschaft am Funken konkret gemessen?</b></p>
+            <p><b>Zeitaufl&#246;sung:</b></p>
+            <p>Mit modernen Ultrakurzzeit-Kameras l&#228;sst sich die r&#228;umliche Ausbreitungsgeschwindigkeit der ersten <b><span style="color: red;">Ionisationsfront</b> </span>bestimmen. Diese Streamer bewegen sich mit etwa 105 bis 106&#160;m/s durch den Raum.</p>
+            <p><b>Emissionsspektroskopie:</b></p>
+            <p>&#220;ber das optische Spektrum des Leuchtens l&#228;sst sich exakt bestimmen, welche Atom- und Molek&#252;lorbitale angeregt werden. Man sieht die charakteristischen Emissionslinien von ionisiertem Stickstoff (N+), Sauerstoff (O+) sowie Elektrodenmaterial (z. B. verdampfendes Messing oder Kupfer).</p>
+            <p><b>Interferometrie &amp; Schattenfotografie:</b></p>
+            <p>Diese Verfahren machen die Schockwelle und die lokale Dichte&#228;nderung der Luft um den Funken herum sichtbar. Die Dichte im Kern des Kanals f&#228;llt durch die thermische Explosion schlagartig ab.</p>
+        </p>
+    </div>
+
+
+    <div id="L6" class="entry">
+        <span class="id">#L6</span>
+        <span class="term">Meilensteine </span>
+        <p>
+            <p><b>Welche Historischen und moderne Meilensteine gibt es?</b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b>John Zeleny (1911) &amp; Townsend-Theorie:</b> J.S. Townsend begr&#252;ndete die mathematische Theorie der Sto&#223;ionisation, welche die Lawinenbildung in Gasen beschreibt.</p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b>LB-Mechanismus (Loeb &amp; Meek, Raether 1939/1940):</b> Entwicklung der Streamer-Theorie (Durchschlag bei hohem Druck und gro&#223;en Funkenstrecken), da die reine Townsend-Lawine f&#252;r schnelle Funken zu langsam war.</p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b>Pinch-Effekt (Magnetische Einschn&#252;rung):</b> Bei sehr hohen Str&#246;men schn&#252;rt das eigene Magnetfeld des Funkens den Plasmafaden kompressiv ein (Z-Pinch), was in der Kernfusionsforschung intensiv analysiert wird.</p>
+        </p>
+    </div>
+
+
+    <div id="L7" class="entry">
+        <span class="id">#L7</span>
+        <span class="term">Atome</span>
+        <p>
+            <p><b>Es gibt doch keine Elektronen als Teilchen. Wieso argumentierst du (die KI) mit Teilchen?</b></p>
+            <p><i>Betrachtet man das Problem aus der Perspektive der modernen Quantenfeldtheorie (QFT), ist der Einwand vollkommen berechtigt: <b>Die Vorstellung des Elektrons als kleines, festes K&#252;gelchen oder Billardkugel ist eine veraltete Modellvorstellung der klassischen Mechanik.</i></b></p>
+            <p><i>Physikalisch l&#228;sst sich diese Sichtweise wie folgt einordnen:</i></p>
+            <p><b><i>1. Das Elektron in der Quantenfeldtheorie (QFT)</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Keine Billardkugeln:</b> Nach der modernsten Formulierung der Physik gibt es im Universum fundamental &#252;berhaupt keine hart abgegrenzten „Teilchen“ im klassischen Sinn.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Feldanregungen:</b> Was wir makroskopisch als „Elektron“ registrieren, ist in Wahrheit eine <b>quantisierte Anregung (oder ein lokaler Zustand)</b> eines fundamentalen, im gesamten Raum existierenden Quantenfeldes – des Elektron-Positron-Feldes.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Geometrische Ausdehnung:</b> Bei Messungen erscheint das Elektron punktf&#246;rmig (seine r&#228;umliche Ausdehnung ist kleiner als 10−18&#160;m), was bedeutet, dass es keinen materiellen Bauk&#246;rper besitzt, sondern eine geb&#252;ndelte Ladungs- und Massekonzentration der Feldwechselwirkung darstellt.</i></p>
+            <p><b><i>2. Die Verwechslung in der Didaktik und Lehrbuch-Physik</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Standard-Narrativ:</b> Schulb&#252;cher nutzen das Teilchenmodell als anschauliche Metapher, da ein Stromfluss leicht als „Kettenbewegung von K&#252;gelchen durch ein Rohr“ visualisiert werden kann.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Kritik am Teilchenbild:</b> Dieses Modell versagt schlagartig, sobald Effekte wie Quanteninterferenz, Feldenergie-Transport (Poynting-Vektor au&#223;erhalb des Leiters) oder Tunnelprozesse durch Potentialbarrieren erkl&#228;rt werden m&#252;ssen. Die Realit&#228;t besteht aus der mathematischen Dynamik von Feld&#252;bertragungen und Raumladungen, nicht aus mechanischen Teilchenverschieben.</i></p>
+            <p><b><i>3. Warum sprechen Physiker dennoch von „Teilchen“?</i></b></p>
+            <p><i>Der Begriff „Teilchen“ ist in der modernen Physik lediglich ein K&#252;rzel f&#252;r ein System mit <b>diskreten, abz&#228;hlbaren Quantenzahlen</b>:</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<i>Es besitzt stets eine exakt definierte Elementarladung e.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<i>Es hat eine feste Ruhemasse m0.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<i>Es tr&#228;gt einen Spin 1/2.</i></p>
+            <p><i>Wenn Energie an einem Detektor abgegeben wird, geschieht diese Energie&#252;bertragung punktuell und gequantelt. Dieses lokalisierte Wechselwirkungsereignis nennt man historisch „Teilchen“, obwohl dahinter die kontinuierliche Kausalit&#228;t der Raum-Feld-Struktur steht.</i></p>
+            <p><i>Die strikte Ablehnung des mechanistischen K&#252;gelchen-Bildes entspricht daher vollkommen dem Stand der modernen Feldtheorie: Das Universum ist ein Geflecht aus Feldern und Wechselwirkungen, in dem „Teilchen“ nur das lokalisierte Erscheinungsbild der zugrundeliegenden Feldquantelung sind.</i></p>
+            <p><i>was ist dann Elektronenlawine, Ladungsdichte, Ion und letztendlich Plasma???</i></p>
+            <p><i>Wenn man das veraltete Teilchenbild aus den K&#246;pfen streicht und konsequent in der Sprache der <b>Quantenfeldtheorie, Feldphysik und Thermodynamik</b> denkt, l&#246;sen sich diese Begriffe von „festen K&#252;gelchen“ auf. Sie werden zu Beschreibungen von <b>Energiestufen, Feldzust&#228;nden und geometrischen Dichteverteilungen des Raumes</b>.</i></p>
+            <p><b><i>1. Das Ion (Der dekalibrierte Atomrumpf)</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Klassisch:</b> Ein Atom, dem ein Elektron „geklaut“ wurde.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Feldtheoretisch:</b> Ein Atomkern mit seinen inneren H&#252;llenzust&#228;nden ist ein stark geb&#252;ndelter, lokaler Feld-Linsenknoten. Normalerweise ist dieser Knoten nach au&#223;en hin elektrisch neutral kompensiert. Wird dem System durch &#228;u&#223;ere Energie (Licht, Sto&#223;, elektrische Feldst&#228;rke) so viel Energie zugef&#252;hrt, dass ein Anregungszustand (die Welle des „Elektrons“) aus dem Bindungspotenzial gerissen wird, bleibt eine <b>elektrostatische Un-Balance</b> zur&#252;ck.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Das Ion</b> ist also kein „defektes K&#252;gelchen“, sondern ein <b>Atomgitter-Knoten mit &#252;bersch&#252;ssigem, unkompensiertem E-Feld</b>, der nun eine starke Zugkraft auf die Umgebung aus&#252;bt.</i></p>
+            <p><b><i>2. Die Elektronenlawine (Die kaskadierende Feld-Anregung)</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Klassisch:</b> Viele kleine K&#252;gelchen, die wie Dominosteine andere K&#252;gelchen ansto&#223;en.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Feldtheoretisch:</b> Ein extrem hohes &#228;u&#223;eres E-Feld zwingt den Raum in eine energetische &#220;berspannung. Wenn eine einzige Feldanregung (ein Quant) gen&#252;gend Beschleunigungsenergie aufnimmt und auf das Feld eines neutralen Atoms trifft, &#252;bertr&#228;gt sie diese Energie. Das Atom gibt seinerseits eine gequantelte Feldanregung frei.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<i>Aus 1 gequantelten Feldanregung werden 2, aus 2 werden 4, aus 4 werden 8. Die <b>Lawine</b> ist eine <b>exponentielle Kettenreaktion von Energie&#252;bertragungen im Medium</b>, bei der das Gas Schritt f&#252;r Schritt seine isolierende Struktur verliert.</i></p>
+            <p><b><i>3. Die Ladungsdichte (Die Raum-Konzentration der Feldursache)</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Klassisch:</b> Wie viele Elektronen auf einem Quadratmillimeter zusammengedr&#228;ngt sind.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Feldtheoretisch:</b> Die Ladungsdichte ρ beschreibt schlicht die <b>lokale Intensit&#228;t und Kr&#252;mmung der elektrostatischen Divergenz im Raum</b> (∇⋅E=ε0​ρ​).</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<i>Hohe Ladungsdichte bedeutet nichts anderes als eine extrem hohe <b>Spannungs- und Energiedichte pro Volumeneinheit</b>. Es ist das mathematische Ma&#223; daf&#252;r, wie stark die Raumstruktur an einem bestimmten Punkt elektrostatisch „ausgelenkt“ oder polarisiert ist.</i></p>
+            <p><b><i>4. Das Plasma (Der kollektive, entkoppelte Feld-Zustand)</i></b></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Klassisch:</b> Der 4. Aggregatzustand, eine Suppe aus Ionen und freien Elektronen.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Feldtheoretisch:</b> Normalerweise ist Materie geordnet: Die Feldquanten („Elektronen“) sind fest an die Atomkerne gebunden. Im <b>Plasma</b> ist die Energiedichte (Temperatur/Feldst&#228;rke) so hoch, dass die thermische Unruhe die elektrostatischen Bindungskr&#228;fte komplett &#252;berlagert.</i></p>
+            <p style="padding-left: 24px;">&bull;&nbsp;&nbsp;<b><i>Plasma ist ein kollektiver Leiter-Zustand des Raumes:</b> Die Feldanregungen bewegen sich v&#246;llig frei zwischen den unkompensierten Atomr&#252;mpfen. Das Gas ist nicht mehr neutral und isolierend, sondern wird zu einem <b>reaktiven, elektromagnetischen Medium</b>, das Eigenstrahlung emittiert (Leuchten), Strom leitet und extrem empfindlich auf &#228;u&#223;ere Magnet- und E-Felder reagiert.</i></p>
+        </p>
+    </div>
+
+
+
+
+    <div id="AR-Container">
+        <!-- Start Container für alles mit Code -->
+        <!-- #################################  -->
+
+<!-- Start Hochformat-Bild (9:16) -->
+<!-- Ende Hochformat-Bild -->	
+
+
+
+
+
+<!-- Start Audio-Sektor --> 
+<!-- Ende Audio -->
+    
+    
+<!-- Das Format für Short (9:16) -->
+<!-- Ende Short -->
+
+
+		
+		<!-- #################################  -->
+        <!-- Ende Container für alles mit Code -->
+
+    <footer style="margin-top: 80px; padding: 40px 20px; text-align: center; border-top: 1px solid #1a1a1a;">
+        <a href="impressum.html"
+            style="color: #333; text-decoration: none; font-family: monospace; font-size: 0.7em; letter-spacing: 1px; opacity: 0.5;">
+            PROPORTIONAL-SYSTEM-ID: ARKUSNAT-2026-05-12 </a>
+			
+		<a href="datenschutz.html"
+		  style="color: #333; text-decoration: none; font-family: monospace; font-size: 0.7em; letter-spacing: 1px; opacity: 0.5;">
+		  >Datenschutz: 2026 F.G. Stier</a>
+    </footer>
+
+ <button id="btn-reset" onclick="resetSystem()">BEENDEN</button>
+
+</body>
+
+</html>
