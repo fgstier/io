@@ -129,7 +129,7 @@ input[type=checkbox]:checked + label:before { content: '\2713'; text-shadow: 1px
 
 <body class="gradient">
   <center>
-    <h2>Programmieren RX480E-1A</h2>
+    <h2>Programmieren Soundausgabe über pwm /h2>
 
 
 <!-- NEU: Debug- und Log-Fenster als eine einzige saubere Box -->
@@ -165,19 +165,18 @@ input[type=checkbox]:checked + label:before { content: '\2713'; text-shadow: 1px
 
 
  <div class="anzeige-box">
-  <h3>Reset 8 Impulse mit F=1HZ </h3>
+  <h3>start wave Datei </h3>
   <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
     <div id="led1" class="led"></div>
   </div>
   <div style="text-align: center; margin-top: 10px;">
-    <button class="Button4" style="padding: 5px 15px; font-size: 14px;" onclick="startManuell('button_modus0', 'led1')">Start Reset</button>
+    <button class="Button4" style="padding: 5px 15px; font-size: 14px;" onclick="startManuell('button_modus0', 'led1')">Start wave</button>
   </div>
 </div>
 
 
  <div class="anzeige-box">
-  <h3 style="white-space: pre-line;">Tast-Modus (1X Impuls) OUT 
-      folgt exakt der Tasterdauer </h3>
+  <h3 style="white-space: pre-line;">Test-Modus PWM-Signal Ausgabe </h3>
   <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
     <div id="led2" class="led"></div>
   </div>
@@ -187,9 +186,7 @@ input[type=checkbox]:checked + label:before { content: '\2713'; text-shadow: 1px
 </div>
 
  <div class="anzeige-box">
-  <h3 style="white-space: pre-line;">Umschalt-Modus / Toggle (2X Impuls)
-Einmal druecken = dauerhaft EIN,
-nochmal druecken = AUS</h3>
+  <h3 style="white-space: pre-line;">Test-Modus Sinus-Signal 1 KHz </h3>
 
   <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
     <div id="led3" class="led"></div>
@@ -302,4 +299,3 @@ function checkStatus(route, ledId)
 
   </body>
 </html>
-
